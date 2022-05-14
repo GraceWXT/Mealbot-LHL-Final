@@ -24,16 +24,13 @@
 
 - [x] Team Workflow (Git, Task Distribution, Meeting Schedule, Coding Styles, etc.)
 
-- [ ] DB Setup
-
 - [ ] Tech stack
   - Dependencies
     - server
-      - [ ] Express
-      - [ ] dotenv
-      - [ ] axios
-      - [ ] pg
-      - [ ] bcryptjs?
+      - [x] Express
+      - [x] dotenv
+      - [x] axios
+      - [x] pg
     - client
       - [ ] Create React App
       - [ ] Chakra related
@@ -42,11 +39,15 @@
 
   - Dev Dependencies
     - server
-      - [ ] Morgan
-      - [ ] Nodemon
+      - [x] Morgan
+      - [x] Nodemon
+      - [x] JEST
     - client
       - [ ] node-sass
       - [ ] storybook related
       - [ ] cypress
 
   - Database
+    - local PostgreSQL/ElephantSQL
+
+- [ ] DB Setup
