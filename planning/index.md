@@ -24,7 +24,7 @@
 
 - [x] Team Workflow (Git, Task Distribution, Meeting Schedule, Coding Styles, etc.)
 
-- [ ] Tech stack
+- [x] Tech stack
   - Dependencies
     - server
       - [x] Express
@@ -32,10 +32,11 @@
       - [x] axios
       - [x] pg
     - client
-      - [ ] Create React App
-      - [ ] Chakra related
-      - [ ] classnames
-      - [ ] axios
+      - [x] Create React App
+      - [x] react router
+      - [x] Chakra related
+      - [x] classnames
+      - [x] axios
 
   - Dev Dependencies
     - server
@@ -43,11 +44,11 @@
       - [x] Nodemon
       - [x] JEST
     - client
-      - [ ] node-sass
+      - [x] node-sass
       - [ ] storybook related
-      - [ ] cypress
+      - [x] cypress
 
   - Database
     - local PostgreSQL/ElephantSQL
 
-- [ ] DB Setup
+- [x] DB Setup

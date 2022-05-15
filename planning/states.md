@@ -17,3 +17,19 @@
     ...
   }]
 ```
+
+```js
+{
+   monday: {
+    1: { <recipe 1> },
+    2: { <recipe 2> },
+    3: { <recipe 3> }
+   },
+   tuesday: {
+    1: { <recipe 1> },
+    2: { <recipe 2> },
+    3: { <recipe 3> }
+   },
+   …
+}
+```
