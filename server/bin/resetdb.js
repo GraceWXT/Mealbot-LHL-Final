@@ -5,7 +5,7 @@ require("dotenv").config();
 const fs = require("fs");
 const chalk = require("chalk");
 const { Client } = require("pg");
-const dbParams = require("../lib/db.js");
+const dbParams = require("../lib/db-config");
 const db = new Client(dbParams);
 
 // PG connection setup

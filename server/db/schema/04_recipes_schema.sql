@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS recipes CASCADE;
 
 CREATE TABLE recipes (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id VARCHAR(255) NOT NULL,
-  start_date VARCHAR(255) NOT NULL,
+  api_recipe_id INTEGER NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  img_url VARCHAR(255) NOT NULL,
+  slot INTEGER NOT NULL
 );
