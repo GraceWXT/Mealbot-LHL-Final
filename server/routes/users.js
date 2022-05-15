@@ -7,13 +7,15 @@
 
 const express = require("express");
 const router  = express.Router();
-const { getUserById } = require("../db/queries/user-queries");
+const { getUserById, getPantryItemsByUserId } = require("../db/queries/user-queries");
 
-// GET /users/:id
+// GET /users/:id => data needed for user profile page
 router.get("/:id", (req, res) => {
-  getUserById(req.params.id)
-    .then((user) => {
-      res.json(user);
+  const userPromise = getUserById(req.params.id);
+  const pantryItemsPromise = getPantryItemsByUserId(req.params.id);
+  Promise.all([userPromise, pantryItemsPromise])
+    .then(([user, pantryItems]) => {
+      res.json([user, pantryItems]);
     })
     .catch(err => {
       res
