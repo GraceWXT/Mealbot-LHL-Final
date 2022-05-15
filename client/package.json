@@ -1,0 +1,58 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "private": true,
+  "proxy": "http://localhost:8080",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "cypress": "node_modules/.bin/cypress open"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "classnames": "^2.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.10",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/react-hooks": "^8.0.0",
+    "@testing-library/user-event": "^14.2.0",
+    "eslint": "^8.15.0",
+    "babel-loader": "^8.2.5",
+    "cypress": "^9.6.1",
+    "node-sass": "^7.0.1",
+    "prop-types": "^15.8.1",
+    "react-test-renderer": "^17.0.2"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/.git/"
+    ]
+  }
+}
