@@ -1,0 +1,2 @@
+-- INSERT INTO meal_plans (user_id, start_date)
+-- VALUES (1, )

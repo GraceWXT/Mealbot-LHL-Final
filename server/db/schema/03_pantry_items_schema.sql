@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS pantry_items CASCADE;
+
+CREATE TABLE pantry_items (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  name VARCHAR(255)
+);

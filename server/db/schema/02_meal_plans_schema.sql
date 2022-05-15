@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS meal_plans CASCADE;
+
+CREATE TABLE meal_plans (
+  id SERIAL PRIMARY KEY NOT NULL,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  start_date DATE NOT NULL
+)
