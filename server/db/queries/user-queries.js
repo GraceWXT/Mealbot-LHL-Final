@@ -15,4 +15,19 @@ const getUserById = (id) => {
     });
 };
 
-module.exports = { getUserById };
+const getPantryItemsByUserId = (id) => {
+  return db.query(`
+  SELECT *
+  FROM pantry_items
+  WHERE user_id = ${id};
+  `)
+    .then((result) => {
+      const pantryItems = result.rows;
+      return pantryItems;
+    })
+    .catch((err) => {
+      console.log("getPantryItemsByUserId error: ", err.message);
+    });
+};
+
+module.exports = { getUserById, getPantryItemsByUserId };

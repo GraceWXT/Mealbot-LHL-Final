@@ -4,7 +4,7 @@ require("dotenv").config();
 // Web server config
 const express = require("express");
 const morgan = require("morgan");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -23,13 +23,6 @@ const homepageRouter = require("./routes/homepage");
 // Mount all resource routes
 app.use("/users", usersRouter);
 app.use("/", homepageRouter);
-// Note: mount other resources here, using the same pattern above
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-
-
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
