@@ -1,11 +1,15 @@
 import "./App.scss";
 import Navbar from "./Navbar";
+import { ChakraProvider } from "@chakra-ui/react";
+import { Outlet } from "react-router-dom";
 
 export default function App() {
   return (
-    <Navbar />
-    // <div className="App">
-    //   <h1 id="logo">Mealbot</h1>
-    // </div>
+    <div className="App">
+      <ChakraProvider>
+        <Navbar />
+        <Outlet />
+      </ChakraProvider>
+    </div>
   );
 }

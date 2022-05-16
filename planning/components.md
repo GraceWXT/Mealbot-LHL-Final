@@ -3,49 +3,43 @@
 
 - [ ] Navbar
 
-- [ ] AppBody
-
-- [ ] ProfileMode
+- [ ] Profile
   - [ ] UserProfile
   - [ ] InfoColumn
 
-- [ ] HomePageMode
+- [ ] HomePage
 
-- [ ] LoadingMode
+- [ ] Loading
 
-- [ ] MealPlanMode
+- [ ] MealPlan
   - [ ] MealPlantable
     - [ ] MealItem
 
-- [ ] RecipeDetailMode
+- [ ] Recipe
   - [ ] TabButton
   - [ ] IngredientsDetail
   - [ ] InstructionsDetail
 
-- [ ] GroceryListMode
+- [ ] GroceryList
   - [ ] AisleNavigator
   - [ ] GroceryChecklist
     - [ ] Aisle (ingredients list by aisle)
       - [ ] IngredientInAisle
 
 ## App
-- State: __user__
+- State: __user__, __mealPlan__, __ingredientList__, __pantryItems__
+- Props: __user__ (object: id, imgUrl), __pantryItems__(array of objects)
 
 ## Button
 - State: no state
 - Props: __children__ (string), __handleClick__(function),
-- Used by: HomePageMode, MealPlanMode
+- Used by: HomePage, MealPlan
 
 ## Navbar
 - State: no state
 - Props: __user__ (object: id, imgUrl)
 
-## AppBody
-- State: __mode, mealPlan, ingredientList, pantryItems__
-- Props: __user__ (object: id, imgUrl), __pantryItems__(array of objects)
-- Used by: App
-
-## ProfileMode
+## Profile
 - State: no state
 - Props: __user__ (object: imgUrl, firstName, lastName, email, maxCalories, maxReadyTime, householdSize), __pantryItems__(array of objects)
 - Used by: App
@@ -65,7 +59,7 @@
   - Props: __pantryItems__ (array of objects: name)
   - Used by: ProfilePage
 
-## MealPlanMode
+## MealPlan
 - State: no state
 - Props: mealPlan, setMealPlan
 - Used by: App
@@ -79,7 +73,7 @@
       - ### DeleteIcon
       - Props: __handleDelete__
 
-## RecipeDetailMode
+## Recipe
 - State: __selectedTab__
 - Props: __recipe__ (object)
 - ## TabButton
@@ -94,7 +88,7 @@
   - State: no state
   - Props: __data__(object of instructions)
 
-## GroceryListMode
+## GroceryList
 - State: __filteredIngredientList__
 - Props: __ingredientList__ (array of objects), __pantryItems__(array of objects)
   - create __filteredIngredientList__ here and pass down to _AislesNavigator_ and _GroceryChecklist_
