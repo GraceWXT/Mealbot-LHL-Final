@@ -8,4 +8,11 @@ const getNextMonday = () => {
   return nextMondayInSec;
 };
 
-module.exports = getNextMonday;
+// A function that calculates the endDate
+const getEndDate = (start_date) => {
+  const end_date = new Date(start_date);
+  end_date.setDate(end_date.getDate() + 6)  // getDate grabs the day
+  return end_date.toISOString().substring(0,10)   // converts date to string
+}
+
+module.exports = { getNextMonday, getEndDate };
