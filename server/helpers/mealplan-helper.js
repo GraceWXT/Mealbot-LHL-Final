@@ -2,8 +2,8 @@ const getNextMonday = require("./date-helper");
 
 const mealConstructor = (recipe, i) => {
   const meal = {
-    "date": getNextMonday() + i * 24 * 60 * 6000,
-    "slot": 1,
+    "date": getNextMonday() + i * 24 * 60 * 60,
+    "slot": recipe.slot,
     "position": 0,
     "type": "RECIPE",
     "value":{

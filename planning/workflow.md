@@ -18,13 +18,15 @@
   - Always use Github pull request to merge local changes to remote master
     - Never merge to local master directly (or push local master to remote master directly)
 
-3. Branching Convention
-- Naming
+3. Convention
+- Branch Naming
   - feature/example-branch
   - fix/example-branch
   - component/example-branch
   - routes/example-branch
   - styling/example-branch
+
+- Commit Message: present tense
 
 ## Coding Styles
 - Component function convention:

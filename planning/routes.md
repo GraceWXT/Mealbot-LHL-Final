@@ -8,9 +8,9 @@
 - ~~U/user~~
 ~~D/user~~
 
-- C `POST /mealplans/:startDate` - save meal plan
+- [x] C `POST /mealplans/:startDate` - save meal plan
 - [x] R `GET /mealplans/random` - show a random meal plan (for homepage button and for meal plan tab)
-- U `POST /mealplans/:id` - _update specific meal plan (stretch)_
+- ~~U `POST /mealplans/:id` - update specific meal plan~~ (meal plan detail is only stored at API database)
 - ~~D/mealplan~~
 
 - ~~C/recipe~~

@@ -40,7 +40,7 @@
     "func-style": ["error", "expression"],
     "space-infix-ops": "error",
     "space-in-parens": "error",
-    "camelcase": "error",
+    "camelcase": "warn",
     "eqeqeq": "error",
     "brace-style": "error",
     "space-before-function-paren": [ "warn", { "anonymous": "never", "named": "never", "asyncArrow": "never" } ],
