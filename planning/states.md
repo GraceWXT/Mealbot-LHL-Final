@@ -1,6 +1,18 @@
 # States breakdown
 
-## bodyMode
+## user
+```js
+{
+  "id": 1,
+  "first_name": "Gordon",
+  "last_name": "Ramsay",
+  "email": "idiotsandwich@email.com",
+  "img_url": "https://i.imgur.com/dsTjcWuh.jpg",
+  "max_calories": 800,
+  "max_time": 30,
+  "servings": 2
+}
+```
 
 ## mealplan
 ```js

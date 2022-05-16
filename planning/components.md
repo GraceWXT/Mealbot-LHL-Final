@@ -27,7 +27,7 @@
       - [ ] IngredientInAisle
 
 ## App
-- State: __user__, __mealPlan__, __ingredientList__, __pantryItems__
+- State: __user__, __mealPlan__, __groceryList__, __pantryItems__
 - Props: __user__ (object: id, imgUrl), __pantryItems__(array of objects)
 
 ## Button
@@ -89,14 +89,14 @@
   - Props: __data__(object of instructions)
 
 ## GroceryList
-- State: __filteredIngredientList__
-- Props: __ingredientList__ (array of objects), __pantryItems__(array of objects)
-  - create __filteredIngredientList__ here and pass down to _AislesNavigator_ and _GroceryChecklist_
+- State: __filteredGroceryList__
+- Props: __groceryList__ (array of objects), __pantryItems__(array of objects)
+  - create __filteredGroceryList__ here and pass down to _AislesNavigator_ and _GroceryChecklist_
   - ### AislesNavigator (table of contents for aisle names)
-    - Props: __filteredIngredientList__ (array of objects) (same prop to all components below)
+    - Props: __filteredGroceryList__ (array of objects) (same prop to all components below)
       - just loops over the aisle keys, don't need the values
   - ### GroceryChecklist (all aisles) - render an array of Aisles components
 
     - #### Aisle (ingredient list) (contains ingredient components)
-      - #### IngredientInAisle
-        - Props: __setFilteredIngredientList__
+      - #### Ingredient
+        - Props: __setFilteredGroceryList__
