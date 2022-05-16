@@ -20,11 +20,13 @@ app.use(express.json());
 const usersRouter = require("./routes/users");
 const homepageRouter = require("./routes/homepage");
 const mealPlansRouter = require("./routes/mealplans");
+const groceryListRouter = require("./routes/grocery-list");
 
 // Mount all resource routes
 app.use("/users", usersRouter);
 app.use("/", homepageRouter);
 app.use("/mealplans", mealPlansRouter);
+app.use("/grocerylist", groceryListRouter);
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
