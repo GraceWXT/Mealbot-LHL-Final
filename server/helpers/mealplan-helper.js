@@ -1,4 +1,4 @@
-const getNextMonday = require("./date-helper");
+const { getNextMonday } = require("./date-helper");
 
 const mealConstructor = (recipe, i) => {
   const meal = {
