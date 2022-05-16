@@ -3,49 +3,43 @@
 
 - [ ] Navbar
 
-- [ ] AppBody
-
-- [ ] ProfileMode
+- [ ] Profile
   - [ ] UserProfile
   - [ ] InfoColumn
 
-- [ ] HomePageMode
+- [ ] HomePage
 
-- [ ] LoadingMode
+- [ ] Loading
 
-- [ ] MealPlanMode
+- [ ] MealPlan
   - [ ] MealPlantable
     - [ ] MealItem
 
-- [ ] RecipeDetailMode
+- [ ] Recipe
   - [ ] TabButton
   - [ ] IngredientsDetail
   - [ ] InstructionsDetail
 
-- [ ] GroceryListMode
+- [ ] GroceryList
   - [ ] AisleNavigator
   - [ ] GroceryChecklist
     - [ ] Aisle (ingredients list by aisle)
       - [ ] IngredientInAisle
 
 ## App
-- State: __user__
+- State: __user__, __mealPlan__, __groceryList__, __pantryItems__
+- Props: __user__ (object: id, imgUrl), __pantryItems__(array of objects)
 
 ## Button
 - State: no state
 - Props: __children__ (string), __handleClick__(function),
-- Used by: HomePageMode, MealPlanMode
+- Used by: HomePage, MealPlan
 
 ## Navbar
 - State: no state
 - Props: __user__ (object: id, imgUrl)
 
-## AppBody
-- State: __mode, mealPlan, ingredientList, pantryItems__
-- Props: __user__ (object: id, imgUrl), __pantryItems__(array of objects)
-- Used by: App
-
-## ProfileMode
+## Profile
 - State: no state
 - Props: __user__ (object: imgUrl, firstName, lastName, email, maxCalories, maxReadyTime, householdSize), __pantryItems__(array of objects)
 - Used by: App
@@ -65,7 +59,7 @@
   - Props: __pantryItems__ (array of objects: name)
   - Used by: ProfilePage
 
-## MealPlanMode
+## MealPlan
 - State: no state
 - Props: mealPlan, setMealPlan
 - Used by: App
@@ -79,7 +73,7 @@
       - ### DeleteIcon
       - Props: __handleDelete__
 
-## RecipeDetailMode
+## Recipe
 - State: __selectedTab__
 - Props: __recipe__ (object)
 - ## TabButton
@@ -94,15 +88,15 @@
   - State: no state
   - Props: __data__(object of instructions)
 
-## GroceryListMode
-- State: __filteredIngredientList__
-- Props: __ingredientList__ (array of objects), __pantryItems__(array of objects)
-  - create __filteredIngredientList__ here and pass down to _AislesNavigator_ and _GroceryChecklist_
+## GroceryList
+- State: __filteredGroceryList__
+- Props: __groceryList__ (array of objects), __pantryItems__(array of objects)
+  - create __filteredGroceryList__ here and pass down to _AislesNavigator_ and _GroceryChecklist_
   - ### AislesNavigator (table of contents for aisle names)
-    - Props: __filteredIngredientList__ (array of objects) (same prop to all components below)
+    - Props: __filteredGroceryList__ (array of objects) (same prop to all components below)
       - just loops over the aisle keys, don't need the values
   - ### GroceryChecklist (all aisles) - render an array of Aisles components
 
     - #### Aisle (ingredient list) (contains ingredient components)
-      - #### IngredientInAisle
-        - Props: __setFilteredIngredientList__
+      - #### Ingredient
+        - Props: __setFilteredGroceryList__
