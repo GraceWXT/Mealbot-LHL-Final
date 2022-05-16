@@ -1,9 +1,11 @@
 import "./App.scss";
+import Navbar from "./Navbar";
 
 export default function App() {
   return (
-    <div className="App">
-      <h1 id="logo">Mealbot</h1>
-    </div>
+    <Navbar />
+    // <div className="App">
+    //   <h1 id="logo">Mealbot</h1>
+    // </div>
   );
 }
