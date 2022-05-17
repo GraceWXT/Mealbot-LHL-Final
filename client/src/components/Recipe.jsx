@@ -12,6 +12,8 @@ import { Divider } from '@chakra-ui/react';
 import { Image } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/react';
+import { Flex, Spacer } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 export default function Recipe() {
   const [state, setState] = useState({
@@ -20,7 +22,8 @@ export default function Recipe() {
     nutrition: [],
     title: "",
     readyInMinutes: "",
-    image: ""
+    image: "",
+    servings: ""
   });
 
 
@@ -38,20 +41,24 @@ export default function Recipe() {
   console.log('state', state);
 
   return (
-    <HStack>
+    <HStack alignItems="start">
       <Container w="40%" py={20}>
-        <Heading as='h3' size='md'>{state.title}</Heading>
+        <Heading as='h2' size='lg'>{state.title}</Heading>
+        <Divider />
         <Text>Ready in {state.readyInMinutes}min</Text>
-        <Image src={state.image} py={5}/>
+        <Divider />
+        <Text>{state.servings} servings</Text>
+        <Image src={state.image} py={5} />
       </Container>
 
-      <Divider orientation='vertical'/>
+      <Divider orientation='vertical' />
 
-      <Tabs isFitted variant='enclosed' w="60%" align="top">
+      {/* <VStack> */}
+      <Tabs isFitted variant='enclosed' w="60%" py={20}>
         <TabList mb='1em'>
-          <Tab>One</Tab>
-          <Tab>Two</Tab>
-          <Tab>Three</Tab>
+          <Tab>Ingredients</Tab>
+          <Tab>Instructions</Tab>
+          <Tab>Nutrition</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -62,6 +69,7 @@ export default function Recipe() {
           </TabPanel>
         </TabPanels>
       </Tabs>
+      {/* </VStack> */}
 
     </HStack>
 
