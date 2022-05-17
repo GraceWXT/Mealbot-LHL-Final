@@ -7,10 +7,13 @@ import {
   Tr,
   Td,
   Th,
-  Button,
+  IconButton,
   Heading,
-  HStack
+  HStack,
+  VStack,
+
 } from "@chakra-ui/react";
+import { ChevronLeftIcon, ChevronRightIcon} from "@chakra-ui/icons";
 
 import headerTextHelper from "helpers/headerTextHealper";
 import mealPlanSorter from "helpers/mealplan-helper";
@@ -41,17 +44,19 @@ export default function MealPlan() {
       }
       return (
         <Tr key={index}>
-          <Th>{headerText}</Th>
+          <Th width="8vw">{headerText}</Th>
           {tds}
         </Tr>
       );
     } else {
       const tds = row.map(meal => {
-        return <Meal key={meal.value.id} recipe={meal}/>;
+        return (
+          <Meal key={meal.value.id} recipe={meal}/>
+        );
       });
       return (
         <Tr key={index}>
-          <Th>{headerText}</Th>
+          <Th  width="8vw">{headerText}</Th>
           {tds}
         </Tr>
       );
@@ -60,35 +65,39 @@ export default function MealPlan() {
 
 
   return (
-    <>
-      <HStack>
-        <Button>
-          left
-        </Button>
-        <Heading as="span">
+    <VStack>
+      <HStack marginTop="3vh" marginBottom="2vh">
+        <IconButton
+          aria-label='previous week'
+          icon={<ChevronLeftIcon />}
+          borderRadius="50%"
+        />
+        <Heading fontSize="1.5rem">
           May 16 - May 22
         </Heading>
-        <Button>
-          right
-        </Button>
+        <IconButton
+          aria-label='next week'
+          icon={<ChevronRightIcon />}
+          borderRadius="50%"
+        />
       </HStack>
-      <Table>
+      <Table width="88vw">
         <Thead>
           <Tr>
             <Th></Th>
-            <Th>Mon</Th>
-            <Th>Tue</Th>
-            <Th>Wed</Th>
-            <Th>Thu</Th>
-            <Th>Fri</Th>
-            <Th>Sat</Th>
-            <Th>Sun</Th>
+            <Th textAlign="center">Mon</Th>
+            <Th textAlign="center">Tue</Th>
+            <Th textAlign="center">Wed</Th>
+            <Th textAlign="center">Thu</Th>
+            <Th textAlign="center">Fri</Th>
+            <Th textAlign="center">Sat</Th>
+            <Th textAlign="center">Sun</Th>
           </Tr>
         </Thead>
         <Tbody>
           {rows}
         </Tbody>
       </Table>
-    </>
+    </VStack>
   );
 }
