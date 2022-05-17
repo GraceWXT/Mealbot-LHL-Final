@@ -17,7 +17,7 @@ export default function Recipe() {
 
   // get data to update state
   useEffect(() => {
-    axios.get(`/recipes/${id}`
+    axios.get(`http://localhost:8080/api/recipes/${id}`
     ).then((res) => {
       // console.log("res", res.data);
       setState(prev => ({ ...prev, ...res.data }));
