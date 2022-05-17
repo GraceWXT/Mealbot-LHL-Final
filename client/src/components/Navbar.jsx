@@ -40,7 +40,7 @@ export default function Navbar(props) {
               minW={0}>
               <Avatar
                 size={"md"}
-                src={`${user.img_url}`}
+                src={user.img_url ? `${user.img_url}` : null}
               />
             </MenuButton>
             <MenuList>
