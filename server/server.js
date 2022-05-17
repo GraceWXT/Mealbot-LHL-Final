@@ -5,6 +5,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -15,6 +16,7 @@ const app = express();
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(express.json());
+app.use(cors());
 
 // Separated Routes for each Resource
 const usersRouter = require("./routes/users");
@@ -25,11 +27,11 @@ const recipesRouter = require("./routes/recipes");
 
 
 // Mount all resource routes
-app.use("/users", usersRouter);
-app.use("/", homepageRouter);
-app.use("/mealplans", mealPlansRouter);
-app.use("/grocerylist", groceryListRouter);
-app.use("/recipes", recipesRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/", homepageRouter);
+app.use("/api/mealplans", mealPlansRouter);
+app.use("/api/grocerylist", groceryListRouter);
+app.use("/api/recipes", recipesRouter);
 
 
 app.listen(PORT, () => {

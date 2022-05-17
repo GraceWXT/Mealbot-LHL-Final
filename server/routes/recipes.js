@@ -16,21 +16,21 @@ const getRecipeInfo = require("../helpers/recipes-helper");
 // GET /recipes/:id - get specific recipe info based on :id
 router.get("/:id", (req, res) => {
   const recipeId = req.params.id;
-  console.log('recipeid', recipeId);
+  console.log("recipeid", recipeId);
 
 
   axios.get(
     `${apiBaseUrl}/recipes/${recipeId}/information?includeNutrition=true&apiKey=${apiKey}`)
     .then(response => {
-      const recipe = getRecipeInfo(response.data)
+      const recipe = getRecipeInfo(response.data);
       res.json(recipe);
     })
     .catch(err => {
       res
-      .status(500)
-      .json({ error: err.message });
+        .status(500)
+        .json({ error: err.message });
     });
 
 });
 
-module.exports = router
+module.exports = router;
