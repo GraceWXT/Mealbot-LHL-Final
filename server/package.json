@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "local": "./node_modules/.bin/nodemon -L --ignore public/",
+    "local": "./node_modules/.bin/nodemon -L --ignore client",
     "db:reset": "node bin/resetdb.js"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "axios": "^0.27.2",
     "chalk": "^2.4.2",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "pg": "^8.7.3"
