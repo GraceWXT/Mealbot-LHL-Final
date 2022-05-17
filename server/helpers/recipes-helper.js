@@ -50,6 +50,9 @@ const getRecipeInfo = (recipe) => {
   cleanedRecipe["ingredients"] = getIngredients(recipe);
   cleanedRecipe["instructions"] = getInstructions(recipe);
   cleanedRecipe["nutrition"] = getNutrition(recipe);
+  cleanedRecipe["title"] = recipe.title;
+  cleanedRecipe["readyInMinutes"] = recipe.readyInMinutes;
+  cleanedRecipe["image"] = recipe.image;
 
   return cleanedRecipe;
 
