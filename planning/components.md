@@ -1,7 +1,7 @@
 # App Breakdown
 - [ ] Button
 
-- [ ] Navbar
+- [x] Navbar
 
 - [ ] Profile
   - [ ] UserProfile
@@ -27,47 +27,47 @@
       - [ ] IngredientInAisle
 
 ## App
-- State: __user__, __mealPlan__, __groceryList__, __pantryItems__
-- Props: __user__ (object: id, imgUrl), __pantryItems__(array of objects)
+- State: __user__, , __groceryList__, __pantryItems__
+- Props: none
 
 ## Button
-- State: no state
+- State: none
 - Props: __children__ (string), __handleClick__(function),
 - Used by: HomePage, MealPlan
 
 ## Navbar
-- State: no state
+- State: none
 - Props: __user__ (object: id, imgUrl)
 
 ## Profile
-- State: no state
+- State: none
 - Props: __user__ (object: imgUrl, firstName, lastName, email, maxCalories, maxReadyTime, householdSize), __pantryItems__(array of objects)
 - Used by: App
 
 - ## UserProfile
-  - State: no state
+  - State: none
   - Props: __user__ (object: imgUrl, firstName, lastName, email, )
   - Used by: ProfilePage
 
 - ## InfoColumn (preferences)
-  - State: no state
+  - State: none
   - Props: __user__ (object: maxCalories, maxReadyTime, householdSize)
   - Used by: ProfilePage
 
 - ## InfoColumn (pantry items)
-  - State: no state
+  - State: none
   - Props: __pantryItems__ (array of objects: name)
   - Used by: ProfilePage
 
 ## MealPlan
-- State: no state
+- State: __mealPlan__
 - Props: mealPlan, setMealPlan
 - Used by: App
   - ## Meal Plan Table
-  - State: no state
+  - State: none
   - Props: mealPlan, setMealPlan
     - ### Meal
-      - State: no state
+      - State: none
       - Props: __recipe__ (object: imgUrl, title || null when deleted), __handleDelete__
       - Used by: ProfilePage
       - ### DeleteIcon
@@ -77,15 +77,15 @@
 - State: __selectedTab__
 - Props: __recipe__ (object)
 - ## TabButton
-  - State: no state
+  - State: none
   - Props: __children__(string), __selectedTab__(string), __setSelectedTab__(function)
 - ## IngredientsDetail
-  - State: no state
+  - State: none
   - Props: __data__(object of ingredients/nutritions)
   - ingredients
   - nutritions
 - ## InstructionsDetail
-  - State: no state
+  - State: none
   - Props: __data__(object of instructions)
 
 ## GroceryList
