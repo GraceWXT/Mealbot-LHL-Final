@@ -27,11 +27,11 @@ const recipesRouter = require("./routes/recipes");
 
 
 // Mount all resource routes
-app.use("/users", usersRouter);
-app.use("/", homepageRouter);
-app.use("/mealplans", mealPlansRouter);
-app.use("/grocerylist", groceryListRouter);
-app.use("/recipes", recipesRouter);
+app.use("/api/users", usersRouter);
+app.use("/api/", homepageRouter);
+app.use("/api/mealplans", mealPlansRouter);
+app.use("/api/grocerylist", groceryListRouter);
+app.use("/api/recipes", recipesRouter);
 
 
 app.listen(PORT, () => {

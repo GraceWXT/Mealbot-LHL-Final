@@ -9,7 +9,8 @@ import theme from "styles/extended-theme";
 export default function App() {
   const [user, setUser] = useState({});
   useEffect(() => {
-    axios.get("/").then(user => {
+    axios.get("api/").then(user => {
+      console.log("user", user);
       setUser(user);
     }).catch(err => {
       console.log("Error: ", err.message);
