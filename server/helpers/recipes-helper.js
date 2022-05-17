@@ -25,7 +25,7 @@ const getRecipeInfo = (recipe) => {
       })
     })
     return instructions;
-  }
+  };
 
 
   //get nutrition information
