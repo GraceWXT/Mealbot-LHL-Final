@@ -16,6 +16,7 @@ const getRecipeInfo = (recipe) => {
     return ingredients;
   };
 
+  //get instructions information
   const getInstructions = (recipe) => {
     let instructions = [];
     recipe.analyzedInstructions[0].steps.map( instruction => {
