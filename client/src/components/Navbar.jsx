@@ -1,7 +1,6 @@
 import {
   Box,
   Image,
-  Flex,
   Avatar,
   HStack,
   Link,
@@ -31,11 +30,11 @@ export default function Navbar(props) {
         display="flex" justifyContent={"space-between"} alignItems={"center"}
         padding="0 2vw"
       >
-        <HStack alignItems={"center"}>
+        <HStack>
           <Image boxSize="6vh" minBlockSize="5vh" align={"center"} src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
           <Link href="/" fontSize="2rem" id="logo">Mealbot</Link>
         </HStack>
-        <Flex alignItems={"center"}>
+        <HStack>
           <FormControl display='flex' alignItems='center'>
             <FormLabel htmlFor='email-alerts' mb='0'>
               {colorMode === "light" ? "☀️" : "🌚"}
@@ -67,7 +66,7 @@ export default function Navbar(props) {
               <MenuItem>Logout</MenuItem>
             </MenuList>
           </Menu>
-        </Flex>
+        </HStack>
       </Box>
     </>
   );
