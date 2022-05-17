@@ -9,7 +9,7 @@ import theme from "styles/extended-theme";
 export default function App() {
   const [user, setUser] = useState({});
   useEffect(() => {
-    axios.get("api/").then(res => {
+    axios.get("http://localhost:8080/api/").then(res => {
       const user = res.data;
       console.log("user", user);
       setUser(user);
