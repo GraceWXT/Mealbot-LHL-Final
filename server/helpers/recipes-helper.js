@@ -10,7 +10,7 @@ const getRecipeInfo = (recipe) => {
       ingredients.push({
         name: ingredient.name,
         amount: ingredient.amount,
-        unit: ingredient.unit
+        unit: ingredient.measures.metric.unitShort
       })
     })
     return ingredients;
@@ -53,9 +53,9 @@ const getRecipeInfo = (recipe) => {
   cleanedRecipe["title"] = recipe.title;
   cleanedRecipe["readyInMinutes"] = recipe.readyInMinutes;
   cleanedRecipe["image"] = recipe.image;
+  cleanedRecipe["servings"] = recipe.servings;
 
   return cleanedRecipe;
-
 };
 
 module.exports = getRecipeInfo;
