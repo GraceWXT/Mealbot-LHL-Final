@@ -215,17 +215,17 @@ export default function Recipe() {
     <HStack alignItems="start">
       <Container w="40%" py={10}  >
         <Heading as='h2' size='lg' py={2}>{state.title}</Heading>
+        <Divider />
+        <Text py={2}>Cooking time: {state.readyInMinutes}min</Text>
         {/* <Divider /> */}
-        <Text py={2}>Ready in {state.readyInMinutes}min</Text>
-        {/* <Divider /> */}
-        <Text py={2}>{state.servings} servings</Text>
+        <Text py={2}>Servings: {state.servings}</Text>
         <Image src={state.image} py={5} />
       </Container>
 
       <Divider orientation='vertical' />
 
       {/* <VStack> */}
-      <Tabs isFitted variant='enclosed' w="60%" py={10}>
+      <Tabs isFitted variant='enclosed' w="60%" py={10} >
         <TabList mb='1em'>
           <Tab>Ingredients</Tab>
           <Tab>Instructions</Tab>
