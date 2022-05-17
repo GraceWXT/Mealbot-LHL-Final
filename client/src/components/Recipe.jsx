@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-// import classNames from "classnames";
 
+//grab info from params
+import { useParams } from "react-router-dom";
+
+//chakra-ui components
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
+import { Stack, HStack, VStack } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
+import { Divider } from '@chakra-ui/react';
 
 export default function Recipe() {
   const [state, setState] = useState({
@@ -26,8 +32,30 @@ export default function Recipe() {
   console.log('state', state);
 
   return (
-    <div>
-      Recipe
-    </div>
+    <HStack>
+      <Container w="40%" >
+      something
+      </Container>
+
+      <Divider orientation='vertical'/>
+
+      <Tabs isFitted variant='enclosed' w="60%">
+        <TabList mb='1em'>
+          <Tab>One</Tab>
+          <Tab>Two</Tab>
+          <Tab>Three</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            <p>one!</p>
+          </TabPanel>
+          <TabPanel>
+            <p>two!</p>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+
+    </HStack>
+
   );
 }
