@@ -230,7 +230,7 @@ export default function Recipe() {
         leftIcon={<ArrowBackIcon />}
         _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
         _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}>
-        Back
+        Back to meal plan
       </Button>
       <HStack alignItems="start">
         <Container w="40%">
