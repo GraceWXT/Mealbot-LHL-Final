@@ -9,10 +9,11 @@ const getNextMonday = () => {
 };
 
 // A function that calculates the endDate
-const getEndDate = (start_date) => {
-  const end_date = new Date(start_date);
-  end_date.setDate(end_date.getDate() + 6)  // getDate grabs the day
-  return end_date.toISOString().substring(0,10)   // converts date to string
-}
-console.log(getEndDate('2022-05-16'))
+
+const getEndDate = (startDate) => {
+  const endDate = new Date(startDate);
+  endDate.setDate(endDate.getDate() + 6);  // getDate grabs the day
+  return endDate.toISOString().substring(0,10);   // converts date to string
+};
+
 module.exports = { getNextMonday, getEndDate };
