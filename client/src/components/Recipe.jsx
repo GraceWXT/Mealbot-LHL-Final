@@ -167,7 +167,7 @@ export default function Recipe() {
   }, []);
 
 
-  console.log("state", state);
+  // console.log("state", state);
 
   //creates array of ingredients copied from state.ingredients
   const ingredientsArray = [...state.ingredients];
@@ -184,7 +184,7 @@ export default function Recipe() {
 
   //creates an array of instructions
   const instructionsArray = [...state.instructions];
-  console.log("instructionsArray", instructionsArray);
+  // console.log("instructionsArray", instructionsArray);
 
   //maps over instructionsArray to return a list of instructions
   const instructionsList = instructionsArray.map((instruction, index) => {
@@ -198,7 +198,7 @@ export default function Recipe() {
 
   //creates an array of nutrition
   const nutritionArray = [...state.nutrition];
-  console.log("nutritionArray", nutritionArray);
+  // console.log("nutritionArray", nutritionArray);
 
   //maps over instructionsArray to return a list of instructions
   const nutritionList = nutritionArray.map((nutrient, index) => {

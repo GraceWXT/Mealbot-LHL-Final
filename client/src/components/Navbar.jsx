@@ -19,7 +19,7 @@ import {
 import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
-  const { user } = props;
+  const { user, startDate } = props;
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -61,10 +61,16 @@ export default function Navbar(props) {
             </MenuButton>
             <MenuList>
               <MenuItem>
-                <Link to={`/users/${user.id}`} >User Profile</Link>
+                <Link to={`/users/${user.id}`} >
+                  User Profile
+                </Link>
               </MenuItem>
               <MenuDivider />
-              <MenuItem>Meal Plan</MenuItem>
+              <MenuItem>
+                <Link to={`mealplan/${startDate}`}>
+                  Meal Plan
+                </Link>
+              </MenuItem>
               <MenuDivider />
               <MenuItem>Logout</MenuItem>
             </MenuList>
