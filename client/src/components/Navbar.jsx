@@ -1,9 +1,9 @@
 import {
   Box,
+  Heading,
   Image,
   Avatar,
   HStack,
-  Link,
   Button,
   Menu,
   MenuButton,
@@ -16,6 +16,7 @@ import {
   FormLabel,
   Switch
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function Navbar(props) {
   const { user } = props;
@@ -30,17 +31,19 @@ export default function Navbar(props) {
         display="flex" justifyContent={"space-between"} alignItems={"center"}
         padding="0 2vw"
       >
-        <HStack>
-          <Image boxSize="6vh" minBlockSize="5vh" align={"center"} src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
-          <Link href="/" fontSize="2rem" id="logo">Mealbot</Link>
-        </HStack>
+        <Link to="/">
+          <HStack>
+            <Image boxSize="6vh" minBlockSize="5vh" align={"center"} src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
+            <Heading fontSize="2rem" id="logo">Mealbot</Heading>
+          </HStack>
+        </Link>
         <HStack>
           <FormControl display='flex' alignItems='center'>
             <FormLabel htmlFor='email-alerts' mb='0'>
-              {colorMode === "light" ? "☀️" : "🌚"}
+              {colorMode === "light" ? "☀️" : "🌒"}
             </FormLabel>
             <Switch
-              colorScheme="gray"
+              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
               onChange={toggleColorMode}
             />
           </FormControl>
@@ -58,7 +61,7 @@ export default function Navbar(props) {
             </MenuButton>
             <MenuList>
               <MenuItem>
-                <Link href={`/users/${user.id}`} >User Profile</Link>
+                <Link to={`/users/${user.id}`} >User Profile</Link>
               </MenuItem>
               <MenuDivider />
               <MenuItem>Meal Plan</MenuItem>
