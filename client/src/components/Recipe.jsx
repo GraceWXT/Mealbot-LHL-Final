@@ -224,7 +224,12 @@ export default function Recipe() {
 
   return (
     <Box>
-      <Button m={5} bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")} leftIcon={<ArrowBackIcon />}>
+      <Button
+        m={5}
+        bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+        leftIcon={<ArrowBackIcon />}
+        _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+        _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}>
         Back
       </Button>
       <HStack alignItems="start">
@@ -242,9 +247,21 @@ export default function Recipe() {
 
         <Tabs isFitted variant='enclosed' w="60%" variantColor="red">
           <TabList mb='1em' >
-            <Tab _selected={{ bg: "turquoiseGreen.100", _dark: { bg: "majestyPurple.500" } }}>Ingredients</Tab>
-            <Tab _selected={{ bg: "turquoiseGreen.100", _dark: { bg: "majestyPurple.500" } }}>Instructions</Tab>
-            <Tab _selected={{ bg: "turquoiseGreen.100", _dark: { bg: "majestyPurple.500" } }}>Nutrition</Tab>
+            <Tab
+              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
+              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+            >Ingredients</Tab>
+            <Tab
+              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
+              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+            >Instructions</Tab>
+            <Tab
+              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
+              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+            >Nutrition</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
