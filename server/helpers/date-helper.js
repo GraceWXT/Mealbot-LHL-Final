@@ -9,6 +9,7 @@ const getNextMonday = () => {
 };
 
 // A function that calculates the endDate
+
 const getEndDate = (startDate) => {
   const endDate = new Date(startDate);
   endDate.setDate(endDate.getDate() + 6);  // getDate grabs the day

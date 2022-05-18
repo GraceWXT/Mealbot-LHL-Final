@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 
 // Helper functions
-const getEndDate = require("../helpers/date-helper");
+const { getEndDate } = require("../helpers/date-helper");
 
 // Convenience variables
 const apiBaseUrl = "https://api.spoonacular.com/mealplanner";

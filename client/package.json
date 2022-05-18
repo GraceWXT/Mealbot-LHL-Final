@@ -13,6 +13,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
+    "@chakra-ui/skip-nav": "^1.2.6",
     "@chakra-ui/system": "^1.12.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
