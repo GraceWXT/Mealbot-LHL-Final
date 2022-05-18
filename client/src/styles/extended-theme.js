@@ -1,15 +1,17 @@
 import { extendTheme } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
 
 const theme = extendTheme({
   styles: {
-    global: {
+    global: (props) => ({
       body: {
-        fontFamily: "Inter, sans-serif"
+        fontFamily: "Inter, sans-serif",
+        bg: mode("hsl(0 0% 97%)", "gray.800")(props)
       },
       ":focus:not(:focus-visible):not([role=\"dialog\"]):not([role=\"menu\"])": {
         boxShadow: "none !important"
       }
-    }
+    })
   },
   colors: {
     turquoiseGreen: {
