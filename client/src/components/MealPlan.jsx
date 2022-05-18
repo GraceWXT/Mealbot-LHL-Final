@@ -22,8 +22,6 @@ import { getNextMondaySec, getEndDate } from "helpers/date-helper";
 export default function MealPlan() {
   const { mealPlan, setMealPlan } = useOutletContext();
 
-
-
   // Create the date strings for meal plan heading
   const nextMondayTimestamp = getNextMondaySec();
   const nextMondayDate = new Date(nextMondayTimestamp * 1000).toISOString().split("T")[0];

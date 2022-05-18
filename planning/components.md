@@ -1,6 +1,4 @@
 # App Breakdown
-- [ ] Button
-
 - [x] Navbar
 
 - [ ] Profile
@@ -12,22 +10,22 @@
 - [ ] Loading
 
 - [ ] MealPlan
-  - [ ] MealPlantable
-    - [ ] MealItem
+  - [x] MealPlantable
+    - [x] MealItem
 
-- [ ] Recipe
+- [x] Recipe
   - [ ] TabButton
   - [ ] IngredientsDetail
   - [ ] InstructionsDetail
 
-- [ ] GroceryList
+- [x] GroceryList
   - [ ] AisleNavigator
   - [ ] GroceryChecklist
     - [ ] Aisle (ingredients list by aisle)
       - [ ] IngredientInAisle
 
 ## App
-- State: __user__, , __groceryList__, __pantryItems__
+- State: __user__, __mealPlan__, __startDate__,__groceryList__, __pantryItems__
 - Props: none
 
 ## Button
@@ -60,7 +58,7 @@
   - Used by: ProfilePage
 
 ## MealPlan
-- State: __mealPlan__
+- State: none
 - Props: mealPlan, setMealPlan
 - Used by: App
   - ## Meal Plan Table
