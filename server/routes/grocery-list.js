@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require("axios");
 
 // Helper functions
-const getEndDate = require("../helpers/date-helper");
+const { getEndDate } = require("../helpers/date-helper");
 
 // Convenience variables
 const apiBaseUrl = "https://api.spoonacular.com/mealplanner";
@@ -16,6 +16,7 @@ const apiUserHash = process.env.API_USER_HASH;
 router.get("/:startDate", (req, res) => {
   const startDate = req.params.startDate;
   const endDate = getEndDate(startDate);
+  console.log
 
   axios.post(`${apiBaseUrl}/${apiUserName}/shopping-list/${startDate}/${endDate}?hash=${apiUserHash}&apiKey=${apiKey}`)
     .then(response => {
