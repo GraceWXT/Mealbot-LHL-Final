@@ -6,21 +6,24 @@ import { useParams } from "react-router-dom";
 
 
 //chakra-ui imports
-import { Stack, HStack, VStack } from '@chakra-ui/react';
-import { Box } from '@chakra-ui/react';
-import { Container } from '@chakra-ui/react';
-import { Image } from '@chakra-ui/react';
-import { Heading } from '@chakra-ui/react';
-import { useColorModeValue, useColorMode, } from '@chakra-ui/react';
-import { Button, ButtonGroup } from '@chakra-ui/react';
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { Stack, HStack, VStack } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
+import { Spacer, Flex } from "@chakra-ui/react";
+import { useColorModeValue, useColorMode, } from "@chakra-ui/react";
+import { Button, ButtonGroup, IconButton } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
+import { EditIcon, SmallAddIcon, CheckIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import {
   List,
   ListItem,
   ListIcon,
   OrderedList,
   UnorderedList,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
 
 
 
@@ -69,6 +72,14 @@ export default function Profile() {
     ]
   ];
 
+  const getPantryItems = pantryItems.map((item, index) => {
+    return (
+      <ListItem key={index}>
+        {item.name}
+      </ListItem>
+    );
+  });
+
 
   // const { id } = useParams();
 
@@ -92,13 +103,74 @@ export default function Profile() {
   }, []);
 
 
-  console.log('user', user);
-  console.log('pantry', pantryItems);
+  console.log("user", user);
+  console.log("pantry", pantryItems);
+
+
 
 
   return (
-    <div>
-      Profile
-    </div>
+    <Center>
+      <HStack m={5} justifyContent="center" w="100%" h="100%">
+        <Container boxShadow="xl" border="1px" borderColor="gray.200" py={5} w="30vw" minH="70vh" rounded="lg">
+          <Image src={user.imgUrl} padding={1} />
+          <Heading as="h3" size="md" py={2}>{user.firstName} {user.lastName}</Heading>
+          <Text fontWeight="bold">{user.email}</Text>
+          <Text py={2}>“This crab is so undercooked I can still hear it singing ‘Under the Sea.’” - Gordon Ramsay</Text>
+        </Container>
+        <Container boxShadow="xl" border="1px" borderColor="gray.200" py={5} w="30vw" minH="70vh" rounded="lg">
+          <HStack>
+            <Heading as="h2" size="md">Preferences</Heading>
+            <Spacer />
+            <IconButton
+              size="sm"
+              icon={<EditIcon />}
+              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
+              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+            />
+          </HStack>
+          <List>
+            <ListItem>
+              <ListIcon as={ChevronRightIcon} />
+              Max Calories: {user.maxCalories}
+            </ListItem>
+            <ListItem>
+              <ListIcon as={ChevronRightIcon}  />
+              Max Cooking Time: {user.maxTime}
+            </ListItem>
+            <ListItem>
+              <ListIcon as={ChevronRightIcon}  />
+              Servings: {user.servings}
+            </ListItem>
+
+          </List>
+        </Container>
+        <Container boxShadow="xl" border="1px" borderColor="gray.200" py={5} w="30vw" minH="70vh" rounded="lg">
+          <HStack>
+            <Heading as="h2" size="md">Pantry Items</Heading>
+            <Spacer />
+            <IconButton
+              size='sm'
+              icon={<EditIcon />}
+              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
+              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+            />
+          </HStack>
+          <UnorderedList>
+            {getPantryItems}
+          </UnorderedList>
+        </Container>
+      </HStack>
+
+    </Center>
+    // <div>
+    //   <text>
+    //     profile
+    //   </text>
+    // </div>
   );
 }
