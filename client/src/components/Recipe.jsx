@@ -5,26 +5,27 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 //chakra-ui components
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
-import { Stack, HStack, VStack } from '@chakra-ui/react';
-import { Container } from '@chakra-ui/react';
-import { Divider } from '@chakra-ui/react';
-import { Image } from '@chakra-ui/react';
-import { Heading } from '@chakra-ui/react';
-import { Text } from '@chakra-ui/react';
-import { Flex, Spacer } from '@chakra-ui/react';
-import { Box } from '@chakra-ui/react';
-import { extendTheme, withDefaultColorScheme } from '@chakra-ui/react';
-import { useColorModeValue, useColorMode, } from '@chakra-ui/react';
-import { Button, ButtonGroup } from '@chakra-ui/react';
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Stack, HStack, VStack } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
+import { Divider } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
+import { Flex, Spacer } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
+import { useColorModeValue, useColorMode, } from "@chakra-ui/react";
+import { Button, ButtonGroup } from "@chakra-ui/react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import {
   List,
   ListItem,
   ListIcon,
   OrderedList,
   UnorderedList,
-} from '@chakra-ui/react';
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function Recipe() {
   const [state, setState] = useState({
@@ -166,7 +167,7 @@ export default function Recipe() {
   }, []);
 
 
-  console.log('state', state);
+  console.log("state", state);
 
   //creates array of ingredients copied from state.ingredients
   const ingredientsArray = [...state.ingredients];
@@ -183,7 +184,7 @@ export default function Recipe() {
 
   //creates an array of instructions
   const instructionsArray = [...state.instructions];
-  console.log('instructionsArray', instructionsArray);
+  console.log("instructionsArray", instructionsArray);
 
   //maps over instructionsArray to return a list of instructions
   const instructionsList = instructionsArray.map((instruction) => {
@@ -197,7 +198,7 @@ export default function Recipe() {
 
   //creates an array of nutrition
   const nutritionArray = [...state.nutrition];
-  console.log('nutritionArray', nutritionArray);
+  console.log("nutritionArray", nutritionArray);
 
   //maps over instructionsArray to return a list of instructions
   const nutritionList = nutritionArray.map((nutrient) => {
@@ -224,14 +225,16 @@ export default function Recipe() {
 
   return (
     <Box>
-      <Button
-        m={5}
-        bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
-        leftIcon={<ArrowBackIcon />}
-        _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-        _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}>
-        Back to meal plan
-      </Button>
+      <Link to={"/mealplan/2022-05-23"} >
+        <Button
+          m={5}
+          bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+          leftIcon={<ArrowBackIcon />}
+          _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+          _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}>
+          Back
+        </Button>
+      </Link>
       <HStack alignItems="start">
         <Container w="40%">
           <Heading as='h2' size='lg'>{state.title}</Heading>
