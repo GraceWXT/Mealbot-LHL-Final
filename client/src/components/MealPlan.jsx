@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
+// External components and hooks
 import {
   Table,
   Thead,
@@ -10,62 +9,66 @@ import {
   IconButton,
   Heading,
   HStack,
-  VStack,
-
+  VStack
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon} from "@chakra-ui/icons";
-
-import headerTextHelper from "helpers/headerTextHealper";
-import mealPlanSorter from "helpers/mealplan-helper";
+import { useOutletContext } from "react-router-dom";
+// Internal components
 import Meal from "./Meal";
+// Helper Functions
+import { mealPlanSorter, headerTextHelper } from "helpers/mealplan-helper";
+import { getNextMondaySec, getEndDate } from "helpers/date-helper";
 
 export default function MealPlan() {
-  const [mealPlan, setMealPlan] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/mealplans/random").then(res => {
-      const mealPlan = res.data;
-      setMealPlan(mealPlan);
-    }).catch(err => {
-      console.log("Error: ", err.message);
-    });
-  }, []);
+  const { mealPlan, setMealPlan } = useOutletContext();
 
-  const breakfasts = mealPlanSorter(mealPlan, 1);
-  const lunches = mealPlanSorter(mealPlan, 2);
-  const dinner = mealPlanSorter(mealPlan, 3);
+  // Create the date strings for meal plan heading
+  const nextMondayTimestamp = getNextMondaySec();
+  const nextMondayDate = new Date(nextMondayTimestamp * 1000).toISOString().split("T")[0];
+  const nextSundayDate = getEndDate(nextMondayTimestamp);
+
+  // Restructure the mealPlan state into array of 3 arrays
+  const breakfasts = mealPlanSorter(mealPlan, 1) || [];
+  const lunches = mealPlanSorter(mealPlan, 2) || [];
+  const dinner = mealPlanSorter(mealPlan, 3) || [];
 
   const array = [breakfasts, lunches, dinner];
+
+  // Map the restructured meal plan array to render each table row
   const rows = array.map((row, index) => {
+    //Create the row header based on the index
     const headerText = headerTextHelper(index + 1);
+
+    let tds = [];
     if (!row.length) {
-      let tds = [];
+      // When the row is empty, push 7 empty Tds to the row
       for (let i = 0; i <= 6; i++) {
-        tds.push(<Td key={`${index}-${i}`} padding="5px"></Td>);
+        tds.push(<Td key={`${index}-${i}`} py="8px" height="20vh"></Td>);
       }
-      return (
-        <Tr key={index}>
-          <Th width="8vw">{headerText}</Th>
-          {tds}
-        </Tr>
-      );
+
     } else {
-      const tds = row.map(meal => {
-        return (
-          <Meal key={meal.value.id} recipe={meal}/>
-        );
-      });
-      return (
-        <Tr key={index}>
-          <Th  width="8vw">{headerText}</Th>
-          {tds}
-        </Tr>
-      );
+      // When the row is not empty
+      // Check if there is a recipe value for each meal and render the meal or an empty Td
+      for (let i = 0; i < row.length; i++) {
+        row[i].value ?
+          tds.push(<Meal key={row[i].value.id} meal={row[i]} setMealPlan={setMealPlan} />) :
+          tds.push(<Td key={`${index}-${i}`} py="8px" height="20vh"></Td>);
+      }
     }
+
+    // Return the table row with a header and 7 Tds
+    return (
+      <Tr key={index}>
+        <Th  width="7vw">{headerText}</Th>
+        {tds}
+      </Tr>
+    );
   });
 
 
   return (
     <VStack>
+      {/* Heading with left & right button and the meal plan start & end date */}
       <HStack marginTop="3vh" marginBottom="2vh">
         <IconButton
           aria-label='previous week'
@@ -73,7 +76,7 @@ export default function MealPlan() {
           borderRadius="50%"
         />
         <Heading fontSize="1.5rem">
-          May 16 - May 22
+          {`${nextMondayDate} - ${nextSundayDate}`}
         </Heading>
         <IconButton
           aria-label='next week'
@@ -81,6 +84,7 @@ export default function MealPlan() {
           borderRadius="50%"
         />
       </HStack>
+      {/* Table with a Thead of 7 days (7 columns) in a week, and 3 rows */}
       <Table width="88vw">
         <Thead>
           <Tr>

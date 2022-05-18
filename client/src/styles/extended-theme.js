@@ -5,6 +5,9 @@ const theme = extendTheme({
     global: {
       body: {
         fontFamily: "Inter, sans-serif"
+      },
+      ":focus:not(:focus-visible):not([role=\"dialog\"]):not([role=\"menu\"])": {
+        boxShadow: "none !important"
       }
     }
   },

@@ -18,8 +18,8 @@ ReactDOM.render(
         <Route path="/" element={<App />}>
           <Route index element={<HomePage />} />
           <Route path="users/:id" element={<Profile />} />
-          <Route path="mealplan/random" element={<MealPlan />} />
-          <Route path="recipe/:id" element={<Recipe />} />
+          <Route path="mealplan/:startDate" element={<MealPlan />} />
+          <Route path="recipes/:id" element={<Recipe />} />
           <Route path="grocerylist/:startDate" element={<GroceryList />} />
         </Route>
       </Routes>
