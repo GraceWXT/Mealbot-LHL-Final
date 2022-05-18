@@ -14,6 +14,10 @@ import { Heading } from '@chakra-ui/react';
 import { Text } from '@chakra-ui/react';
 import { Flex, Spacer } from '@chakra-ui/react';
 import { Box } from '@chakra-ui/react';
+import { extendTheme, withDefaultColorScheme } from '@chakra-ui/react';
+import { useColorModeValue, useColorMode, } from '@chakra-ui/react';
+import { Button, ButtonGroup } from '@chakra-ui/react';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import {
   List,
   ListItem,
@@ -151,6 +155,12 @@ export default function Recipe() {
   //   });
   // }, []);
 
+  // const { colorMode, toggleColorMode } = useColorMode();
+  // const customTheme = extendTheme(
+  //   onClick=({
+  //     colorScheme: 'turquoiseGreen.100' }))
+
+
   useEffect(() => {
     setState(prev => ({ ...prev, ...recipeMock }));
   }, []);
@@ -193,7 +203,7 @@ export default function Recipe() {
   const nutritionList = nutritionArray.map((nutrient) => {
     return (
       // <ListItem py={2}>
-      <Box py={2} borderBottom='1px'  borderColor='gray.200'>
+      <Box py={2} borderBottom='1px' borderColor='gray.200'>
         <Flex>
           <Text fontWeight='semibold'>
             {nutrient.name}
@@ -211,45 +221,52 @@ export default function Recipe() {
 
 
 
+
   return (
-    <HStack alignItems="start">
-      <Container w="40%" py={10}  >
-        <Heading as='h2' size='lg' py={2}>{state.title}</Heading>
-        <Divider />
-        <Text py={2}>Cooking time: {state.readyInMinutes}min</Text>
-        {/* <Divider /> */}
-        <Text py={2}>Servings: {state.servings}</Text>
-        <Image src={state.image} py={5} />
-      </Container>
+    <Box>
+      <Button m={5} bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")} leftIcon={<ArrowBackIcon />}>
+        Back
+      </Button>
+      <HStack alignItems="start">
+        <Container w="40%">
+          <Heading as='h2' size='lg'>{state.title}</Heading>
+          <Divider />
+          <Text py={2}>Cooking time: {state.readyInMinutes}min</Text>
+          {/* <Divider /> */}
+          <Text py={2}>Servings: {state.servings}</Text>
+          <Image src={state.image} py={5} />
+        </Container>
 
-      <Divider orientation='vertical' />
+        <Divider orientation='vertical' />
 
-      {/* <VStack> */}
-      <Tabs isFitted variant='enclosed' w="60%" py={10} >
-        <TabList mb='1em'>
-          <Tab>Ingredients</Tab>
-          <Tab>Instructions</Tab>
-          <Tab>Nutrition</Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <UnorderedList>
-              {ingredientList}
-            </UnorderedList>
-          </TabPanel>
-          <TabPanel>
-            <OrderedList>
-              {instructionsList}
-            </OrderedList>
-          </TabPanel>
-          <TabPanel>
-            <UnorderedList>
-              {nutritionList}
-            </UnorderedList>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </HStack>
+
+        <Tabs isFitted variant='enclosed' w="60%" variantColor="red">
+          <TabList mb='1em' >
+            <Tab _selected={{ bg: "turquoiseGreen.100", _dark: { bg: "majestyPurple.500" } }}>Ingredients</Tab>
+            <Tab _selected={{ bg: "turquoiseGreen.100", _dark: { bg: "majestyPurple.500" } }}>Instructions</Tab>
+            <Tab _selected={{ bg: "turquoiseGreen.100", _dark: { bg: "majestyPurple.500" } }}>Nutrition</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <UnorderedList>
+                {ingredientList}
+              </UnorderedList>
+            </TabPanel>
+            <TabPanel>
+              <OrderedList>
+                {instructionsList}
+              </OrderedList>
+            </TabPanel>
+            <TabPanel>
+              <UnorderedList>
+                {nutritionList}
+              </UnorderedList>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </HStack>
+    </Box>
+
 
   );
 }
