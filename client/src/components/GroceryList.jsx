@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import {
+  Flex,
+  Text,
+  Spacer,
   IconButton,
   Heading,
   Link,
   Center,
-  Divider,
   HStack,
   VStack,
   Container,
@@ -20,8 +22,6 @@ import { CopyIcon } from "@chakra-ui/icons";
 import groceryList from "./grocery-list-data";
 
 export default function GroceryList() {
-
-  //aisles.items.measures.metric
 
   // get start date from react router
   const { startDate } = useParams();
@@ -44,7 +44,7 @@ export default function GroceryList() {
 
     const linkText = aisle.aisle.replaceAll(" ", "-");
     return (
-      <ListItem key={aisle.aisle}>
+      <ListItem key={aisle.aisle} py={0.5} borderBottom='1px' borderColor='gray.200'>
         <Link href={`#${linkText}`}>
           {aisle.aisle}
         </Link>
@@ -52,15 +52,22 @@ export default function GroceryList() {
     );
   });
 
+  // ITEMS QUANTITY
+
+
   // GROCERY LIST
   const listOfAisleItems = aisles.map((aisle) => {
 
     // AISLE ITEMS
     const aisleItems = aisle.items.map(item => {
+      const measurement = item.measures.original;
+      const { amount, unit } = measurement;
+      const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
+      console.log(quantity);
       return (
-        <ListItem key={item.id}>
-          <Checkbox colorScheme="green" spacing="1rem">
-            {item.name}
+        <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
+          <Checkbox colorScheme="green" spacing="1rem" width="100%">
+            {quantity} {item.name}
           </Checkbox>
         </ListItem>
       );
@@ -95,7 +102,7 @@ export default function GroceryList() {
           </List>
         </VStack>
 
-        <Container width="30%" height="100%"  >
+        <Container width="50%" height="100%"  >
           <HStack justifyContent="center" position="sticky" padding="20px" >
             <Heading fontSize="1.8rem" >Grocery List</Heading>
             <IconButton
