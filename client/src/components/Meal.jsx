@@ -13,9 +13,25 @@ import {
 } from "@chakra-ui/react";
 import { DeleteIcon, RepeatIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+// import { useOutletContext } from "react-router-dom";
 
 export default function Meal(props) {
-  const { meal, handleDelete } = props;
+  // the mealPlan state is only used in the console.log below for testing the delete function
+  // const { mealPlan } = useOutletContext();
+  const { meal, setMealPlan } = props;
+
+  const deleteMealByDateSlot = () => {
+    setMealPlan(prev => {
+      // console.log(mealPlan.map(prevMeal => {
+      //   return (prevMeal.date === meal.date && prevMeal.slot === meal.slot ?
+      //     {...prevMeal, value:null} : prevMeal);
+      // }));
+      return prev.map(prevMeal => {
+        return (prevMeal.date === meal.date && prevMeal.slot === meal.slot ?
+          {...prevMeal, value:null} : prevMeal);
+      });
+    });
+  };
 
   return (
     <Td padding="8px 0px" verticalAlign="top" >
@@ -47,6 +63,7 @@ export default function Meal(props) {
                 colorScheme="majestyPurple"
                 borderRadius="50%"
                 size="xs"
+                onClick={() => deleteMealByDateSlot()}
               />
               <IconButton
                 aria-label='delete meal'
