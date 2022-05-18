@@ -14,5 +14,5 @@ const getEndDate = (start_date) => {
   end_date.setDate(end_date.getDate() + 6)  // getDate grabs the day
   return end_date.toISOString().substring(0,10)   // converts date to string
 }
-
+console.log(getEndDate('2022-05-16'))
 module.exports = { getNextMonday, getEndDate };
