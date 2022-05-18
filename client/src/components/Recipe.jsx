@@ -143,10 +143,10 @@ export default function Recipe() {
     "servings": 4
   };
 
-  // const { id } = useParams();
 
   // get data to update state;
 
+  // const { id } = useParams();
   // useEffect(() => {
   //   axios.get(`http://localhost:8080/api/recipes/${id}`
   //   ).then((res) => {
@@ -172,9 +172,9 @@ export default function Recipe() {
   const ingredientsArray = [...state.ingredients];
 
   //maps over ingredientsArray to return list of ingredients
-  const ingredientList = ingredientsArray.map((ingredient) => {
+  const ingredientList = ingredientsArray.map((ingredient, index) => {
     return (
-      <ListItem py={2} borderBottom='1px' borderColor='gray.200'>
+      <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
         {ingredient.amount} {ingredient.unit} {ingredient.name}
         {/* <Divider /> */}
       </ListItem>
@@ -186,9 +186,9 @@ export default function Recipe() {
   console.log('instructionsArray', instructionsArray);
 
   //maps over instructionsArray to return a list of instructions
-  const instructionsList = instructionsArray.map((instruction) => {
+  const instructionsList = instructionsArray.map((instruction, index) => {
     return (
-      <ListItem py={2} borderBottom='1px' borderColor='gray.200'>
+      <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
         {instruction.step}
         {/* <Divider /> */}
       </ListItem>
@@ -200,10 +200,10 @@ export default function Recipe() {
   console.log('nutritionArray', nutritionArray);
 
   //maps over instructionsArray to return a list of instructions
-  const nutritionList = nutritionArray.map((nutrient) => {
+  const nutritionList = nutritionArray.map((nutrient, index) => {
     return (
       // <ListItem py={2}>
-      <Box py={2} borderBottom='1px' borderColor='gray.200'>
+      <Box key={index} py={2} borderBottom='1px' borderColor='gray.200'>
         <Flex>
           <Text fontWeight='semibold'>
             {nutrient.name}
@@ -245,7 +245,7 @@ export default function Recipe() {
         <Divider orientation='vertical' />
 
 
-        <Tabs isFitted variant='enclosed' w="60%" variantColor="red">
+        <Tabs isFitted variant='enclosed' w="60%">
           <TabList mb='1em' >
             <Tab
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
