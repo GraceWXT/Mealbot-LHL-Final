@@ -16,7 +16,6 @@ const apiUserHash = process.env.API_USER_HASH;
 router.get("/:startDate", (req, res) => {
   const startDate = req.params.startDate;
   const endDate = getEndDate(startDate);
-  console.log
 
   axios.post(`${apiBaseUrl}/${apiUserName}/shopping-list/${startDate}/${endDate}?hash=${apiUserHash}&apiKey=${apiKey}`)
     .then(response => {
