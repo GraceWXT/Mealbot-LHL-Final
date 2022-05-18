@@ -8,41 +8,37 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
-  PopoverCloseButton,
-  PopoverAnchor,
 } from "@chakra-ui/react";
 import { DeleteIcon, RepeatIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 export default function Meal(props) {
-  const { recipe, handleDelete } = props;
+  const { meal, handleDelete } = props;
 
-  const toggleOptions = () => {
-
-  };
   return (
     <Td padding="8px 0px" verticalAlign="top" >
       <Popover trigger="hover" gutter={3}>
         <PopoverTrigger>
           <VStack>
-            <Image
-              src={recipe.value.image}
-              width="auto"
-              height="12vh"
-              borderRadius='lg'
-            />
+            <Link to={`/recipes/${meal.value.id}`} >
+              <Image
+                src={meal.value.image}
+                width="auto"
+                height="12vh"
+                borderRadius='lg'
+              />
+            </Link>
             <Text
               width="16vh"
               fontSize="xs"
               textAlign="center"
-            >{recipe.value.title}</Text>
+            >{meal.value.title}</Text>
           </VStack>
         </PopoverTrigger>
-        <PopoverContent width="16vh" >
-          <PopoverArrow />
+        <PopoverContent width="16vh" bg="gray.100" >
+          <PopoverArrow bg="gray.100" />
           <PopoverBody>
             <HStack justifyContent="center">
               <IconButton
