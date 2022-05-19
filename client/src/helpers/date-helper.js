@@ -19,11 +19,15 @@ const getNextMondaySec = () => {
 
 // console.log("getNextMondaySec", getNextMondaySec());
 
-/** Given a Monday timestamp, returns the yyyy-mm-dd format Sunday */
+/** Given a Monday timestamp, returns the MMM DD, YYYY format Sunday */
 const getEndDate = (startDate) => {
   const endDate = new Date(startDate * 1000);
   endDate.setDate(endDate.getDate() + 6);  // getDate grabs the day
-  return endDate.toISOString().split("T")[0];   // converts date to string
+  return endDate.toLocaleString("en-CA", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });   // converts date to string
 };
 
 // console.log("getEndDate", getEndDate(getNextMondaySec()));
