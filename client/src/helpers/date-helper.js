@@ -40,12 +40,12 @@ const getFormatedDates = (yyyymmdd) => {
     month: "short",
     day: "numeric",
     year: "numeric"
-  });
+  }).split(",")[0];
   const sunday = new Date(localTimestamp + 6 * 24 * 60 * 60 * 1000).toLocaleString("en-CA", {
     month: "short",
     day: "numeric",
     year: "numeric"
-  });
+  }).split(",")[0];
 
   return { monday, sunday };
 };

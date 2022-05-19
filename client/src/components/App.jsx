@@ -30,12 +30,37 @@ export default function App() {
   }, []);
 
   const [mealPlan, setMealPlan] = useState([]);
+  const [mealPlanStatus, setMealPlanStatus] = useState("");
+  console.log("mealPlanStatus:", mealPlanStatus);
+
+  // based on the startDate
+  // send an axios request to get back end to get either an existing plan or a random new plan
+  // set meal plan data and status based on the response
+  useEffect(() => {
+    if (startDate) {
+      axios.get(`http://localhost:8080/api/mealplans/${startDate}`).then(res => {
+        setMealPlan(res.data.mealplan);
+        if (Date.parse(startDate) > new Date()) {
+          // console.log(`Future${res.data.status}`);
+          setMealPlanStatus(`Future${res.data.status}`);
+        } else {
+          // console.log(`Past${res.data.status}`);
+          setMealPlanStatus(`Past${res.data.status}`);
+        }
+      }).catch(err => {
+        console.log("Error: ", err.message);
+      });
+    }
+  }, [startDate]);
 
   return (
     <div className="App">
       <ChakraProvider theme={theme}>
         <Navbar user={ user } setStartDate={ setStartDate } />
-        <Outlet context={{ mealPlan, setMealPlan, startDate, setStartDate }} />
+        <Outlet context={{
+          mealPlan, setMealPlan,
+          startDate, setStartDate,
+          mealPlanStatus, setMealPlanStatus }} />
       </ChakraProvider>
     </div>
   );
