@@ -92,7 +92,7 @@ export default function GroceryList() {
   });
 
   return (
-    <Center width="100vw" >
+    <Center width="100vw" position="absolute">
       <HStack height="80vh" width="80vw" border="1px" borderRadius="lg" justifyContent="center" marginTop="5vh" >
         {/* AISLES */}
         <VStack height="100%" padding="20px">
