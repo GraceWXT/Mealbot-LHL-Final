@@ -49,7 +49,7 @@ export default function App() {
     <div className="App">
       <ChakraProvider theme={theme}>
         <Navbar user={ user } startDate={ startDate } />
-        <Outlet context={{ mealPlan, setMealPlan, startDate, setStartDate }} />
+        <Outlet context={{ nextMondayDate, mealPlan, setMealPlan, startDate, setStartDate }} />
       </ChakraProvider>
     </div>
   );

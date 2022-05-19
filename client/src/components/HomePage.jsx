@@ -4,12 +4,12 @@ import {
 import { Link, useOutletContext } from "react-router-dom";
 
 export default function HomePage() {
-  const { startDate } = useOutletContext();
+  const { nextMondayDate } = useOutletContext();
 
   return (
     <div>
       HomePage
-      <Link to={`mealplan/${startDate}`}>
+      <Link to={`mealplan/${nextMondayDate}`}>
         <Button>
           I'm feeling Hungry!
         </Button>
