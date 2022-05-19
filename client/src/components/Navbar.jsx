@@ -17,10 +17,13 @@ import {
   Switch
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { getCurrentMondayDate } from "helpers/date-helper";
 
 export default function Navbar(props) {
-  const { user, startDate } = props;
+  const { user, setStartDate } = props;
   const { colorMode, toggleColorMode } = useColorMode();
+
+  const currentMonday = getCurrentMondayDate();
 
   return (
     <>
@@ -66,8 +69,8 @@ export default function Navbar(props) {
                 </Link>
               </MenuItem>
               <MenuDivider />
-              <MenuItem>
-                <Link to={`mealplan/${startDate}`}>
+              <MenuItem onClick={() => setStartDate(currentMonday) } >
+                <Link to={`mealplan/${currentMonday}`}>
                   Meal Plan
                 </Link>
               </MenuItem>

@@ -10,10 +10,15 @@ import {
   Image,
   useColorModeValue
 } from "@chakra-ui/react";
+
 import { Link, useOutletContext } from "react-router-dom";
+// Helper functions
+import { getNextMondayDate } from "helpers/date-helper";
 
 export default function HomePage() {
-  const { startDate } = useOutletContext();
+  const { setStartDate } = useOutletContext();
+  //Set Initial start date to next Monday
+  const nextMondayDate = getNextMondayDate();
 
   return (
     <Container>
@@ -36,13 +41,21 @@ export default function HomePage() {
             Click the button below to see what you get
           </Text>
           <br />
-          <Link to={`mealplan/${startDate}`}>
-            <Button fontSize="22px" fontWeight="600" w="100%" h="50px" bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}>
+          <Link to={`mealplan/${nextMondayDate}`}>
+            <Button
+              fontSize="22px"
+              fontWeight="600"
+              w="100%"
+              h="50px"
+              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              onClick={() => setStartDate(nextMondayDate)}
+            >
               I'm feeling hungry!
             </Button>
           </Link>
         </Box>
       </VStack>
     </Container>
+
   );
 }

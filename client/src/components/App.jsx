@@ -9,15 +9,11 @@ import Navbar from "./Navbar";
 // Styling
 import theme from "styles/extended-theme";
 import "./App.scss";
-// Helper functions
-import { getNextMondaySec } from "helpers/date-helper";
+
 
 export default function App() {
-  //Set Initial start date to next Monday
-  const nextMondayTimestamp = getNextMondaySec();
-  const nextMondayDate = new Date(nextMondayTimestamp * 1000).toISOString().split("T")[0];
 
-  const [startDate, setStartDate] = useState(`${nextMondayDate}`);
+  const [startDate, setStartDate] = useState("");
 
   // const [groceryList, setgroceryList] = useState({});
   // const [pantryItems, setPantryItems] = useState([]);
@@ -33,22 +29,12 @@ export default function App() {
     });
   }, []);
 
-  // Getrandom meal plan and set to state
   const [mealPlan, setMealPlan] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/mealplans/random").then(res => {
-      const mealPlan = res.data;
-      setMealPlan(mealPlan);
-    }).catch(err => {
-      console.log("Error: ", err.message);
-    });
-  }, []);
-
 
   return (
     <div className="App">
       <ChakraProvider theme={theme}>
-        <Navbar user={ user } startDate={ startDate } />
+        <Navbar user={ user } setStartDate={ setStartDate } />
         <Outlet context={{ mealPlan, setMealPlan, startDate, setStartDate }} />
       </ChakraProvider>
     </div>
