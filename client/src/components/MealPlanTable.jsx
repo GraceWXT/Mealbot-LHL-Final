@@ -56,7 +56,7 @@ export default function MealPlanTable(props) {
   });
 
   return (
-    <Table width="88vw">
+    <Table width="88vw" bgcolor="white" borderRadius="lg">
       <Thead>
         <Tr>
           <Th></Th>
