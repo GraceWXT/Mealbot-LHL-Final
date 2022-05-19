@@ -27,13 +27,13 @@ router.get("/:startDate", (req, res) => {
   axios.get(`${apiBaseUrl}/mealplanner/${apiUserName}/week/${startDate}?hash=${apiUserHash}&apiKey=${apiKey}`)
     .then(result => {
       // if there's no saved mealplan in the api database
-      // get random recipes from our pool and send back as meal plan json
       if (result.data.days.length === 0) {
+        // For a future weeek, get random recipes from our pool and send back as meal plan json
         if (Date.parse(startDate) > new Date()) {
           getRandomRecipesForWeek()
             .then((recipes) => {
               const mealplan = mealplanMapper(recipes);
-              res.json(mealplan);
+              res.json({ mealplan, status: "New" });
             })
             .catch(err => {
               res
@@ -41,16 +41,16 @@ router.get("/:startDate", (req, res) => {
                 .json({ error: err.message });
             });
         } else {
+          // For a past week, send back empty mealplan
           const mealplan = getEmptyMealPlan(startDate);
-          res.json(mealplan);
+          res.json({mealplan, status: "Saved" });
         }
-
 
       } else {
         // If the meal plan exists
         // transform data to the shape we need and send to front end
         const mealplan = apiMealPlanMapper(result.data.days);
-        res.json(mealplan);
+        res.json({ mealplan, status: "Saved" });
       }
     })
     .catch(err => {
@@ -58,8 +58,6 @@ router.get("/:startDate", (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
-
-
 
 });
 
