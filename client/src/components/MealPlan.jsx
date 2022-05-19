@@ -10,16 +10,18 @@ import {
   useToast
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon} from "@chakra-ui/icons";
-import { Link, useOutletContext, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 // Helper Functions
-import { getNextMondaySec, getEndDate } from "helpers/date-helper";
+import { getFormatedDates, getPreviousMonday, getNextMonday } from "../helpers/date-helper";
+
 import MealPlanTable from "./MealPlanTable";
 
 export default function MealPlan() {
-  const { startDate } = useParams;
+  const { startDate } = useParams();
   const [mealPlan, setMealPlan ] = useState([]);
+  const navigate = useNavigate();
 
   // based on the startDate
   // send an axios request to get back end to get either an existing plan or a random new plan
@@ -35,13 +37,17 @@ export default function MealPlan() {
   // set meal plan data and status based on the response
 
   // Create the date strings for meal plan heading
-  const nextMondayTimestamp = getNextMondaySec();
-  const nextMondayDate = new Date(nextMondayTimestamp * 1000).toLocaleString("en-CA", {
-    month: "short",
-    day: "numeric",
-    year: "numeric"
-  });
-  const nextSundayDate = getEndDate(nextMondayTimestamp);
+  const { monday, sunday } = getFormatedDates(startDate);
+
+  const showPreviousWeek = () => {
+    const previousMonday = getPreviousMonday(startDate);
+    navigate(`/mealplan/${previousMonday}`);
+  };
+
+  const showNextWeek = () => {
+    const nextMonday = getNextMonday(startDate);
+    navigate(`/mealplan/${nextMonday}`);
+  };
 
 
   let groceryButtonHidden = true;
@@ -78,15 +84,17 @@ export default function MealPlan() {
             icon={<ChevronLeftIcon />}
             borderRadius="50%"
             bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+            onClick={() => showPreviousWeek()}
           />
           <Heading fontSize="1.5rem">
-            {`${nextMondayDate} - ${nextSundayDate}`}
+            {`${monday} - ${sunday}`}
           </Heading>
           <IconButton
             aria-label='next week'
             icon={<ChevronRightIcon />}
             borderRadius="50%"
             bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+            onClick={() => showNextWeek()}
           />
         </HStack>
         <MealPlanTable mealPlan={mealPlan}/>

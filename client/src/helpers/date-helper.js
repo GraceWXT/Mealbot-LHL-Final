@@ -8,13 +8,14 @@ const getCurrentMondayDate = () => {
 };
 
 /** A function that returns the timestamp of the next Monday in seconds */
-const getNextMondaySec = () => {
+const getNextMondayDate = () => {
   const day = new Date();
   const nextMondayInMillSec = day.setDate(
     day.getDate() + (((1 + 7 - day.getDay()) % 7) || 7)
   );
-  const nextMondayInSec = new Date(nextMondayInMillSec).setHours(0, 0, 0, 0) / 1000;
-  return nextMondayInSec;
+  const nextMondayInMiliSec = new Date(nextMondayInMillSec).setHours(0, 0, 0, 0);
+  const nextMondayDate = new Date(nextMondayInMiliSec).toISOString().split("T")[0];
+  return nextMondayDate;
 };
 
 // console.log("getNextMondaySec", getNextMondaySec());
@@ -32,4 +33,37 @@ const getEndDate = (startDate) => {
 
 // console.log("getEndDate", getEndDate(getNextMondaySec()));
 
-export {getCurrentMondayDate, getNextMondaySec, getEndDate};
+const getFormatedDates = (yyyymmdd) => {
+  const utcTimestamp = Date.parse(yyyymmdd);
+  const localTimestamp = utcTimestamp + new Date().getTimezoneOffset() * 60 * 1000;
+  const monday =  new Date(localTimestamp).toLocaleString("en-CA", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+  const sunday = new Date(localTimestamp + 6 * 24 * 60 * 60 * 1000).toLocaleString("en-CA", {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+
+  return { monday, sunday };
+};
+
+const getPreviousMonday = (startDate) => {
+  const utcTimestamp = Date.parse(startDate);
+  const localTimestamp = utcTimestamp + new Date().getTimezoneOffset() * 60 * 1000;
+  const previousMonday =  new Date(localTimestamp - 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
+  return previousMonday;
+};
+
+const getNextMonday = (startDate) => {
+  const utcTimestamp = Date.parse(startDate);
+  const localTimestamp = utcTimestamp + new Date().getTimezoneOffset() * 60 * 1000;
+  const nextMonday =  new Date(localTimestamp + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0];
+  return nextMonday;
+};
+
+// console.log(formatDate("2022-05-16"));
+
+export {getCurrentMondayDate, getNextMondayDate, getEndDate, getFormatedDates, getPreviousMonday, getNextMonday};
