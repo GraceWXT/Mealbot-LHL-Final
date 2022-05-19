@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 //chakra-ui components
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { Stack, HStack, VStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import { Container } from "@chakra-ui/react";
 import { Divider } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
@@ -14,14 +14,12 @@ import { Heading } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { Flex, Spacer } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
-import { extendTheme, withDefaultColorScheme } from "@chakra-ui/react";
-import { useColorModeValue, useColorMode, } from "@chakra-ui/react";
-import { Button, ButtonGroup } from "@chakra-ui/react";
+import { useColorModeValue } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { mode } from "@chakra-ui/theme-tools";
 import {
-  List,
   ListItem,
-  ListIcon,
   OrderedList,
   UnorderedList,
 } from "@chakra-ui/react";
@@ -235,7 +233,7 @@ export default function Recipe() {
           Back
         </Button>
       </Link>
-      <HStack alignItems="start">
+      <HStack alignItems="start" m={2}>
         <Container w="40%">
           <Heading as='h2' size='lg'>{state.title}</Heading>
           <Divider />
@@ -248,19 +246,28 @@ export default function Recipe() {
         <Divider orientation='vertical' />
 
 
-        <Tabs isFitted variant='enclosed' w="60%">
+        <Tabs isFitted variant='enclosed' w="60%" bg={useColorModeValue("white", "gray.700")}rounded="lg" boxShadow="lg">
           <TabList mb='1em' >
             <Tab
+              border="1px"
+              borderColor={useColorModeValue("gray.200", "gray.700")}
+              bg={ useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
             >Ingredients</Tab>
             <Tab
+              border="1px"
+              borderColor={useColorModeValue("gray.200", "gray.700")}
+              bg={ useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
             >Instructions</Tab>
             <Tab
+              border="1px"
+              borderColor={useColorModeValue("gray.200", "gray.700")}
+              bg={ useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
