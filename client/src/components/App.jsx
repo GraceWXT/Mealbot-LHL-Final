@@ -10,6 +10,8 @@ import Navbar from "./Navbar";
 import theme from "styles/extended-theme";
 import "./App.scss";
 
+// testing data
+// import testingMealPlan from "./MealPlan/testing-mealplan";
 
 export default function App() {
 
