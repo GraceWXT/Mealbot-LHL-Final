@@ -29,16 +29,19 @@ export default function MealPlan() {
 
   let disableGroceryButton = true;
   let disableActionButton = true;
+  let disableGroceryTooltip = false;
   let actionButtonText = "Save";
   if (mealPlanStatus === FutureNew) {
     disableGroceryButton = true;
     disableActionButton = false;
     actionButtonText = "Save";
   } else if (mealPlanStatus === FutureSaved) {
+    disableGroceryTooltip = true;
     disableGroceryButton = false;
     disableActionButton = false;
     actionButtonText = "Edit";
   } else if (mealPlanStatus === PastSaved) {
+    disableGroceryTooltip = true;
     disableGroceryButton = false;
     disableActionButton = true;
     actionButtonText = "Edit";
@@ -122,7 +125,7 @@ export default function MealPlan() {
         </HStack>
         <MealPlanTable mealPlan={mealPlan}/>
         <HStack alignSelf="flex-end">
-          <Tooltip label="Please save your meal plan first">
+          <Tooltip isDisabled={disableGroceryTooltip} label="Please save your meal plan first">
             <Link to={`/grocerylist/${startDate}`}>
               <Button
                 disabled={ disableGroceryButton }
