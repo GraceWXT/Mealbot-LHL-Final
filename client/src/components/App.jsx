@@ -16,7 +16,6 @@ export default function App() {
   const [startDate, setStartDate] = useState("");
 
   // const [groceryList, setgroceryList] = useState({});
-  // const [pantryItems, setPantryItems] = useState([]);
 
   // Get user data and set to state
   const [user, setUser] = useState({});
@@ -28,6 +27,10 @@ export default function App() {
       console.log("Error: ", err.message);
     });
   }, []);
+
+  // Get pantryItems data and set to state
+  const [pantryItems, setPantryItems] = useState([]);
+
 
   const [mealPlan, setMealPlan] = useState([]);
   const [mealPlanStatus, setMealPlanStatus] = useState("");
@@ -48,7 +51,7 @@ export default function App() {
           setMealPlanStatus(`Past${res.data.status}`);
         }
       }).catch(err => {
-        console.log("Error: ", err.message);
+        console.log("axios.get mealplans/startDate error: ", err.message);
       });
     }
   }, [startDate]);
@@ -58,6 +61,8 @@ export default function App() {
       <ChakraProvider theme={theme}>
         <Navbar user={ user } setStartDate={ setStartDate } />
         <Outlet context={{
+          user,
+          pantryItems, setPantryItems,
           mealPlan, setMealPlan,
           startDate, setStartDate,
           mealPlanStatus, setMealPlanStatus }} />
