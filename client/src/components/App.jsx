@@ -30,16 +30,7 @@ export default function App() {
 
   // Get pantryItems data and set to state
   const [pantryItems, setPantryItems] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:8080/api/pantryitems"
-    ).then((res) => {
-      // console.log("res", res.data);
-      console.log("pantryItems",res.data);
-      setPantryItems(res.data);
-    }).catch(err => {
-      console.log("Error: ", err.message);
-    });
-  }, []);
+
 
   const [mealPlan, setMealPlan] = useState([]);
   const [mealPlanStatus, setMealPlanStatus] = useState("");
@@ -71,7 +62,7 @@ export default function App() {
         <Navbar user={ user } setStartDate={ setStartDate } />
         <Outlet context={{
           user,
-          pantryItems,
+          pantryItems, setPantryItems,
           mealPlan, setMealPlan,
           startDate, setStartDate,
           mealPlanStatus, setMealPlanStatus }} />
