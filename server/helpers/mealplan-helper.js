@@ -35,10 +35,10 @@ const apiMealPlanMapper = (days) => {
   // for 7 days (getDay() = 0 - 6) => Sun - Sat
   // find if day exists
   for (let d = 0; d <= 6; d++) {
-    console.log("d:", d);
+    // console.log("d:", d);
     if (days.find(day => new Date(day.date * 1000).getUTCDay() === d)) {
       const day = days.find(day => new Date(day.date * 1000).getUTCDay() === d);
-      console.log(`day found: matching day = ${d} `, day);
+      // console.log(`day found: matching day = ${d} `, day);
 
       for (let i = 1; i <= 3; i++) {
         // if day.items.slot === 1 exists, push meal with recipe
@@ -70,7 +70,7 @@ const apiMealPlanMapper = (days) => {
       }
 
     } else {
-      console.log("day doesn't exist", d);
+      // console.log("day doesn't exist", d);
       // if day doesn't exist in api meal plan
       // push a whole empty day (3 slots) into mealplan
       for (let i = 1; i <= 3; i ++) {
@@ -78,7 +78,7 @@ const apiMealPlanMapper = (days) => {
         const dateDifference = d === 0 ? (7  - knownDay.getUTCDay()) : (d  - knownDay.getUTCDay());
         let missingDay = knownDay.setDate(knownDay.getUTCDate() + dateDifference) / 1000;
         missingDay = new Date(missingDay * 1000).setHours(0, 0, 0, 0) / 1000;
-        console.log("Missing Date: ", missingDay, new Date(missingDay * 1000));
+        // console.log("Missing Date: ", missingDay, new Date(missingDay * 1000));
         mealplan.push({
           "date": missingDay,
           "slot": i,

@@ -33,6 +33,7 @@ export default function Navbar(props) {
         bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
         display="flex" justifyContent={"space-between"} alignItems={"center"}
         padding="0 2vw"
+        boxShadow="rgba(0, 0, 0, 0.10) 0px 0px 12px 0px"
       >
         <Link to="/">
           <HStack>

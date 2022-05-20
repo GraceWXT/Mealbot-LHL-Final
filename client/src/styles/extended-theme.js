@@ -4,9 +4,11 @@ import { mode } from "@chakra-ui/theme-tools";
 const theme = extendTheme({
   styles: {
     global: (props) => ({
-      body: {
+      ".App": {
         fontFamily: "Inter, sans-serif",
-        bg: mode("hsl(0 0% 97%)", "gray.800")(props)
+        bg: mode("hsl(0 0% 97%)", "gray.800")(props),
+        width: "100vw",
+        height: "100vh",
       },
       ":focus:not(:focus-visible):not([role=\"dialog\"]):not([role=\"menu\"])": {
         boxShadow: "none !important"
