@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 // Separated Routes for each Resource
-const usersRouter = require("./routes/users");
+const pantryitemsRouter = require("./routes/pantry-items");
 const homepageRouter = require("./routes/homepage");
 const mealPlansRouter = require("./routes/mealplans");
 const groceryListRouter = require("./routes/grocery-list");
@@ -27,7 +27,7 @@ const recipesRouter = require("./routes/recipes");
 
 
 // Mount all resource routes
-app.use("/api/users", usersRouter);
+app.use("/api/pantryitems", pantryitemsRouter);
 app.use("/api/", homepageRouter);
 app.use("/api/mealplans", mealPlansRouter);
 app.use("/api/grocerylist", groceryListRouter);
