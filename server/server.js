@@ -24,6 +24,7 @@ const homepageRouter = require("./routes/homepage");
 const mealPlansRouter = require("./routes/mealplans");
 const groceryListRouter = require("./routes/grocery-list");
 const recipesRouter = require("./routes/recipes");
+const twilioRouter = require("./routes/twilio");
 
 
 // Mount all resource routes
@@ -32,6 +33,7 @@ app.use("/api/", homepageRouter);
 app.use("/api/mealplans", mealPlansRouter);
 app.use("/api/grocerylist", groceryListRouter);
 app.use("/api/recipes", recipesRouter);
+app.use("/api/twilio", twilioRouter);
 
 
 app.listen(PORT, () => {
