@@ -4,9 +4,9 @@ const router  = express.Router();
 const axios = require("axios");
 
 // db queries and helper functions
-const { getRandomRecipesForWeek } = require("../db/queries/recipe-queries");
+const { getRandomRecipesForWeek, getRandomRecipeForSlot } = require("../db/queries/recipe-queries");
 const { saveMealPlan } = require("../db/queries/mealplan-queries");
-const { getEmptyMealPlan, mealplanMapper, apiMealPlanMapper} = require("../helpers/mealplan-helper");
+const { getEmptyMealPlan, mealplanMapper, apiMealPlanMapper, getRecipeIds} = require("../helpers/mealplan-helper");
 
 // Convenience variables
 const apiBaseUrl = "https://api.spoonacular.com";
@@ -14,11 +14,6 @@ const apiKey = process.env.API_KEY;
 const apiUserName = process.env.API_USERNAME;
 const apiUserHash = process.env.API_USER_HASH;
 // const testingMealPlan = require("../db/mock/testing-mealplan");
-
-// GET /mealplans/random - get random meal plan for a week
-
-
-
 
 // Get /mealplans/:startDate - get the existing meal plan or new random meal plan depending on the start date
 router.get("/:startDate", (req, res) => {
@@ -57,6 +52,32 @@ router.get("/:startDate", (req, res) => {
       res
         .status(500)
         .json({ error: err.message });
+    });
+
+});
+
+// GET mealplans/shuffle/:slot - shuffle
+router.get("/shuffle/:id", (req, res) => {
+  const oldMealPlan = req.body;
+  const recipeToReplace = oldMealPlan.find(meal => meal.value.id === Number.parseInt(req.params.id));
+  const slot = recipeToReplace.slot;
+  const arrayOfExistingRecipeIds = getRecipeIds(oldMealPlan, slot);
+  getRandomRecipeForSlot(slot, arrayOfExistingRecipeIds)
+    .then(recipe => {
+      const mealplan = oldMealPlan.map(meal => {
+        return meal === recipeToReplace ?
+          {...meal,
+            "value":{
+              "id": recipe.api_recipe_id,
+              "servings": 2,
+              "title": recipe.title,
+              "image": recipe.img_url
+            }} : meal;
+      });
+      res.json(mealplan);
+    })
+    .catch(err => {
+      return { error: err.message };
     });
 
 });
