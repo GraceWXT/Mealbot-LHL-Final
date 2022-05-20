@@ -130,7 +130,7 @@ export default function GroceryList() {
                 icon={<CopyIcon />}
                 colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
                 borderRadius="50%"
-                size=""
+                size="sm"
               />
               <Tooltip label='Text the grocery list to your saved phone number'>
                 <IconButton
