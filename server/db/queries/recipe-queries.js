@@ -31,4 +31,29 @@ const getRandomRecipesForWeek = () => {
     });
 };
 
-module.exports = { getRandomRecipesForWeek };
+const getRandomRecipeForSlot = (slot, arrayOfRecipeIds) => {
+  console.log("array of existing recipe ids: ", arrayOfRecipeIds);
+  const arrayString = arrayOfRecipeIds.join(", ");
+  console.log("query", `
+  SELECT * FROM recipes
+  WHERE api_recipe_id NOT IN (${arrayString}) AND slot = ${slot}
+  ORDER BY RANDOM ()
+  LIMIT 1;
+  `);
+  return db.query(`
+  SELECT * FROM recipes
+  WHERE api_recipe_id NOT IN (${arrayString}) AND slot = ${slot}
+  ORDER BY RANDOM ()
+  LIMIT 1;
+  `)
+    .then(res => {
+      const recipe = res.rows[0];
+      console.log(`random recipe for slot ${slot}`, recipe);
+      return recipe;
+    }).catch(err => {
+      console.log("getRandomRecipeForSlot error: ", err.message);
+    });
+
+};
+
+module.exports = { getRandomRecipesForWeek, getRandomRecipeForSlot };
