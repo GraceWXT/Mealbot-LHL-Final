@@ -63,7 +63,6 @@ router.get("/:startDate", (req, res) => {
 
 // POST /mealplans/:startDate - save meal plan to database and api
 router.post("/:startDate", (req, res) => {
-  console.log("req.params.startDate", req.params.startDate, " type:", typeof req.params.startDate);
   const mealplan = req.body.filter(meal => meal.value);
   // console.log(mealplan);
 

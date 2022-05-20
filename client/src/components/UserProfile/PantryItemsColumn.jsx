@@ -17,8 +17,7 @@ export default function PantryItemsColumn() {
   useEffect(() => {
     axios.get("http://localhost:8080/api/pantryitems"
     ).then((res) => {
-      // console.log("res", res.data);
-      console.log("pantryItems",res.data);
+      // console.log("pantryItems",res.data);
       setPantryItems(res.data);
     }).catch(err => {
       console.log("Error: ", err.message);
