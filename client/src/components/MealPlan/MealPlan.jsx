@@ -15,7 +15,7 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import axios from "axios";
 
 // Helper Functions
-import { getFormatedDates, getPreviousMonday, getNextMonday } from "../helpers/date-helper";
+import { getFormatedDates, getPreviousMonday, getNextMonday } from "../../helpers/date-helper";
 
 import MealPlanTable from "./MealPlanTable";
 
