@@ -83,25 +83,26 @@ export default function GroceryList() {
   const [value, setValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(value);
 
-  const copyGroceryList = () => {
-    let textMessage = "";
+  useEffect(() => {
+    const copyGroceryList = () => {
+      let textMessage = "";
 
-    aisles.map((aisle) => {
-      if (!filter.includes(aisle.aisle)) {
-        const aisle = aisle.aisle.toUpperCase();
+      aisles.map((aisle) => {
+        if (!filter.includes(aisle.aisle)) {
+          const aisle = aisle.aisle.toUpperCase();
 
-        textMessage += `\n${aisle}\n`;
+          textMessage += `\n${aisle}\n`;
 
-        aisle.items.map(item => {
-          const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
-          textMessage += ingredient;
-        });
-      }
-    });
-    setValue(textMessage);
-    return textMessage;
-  };
-
+          aisle.items.map(item => {
+            const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
+            textMessage += ingredient;
+          });
+        }
+      });
+      setValue(textMessage);
+      return textMessage;
+    };
+  });
 
 
   // ITEMS QUANTITY
