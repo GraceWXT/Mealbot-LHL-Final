@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import {
@@ -17,8 +17,9 @@ import {
   Checkbox,
   useColorModeValue,
   Button,
-  Tooltip
-
+  Tooltip,
+  Input,
+  useClipboard
 } from "@chakra-ui/react";
 import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
 
@@ -78,6 +79,30 @@ export default function GroceryList() {
       });
   };
 
+  //COPY FEATURE
+  const [value, setValue] = useState("");
+  const { hasCopied, onCopy } = useClipboard(value);
+
+  const copyGroceryList = () => {
+    let textMessage = "";
+
+    aisles.map((aisle) => {
+      if (!filter.includes(aisle.aisle)) {
+        const aisle = aisle.aisle.toUpperCase();
+
+        textMessage += `\n${aisle}\n`;
+
+        aisle.items.map(item => {
+          const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
+          textMessage += ingredient;
+        });
+      }
+    });
+    setValue(textMessage);
+    return textMessage;
+  };
+
+
 
   // ITEMS QUANTITY
 
@@ -125,8 +150,7 @@ export default function GroceryList() {
   return (
     <Center width="100vw" position="absolute">
       <VStack py={2}>
-
-        <HStack height="80vh" width="80vw" border="1px" borderRadius="lg" justifyContent="center" marginTop="5vh" >
+        <HStack height="80vh" width="80vw" bg={useColorModeValue("white", "gray.700")} boxShadow="xl" borderRadius="lg" justifyContent="center" marginTop="5vh" >
           {/* AISLES */}
           <VStack height="100%" padding="20px">
             <Heading fontSize="1.8rem" >Aisles</Heading>
@@ -139,6 +163,7 @@ export default function GroceryList() {
             <HStack justifyContent="center" position="sticky" padding="20px" >
               <Heading fontSize="1.8rem" >Grocery List</Heading>
               <IconButton
+                onClick={onCopy}
                 aria-label='copy grocery list'
                 icon={<CopyIcon />}
                 colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
