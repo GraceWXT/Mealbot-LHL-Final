@@ -14,9 +14,10 @@ import {
 import { DeleteIcon, RepeatIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
+import axios from "axios";
 
 export default function Meal(props) {
-  const { setMealPlan, mealPlanStatus } = useOutletContext();
+  const { mealPlan, setMealPlan, mealPlanStatus } = useOutletContext();
   const { meal } = props;
 
   const FutureSaved = "FutureSaved";
@@ -37,6 +38,16 @@ export default function Meal(props) {
           {...prevMeal, value:null} : prevMeal);
       });
     });
+  };
+
+  const shuffleMealById = () => {
+    axios.post(`http://localhost:8080/api/mealplans/shuffle/${meal.value.id}`, mealPlan)
+      .then(res => {
+        setMealPlan(res.data);
+      })
+      .catch(err => {
+        console.log("axios.get shuffle meal by id error: ", err.message);
+      });
   };
 
   return (
@@ -76,11 +87,12 @@ export default function Meal(props) {
                 onClick={() => deleteMealByDateSlot()}
               />
               <IconButton
-                aria-label='delete meal'
+                aria-label='shuffle meal recipe'
                 icon={<RepeatIcon />}
                 colorScheme="turquoiseGreen"
                 borderRadius="50%"
                 size="xs"
+                onClick={() => shuffleMealById()}
               />
             </HStack>
           </PopoverBody>
