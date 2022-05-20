@@ -107,6 +107,12 @@ export default function Profile() {
   console.log("pantry", pantryItems);
 
 
+  const cake = "ice cream cake";
+  const birthday = "my birthday";
+
+  console.log(`- ${birthday}\n- ${cake}`);
+
+
 
 
   return (
