@@ -137,7 +137,7 @@ export default function MealPlan() {
           </Tooltip>
           <Button
             colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-            onClick={() => saveMealPlan()}
+            onClick={() => actionButtonText === "Save" ? saveMealPlan() : null}
             disabled={ disableActionButton }
           >
             { actionButtonText }
