@@ -106,15 +106,6 @@ export default function Profile() {
   console.log("user", user);
   console.log("pantry", pantryItems);
 
-
-  const cake = "ice cream cake";
-  const birthday = "my birthday";
-
-  console.log(`- ${birthday}\n- ${cake}`);
-
-
-
-
   return (
     <Center>
       <HStack m={5} justifyContent="center" w="100%" h="100%">
