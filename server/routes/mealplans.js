@@ -57,7 +57,7 @@ router.get("/:startDate", (req, res) => {
 });
 
 // GET mealplans/shuffle/:slot - shuffle
-router.get("/shuffle/:id", (req, res) => {
+router.post("/shuffle/:id", (req, res) => {
   const oldMealPlan = req.body;
   const recipeToReplace = oldMealPlan.find(meal => meal.value.id === Number.parseInt(req.params.id));
   const slot = recipeToReplace.slot;
