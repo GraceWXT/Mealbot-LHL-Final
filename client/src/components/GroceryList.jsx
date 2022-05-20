@@ -16,9 +16,14 @@ import {
   ListItem,
   Checkbox,
   useColorModeValue,
-  Button
+  Button,
+  Tooltip
+
 } from "@chakra-ui/react";
 import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
+
+import { MdOutlineTextsms } from "react-icons/md";
+
 
 import groceryList from "./grocery-list-data";
 
@@ -53,7 +58,8 @@ export default function GroceryList() {
     );
   });
 
-  //Twilio Button
+  // Twilio Button
+
   const sendTwilio = () => {
     // console.log('test', aisles);
     axios.post('http://localhost:8080/api/twilio', aisles)
@@ -126,13 +132,17 @@ export default function GroceryList() {
                 icon={<CopyIcon />}
                 colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
                 borderRadius="50%"
-                size="xs"
+
+                size="sm"
               />
-              <Button
-                onClick={sendTwilio}
-                leftIcon={<ChatIcon />}
-                size='sm'
-                bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}>Send Text</Button>
+              <Tooltip label='Text the grocery list to your saved phone number'>
+                <IconButton
+                  onClick={sendTwilio}
+                  icon={<MdOutlineTextsms boxSize={20}/>}
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  borderRadius="50%"
+                  size="sm" />
+              </Tooltip>
             </HStack>
             <List height="85%" overflow="scroll">
               {listOfAisleItems}
