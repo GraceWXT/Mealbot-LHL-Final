@@ -7,10 +7,11 @@ import {
   VStack,
   Button,
   useColorModeValue,
-  useToast
+  useToast,
+  Tooltip
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon} from "@chakra-ui/icons";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import axios from "axios";
 
 // Helper Functions
@@ -19,39 +20,49 @@ import { getFormatedDates, getPreviousMonday, getNextMonday } from "../helpers/d
 import MealPlanTable from "./MealPlanTable";
 
 export default function MealPlan() {
-  const { startDate } = useParams();
-  const [mealPlan, setMealPlan ] = useState([]);
+  const { startDate, setStartDate, mealPlan, mealPlanStatus, setMealPlanStatus } = useOutletContext();
   const navigate = useNavigate();
 
-  // based on the startDate
-  // send an axios request to get back end to get either an existing plan or a random new plan
-  useEffect(() => {
-    axios.get(`http://localhost:8080/api/mealplans/${startDate}`).then(res => {
-      const mealPlan = res.data;
-      setMealPlan(mealPlan);
-    }).catch(err => {
-      console.log("Error: ", err.message);
-    });
-  }, [startDate]);
+  const FutureNew = "FutureNew";
+  const FutureSaved = "FutureSaved";
+  const PastSaved = "PastSaved";
 
-  // set meal plan data and status based on the response
+  let disableGroceryButton = true;
+  let disableActionButton = true;
+  let actionButtonText = "Save";
+  if (mealPlanStatus === FutureNew) {
+    disableGroceryButton = true;
+    disableActionButton = false;
+    actionButtonText = "Save";
+  } else if (mealPlanStatus === FutureSaved) {
+    disableGroceryButton = false;
+    disableActionButton = false;
+    actionButtonText = "Edit";
+  } else if (mealPlanStatus === PastSaved) {
+    disableGroceryButton = false;
+    disableActionButton = true;
+    actionButtonText = "Edit";
+  } else {
+    console.log("mealPlanStatus in MealPlan", mealPlanStatus, typeof mealPlanStatus);
+  }
+
 
   // Create the date strings for meal plan heading
   const { monday, sunday } = getFormatedDates(startDate);
 
   const showPreviousWeek = () => {
     const previousMonday = getPreviousMonday(startDate);
+    setStartDate(previousMonday);
     navigate(`/mealplan/${previousMonday}`);
   };
 
   const showNextWeek = () => {
     const nextMonday = getNextMonday(startDate);
+    setStartDate(nextMonday);
     navigate(`/mealplan/${nextMonday}`);
   };
 
 
-  let groceryButtonHidden = true;
-  let buttonText = "Save";
   const toast = useToast();
   const saveMealPlan = () => {
     axios.post(`http://localhost:8080/api/mealplans/${startDate}`, mealPlan).then(res => {
@@ -59,14 +70,26 @@ export default function MealPlan() {
       console.log("save result", result);
       if (result.status === "success") {
         toast({
-          title: "Meal Plan Saved Successfully!",
-          description: "Click on the grocery list button to see the groce",
+          title: "Meal Plan Saved!",
+          description: "The grocery list is now available.",
           status: "success",
-          duration: 3000,
+          containerStyle: {
+            backgroundColor:"turquoiseGreen"
+          },
+          variant: "subtle",
+          duration: 5000,
           isClosable: true,
         });
-        buttonText = "Edit";
-        groceryButtonHidden = false;
+        setMealPlanStatus("FutureSaved");
+      } else {
+        toast({
+          title: "Sorry, an error occured.",
+          description: "Please try saving it again later.",
+          status: "error",
+          variant: "subtle",
+          duration: 5000,
+          isClosable: true,
+        });
       }
     }).catch(err => {
       console.log("Error: ", err.message);
@@ -76,9 +99,9 @@ export default function MealPlan() {
 
   return (
     <VStack height="92vh">
-      <VStack>
+      <VStack spacing="2vh">
         {/* Heading with left & right button and the meal plan start & end date */}
-        <HStack marginTop="3vh" marginBottom="2vh">
+        <HStack marginTop="3vh">
           <IconButton
             aria-label='previous week'
             icon={<ChevronLeftIcon />}
@@ -86,7 +109,7 @@ export default function MealPlan() {
             bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
             onClick={() => showPreviousWeek()}
           />
-          <Heading fontSize="1.5rem">
+          <Heading fontSize="1.5rem" px="3vw">
             {`${monday} - ${sunday}`}
           </Heading>
           <IconButton
@@ -99,20 +122,22 @@ export default function MealPlan() {
         </HStack>
         <MealPlanTable mealPlan={mealPlan}/>
         <HStack alignSelf="flex-end">
-          <Link to={`grocerylist/${startDate}`}>
-            <Button
-              hidden={groceryButtonHidden}
-              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              onClick={() => saveMealPlan()}
-            >
-              Checkout the grocery list
-            </Button>
-          </Link>
+          <Tooltip label="Please save your meal plan first">
+            <Link to={`/grocerylist/${startDate}`}>
+              <Button
+                disabled={ disableGroceryButton }
+                colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+              >
+                Get the grocery list
+              </Button>
+            </Link>
+          </Tooltip>
           <Button
             colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
             onClick={() => saveMealPlan()}
+            disabled={ disableActionButton }
           >
-            {buttonText}
+            { actionButtonText }
           </Button>
         </HStack>
       </VStack>

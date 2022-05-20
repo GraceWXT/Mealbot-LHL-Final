@@ -6,22 +6,21 @@ import { useParams } from "react-router-dom";
 
 
 //chakra-ui imports
-import { Stack, HStack, VStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import { Container } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { Heading } from "@chakra-ui/react";
-import { Spacer, Flex } from "@chakra-ui/react";
-import { useColorModeValue, useColorMode, } from "@chakra-ui/react";
-import { Button, ButtonGroup, IconButton } from "@chakra-ui/react";
+import { Spacer } from "@chakra-ui/react";
+import { useColorModeValue } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react";
 import { Text } from "@chakra-ui/react";
 import { Center } from "@chakra-ui/react";
-import { EditIcon, SmallAddIcon, CheckIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { EditIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {
   List,
   ListItem,
   ListIcon,
-  OrderedList,
   UnorderedList,
 } from "@chakra-ui/react";
 
@@ -109,13 +108,12 @@ export default function Profile() {
   return (
     <Center>
       <HStack m={5} justifyContent="center" w="100%" h="100%">
-        <Container boxShadow="xl" border="1px" borderColor="gray.200" py={5} w="30vw" minH="70vh" rounded="lg">
+        <Container boxShadow="xl" bg="white" py={3} w="30vw" minH="70vh" rounded="lg">
           <Image src={user.imgUrl} padding={1} />
           <Heading as="h3" size="md" py={2}>{user.firstName} {user.lastName}</Heading>
           <Text fontWeight="bold">{user.email}</Text>
-          <Text py={2}>“This crab is so undercooked I can still hear it singing ‘Under the Sea.’” - Gordon Ramsay</Text>
         </Container>
-        <Container boxShadow="xl" border="1px" borderColor="gray.200" py={5} w="30vw" minH="70vh" rounded="lg">
+        <Container boxShadow="xl" bg="white" py={3} w="30vw" minH="70vh" rounded="lg">
           <HStack>
             <Heading as="h2" size="md">Preferences</Heading>
             <Spacer />
@@ -144,7 +142,7 @@ export default function Profile() {
 
           </List>
         </Container>
-        <Container boxShadow="xl" border="1px" borderColor="gray.200" py={5} w="30vw" minH="70vh" rounded="lg">
+        <Container boxShadow="xl" bg="white" py={3} w="30vw" minH="70vh" rounded="lg">
           <HStack>
             <Heading as="h2" size="md">Pantry Items</Heading>
             <Spacer />

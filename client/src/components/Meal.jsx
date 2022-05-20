@@ -16,8 +16,15 @@ import { Link } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
 
 export default function Meal(props) {
-  const { setMealPlan } = useOutletContext();
+  const { setMealPlan, mealPlanStatus } = useOutletContext();
   const { meal } = props;
+
+  const FutureSaved = "FutureSaved";
+  const PastSaved = "PastSaved";
+
+  const EnablePopover =
+    mealPlanStatus === FutureSaved || mealPlanStatus === PastSaved ?
+      false : undefined;
 
   const deleteMealByDateSlot = () => {
     setMealPlan(prev => {
@@ -34,7 +41,11 @@ export default function Meal(props) {
 
   return (
     <Td padding="8px 0px" verticalAlign="top" height="20vh">
-      <Popover trigger="hover" gutter={3}>
+      <Popover
+        trigger="hover"
+        gutter={3}
+        isOpen={ EnablePopover }
+      >
         <PopoverTrigger>
           <VStack>
             <Link to={`/recipes/${meal.value.id}`} >
@@ -47,7 +58,7 @@ export default function Meal(props) {
             </Link>
             <Text
               width="16vh"
-              fontSize="xs"
+              fontSize="sm"
               textAlign="center"
             >{meal.value.title}</Text>
           </VStack>
