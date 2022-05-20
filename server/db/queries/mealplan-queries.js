@@ -1,7 +1,6 @@
 const db = require("../db-connection");
 
 const saveMealPlan = (userId, startDate) => {
-  console.log("typeof startDate", typeof startDate);
   return db.query(`
   INSERT INTO meal_plans (user_id, start_date)
   VALUES (${userId}, '${startDate}')
