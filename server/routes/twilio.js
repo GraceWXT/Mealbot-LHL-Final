@@ -27,24 +27,6 @@ router.post("/", (req, res) => {
 
   }
 
-
-  // groceryListText();
-
-  /*
-  AISLE
-  -ingredient
-  -ingredient
-
-  AISLE
-
-  */
-
-  const name = "Lucas";
-  const cohortMate = "Warren";
-
-  const mockTest = `${name}\n${cohortMate}`;
-
-
   client.messages.create({
     to: process.env.MY_PHONE_NUMBER,
     from: process.env.TWILIO_NUMBER,
