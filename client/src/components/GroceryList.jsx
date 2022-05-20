@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, useOutletContext } from "react-router-dom";
 import {
   Flex,
   Text,
@@ -17,8 +17,9 @@ import {
   Checkbox,
   useColorModeValue,
   Button,
-  Tooltip
-
+  Tooltip,
+  Input,
+  useClipboard
 } from "@chakra-ui/react";
 import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
 
@@ -31,6 +32,7 @@ export default function GroceryList() {
 
   // get start date from react router
   const { startDate } = useParams();
+  const { sent, setSent } = useOutletContext();
 
   // get grocerylist data
   // useEffect(() => {
@@ -65,23 +67,56 @@ export default function GroceryList() {
 
   });
 
-  // Twilio Button
+  //TWILIO BUTTON
 
   const sendTwilio = () => {
-    // console.log('test', aisles);
+
     axios.post('http://localhost:8080/api/twilio', aisles)
       .then(res => {
         console.log(res);
+        setSent(true);
+
+        // setTimeout(() => {
+        //   setSent(false);
+        // }, 3000);
       })
       .catch(function (error) {
         console.log(error);
       });
+
   };
+
+  //COPY FEATURE
+  const [value, setValue] = useState("");
+  const { hasCopied, onCopy } = useClipboard(value);
+
+  const formatGroceryList = () => {
+    let textMessage = ``;
+
+    //aisleItem cannot be named aisle otherwise will conflict with database key name and won't work
+    aisles.map((aisleItem) => {
+      if (!filter.includes(aisleItem.aisle)) {
+        const aisle = aisleItem.aisle.toUpperCase();
+
+        textMessage += `\n${aisle}\n`;
+
+        aisleItem.items.map(item => {
+          const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
+          textMessage += ingredient;
+        });
+      }
+    });
+
+    setValue(textMessage);
+  };
+
+  //put aisles as dependency so if aisles data changes the formatGroceryList copy function also updates with new data
+  useEffect(() => {
+    formatGroceryList();
+  }, [aisles]);
 
 
   // ITEMS QUANTITY
-
-
 
   // GROCERY LIST
   const listOfAisleItems = aisles.map((aisle) => {
@@ -125,27 +160,47 @@ export default function GroceryList() {
   return (
     <Center width="100vw" position="absolute">
       <VStack py={2}>
-
-        <HStack height="80vh" width="80vw" border="1px" borderRadius="lg" justifyContent="center" marginTop="5vh" >
+        <HStack
+          height="80vh"
+          width="80vw"
+          // bg={useColorModeValue("white", "gray.700")}
+          // boxShadow="lg"
+          // borderRadius="lg"
+          justifyContent="center"
+          marginTop="5vh" >
           {/* AISLES */}
-          <VStack height="100%" padding="20px">
+          <VStack
+            height="100%"
+            padding="20px"
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow="lg"
+            borderRadius="lg">
             <Heading fontSize="1.8rem" >Aisles</Heading>
             <List padding="1em">
               {linkofAisleNames}
             </List>
           </VStack>
 
-          <Container width="50%" height="100%"  >
+          <Container
+            width="50%"
+            height="100%"
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow="lg"
+            borderRadius="lg">
             <HStack justifyContent="center" position="sticky" padding="20px" >
               <Heading fontSize="1.8rem" >Grocery List</Heading>
-              <IconButton
-                aria-label='copy grocery list'
-                icon={<CopyIcon />}
-                colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-                borderRadius="50%"
-                size="sm"
-              />
-              <Tooltip label='Text the grocery list to your saved phone number'>
+              <Tooltip label={hasCopied ? 'Copied!' : 'Copy the grocery list'} closeOnClick={false}>
+                <IconButton
+                  onClick={onCopy}
+                  aria-label='copy grocery list'
+                  icon={<CopyIcon />}
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  borderRadius="50%"
+                  size="sm"
+                />
+              </Tooltip>
+              <Text></Text>
+              <Tooltip label={sent ? 'Sent!' : 'Text the grocery list to your saved phone number'} closeOnClick={false}>
                 <IconButton
                   onClick={sendTwilio}
                   icon={<MdOutlineTextsms boxSize={20} />}
