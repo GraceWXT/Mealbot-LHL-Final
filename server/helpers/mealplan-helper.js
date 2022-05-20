@@ -116,4 +116,8 @@ const getEmptyMealPlan = (startDate) => {
   return mealplan;
 };
 
-module.exports = { mealplanMapper, apiMealPlanMapper, getEmptyMealPlan};
+const getRecipeIds = (mealplan, slot) => {
+  return mealplan.filter(meal => meal.slot === slot).map(meal => meal.value.id);
+};
+
+module.exports = { mealplanMapper, apiMealPlanMapper, getEmptyMealPlan, getRecipeIds};
