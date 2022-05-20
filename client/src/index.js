@@ -4,8 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import App from "./components/App";
 import HomePage from "./components/HomePage";
-import Profile from "./components/Profile";
-import MealPlan from "./components/MealPlan";
+import Profile from "./components/UserProfile/Profile";
+import MealPlan from "./components/MealPlan/MealPlan";
 import Recipe from "./components/Recipe";
 import GroceryList from "./components/GroceryList";
 
