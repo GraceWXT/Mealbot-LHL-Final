@@ -15,9 +15,10 @@ import {
   List,
   ListItem,
   Checkbox,
-  useColorModeValue
+  useColorModeValue,
+  Button
 } from "@chakra-ui/react";
-import { CopyIcon } from "@chakra-ui/icons";
+import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
 
 import groceryList from "./grocery-list-data";
 
@@ -52,6 +53,19 @@ export default function GroceryList() {
     );
   });
 
+  //Twilio Button
+  const sendTwilio = () => {
+    // console.log('test', aisles);
+    axios.post('http://localhost:8080/api/twilio', aisles)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+
   // ITEMS QUANTITY
 
 
@@ -63,7 +77,7 @@ export default function GroceryList() {
       const measurement = item.measures.original;
       const { amount, unit } = measurement;
       const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
-      console.log(quantity);
+      // console.log(quantity);
       return (
         <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
           <Checkbox colorScheme="green" spacing="1rem" width="100%">
@@ -93,31 +107,39 @@ export default function GroceryList() {
 
   return (
     <Center width="100vw" position="absolute">
-      <HStack height="80vh" width="80vw" border="1px" borderRadius="lg" justifyContent="center" marginTop="5vh" >
-        {/* AISLES */}
-        <VStack height="100%" padding="20px">
-          <Heading fontSize="1.8rem" >Aisles</Heading>
-          <List padding="1em" >
-            {linkofAisleNames}
-          </List>
-        </VStack>
+      <VStack py={2}>
 
-        <Container width="50%" height="100%"  >
-          <HStack justifyContent="center" position="sticky" padding="20px" >
-            <Heading fontSize="1.8rem" >Grocery List</Heading>
-            <IconButton
-              aria-label='copy grocery list'
-              icon={<CopyIcon />}
-              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              borderRadius="50%"
-              size="xs"
-            />
-          </HStack>
-          <List height="85%" overflow="scroll">
-            {listOfAisleItems}
-          </List>
-        </Container>
-      </HStack>
+        <HStack height="80vh" width="80vw" border="1px" borderRadius="lg" justifyContent="center" marginTop="5vh" >
+          {/* AISLES */}
+          <VStack height="100%" padding="20px">
+            <Heading fontSize="1.8rem" >Aisles</Heading>
+            <List padding="1em" >
+              {linkofAisleNames}
+            </List>
+          </VStack>
+
+          <Container width="50%" height="100%"  >
+            <HStack justifyContent="center" position="sticky" padding="20px" >
+              <Heading fontSize="1.8rem" >Grocery List</Heading>
+              <IconButton
+                aria-label='copy grocery list'
+                icon={<CopyIcon />}
+                colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                borderRadius="50%"
+                size="xs"
+              />
+              <Button
+                onClick={sendTwilio}
+                leftIcon={<ChatIcon />}
+                size='sm'
+                bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}>Send Text</Button>
+            </HStack>
+            <List height="85%" overflow="scroll">
+              {listOfAisleItems}
+            </List>
+          </Container>
+        </HStack>
+      </VStack >
     </Center>
   );
 }
