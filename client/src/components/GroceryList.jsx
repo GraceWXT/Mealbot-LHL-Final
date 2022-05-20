@@ -150,7 +150,7 @@ export default function GroceryList() {
   return (
     <Center width="100vw" position="absolute">
       <VStack py={2}>
-        <HStack height="80vh" width="80vw" bg={useColorModeValue("white", "gray.700")} boxShadow="xl" borderRadius="lg" justifyContent="center" marginTop="5vh" >
+        <HStack height="80vh" width="80vw" bg={useColorModeValue("white", "gray.700")} boxShadow="lg" borderRadius="lg" justifyContent="center" marginTop="5vh" >
           {/* AISLES */}
           <VStack height="100%" padding="20px">
             <Heading fontSize="1.8rem" >Aisles</Heading>
