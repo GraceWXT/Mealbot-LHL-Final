@@ -5,6 +5,7 @@ import {
   Avatar,
   HStack,
   Button,
+  Icon,
   Menu,
   MenuButton,
   MenuList,
@@ -16,7 +17,12 @@ import {
   FormLabel,
   Switch
 } from "@chakra-ui/react";
+import { BiUserCircle } from "react-icons/bi";
+import { BsCalendar3 } from "react-icons/bs";
+import { MdOutlineLogout } from "react-icons/md";
+
 import { Link } from "react-router-dom";
+
 import { getCurrentMondayDate } from "helpers/date-helper";
 
 export default function Navbar(props) {
@@ -65,18 +71,23 @@ export default function Navbar(props) {
             </MenuButton>
             <MenuList>
               <MenuItem>
+                <Icon boxSize="1.2em" marginRight="0.5em" as={BiUserCircle}></Icon>
                 <Link to={`/users/${user.id}`} >
-                  User Profile
+                  Profile
                 </Link>
               </MenuItem>
               <MenuDivider />
               <MenuItem onClick={() => setStartDate(currentMonday) } >
+                <Icon boxSize="0.9em" marginRight="0.5em" as={BsCalendar3}></Icon>
                 <Link to={`mealplan/${currentMonday}`}>
-                  Meal Plan
+                  Meal Planner
                 </Link>
               </MenuItem>
               <MenuDivider />
-              <MenuItem>Logout</MenuItem>
+              <MenuItem>
+                <Icon boxSize="1em" marginRight="0.5em" as={MdOutlineLogout}></Icon>
+                Logout
+              </MenuItem>
             </MenuList>
           </Menu>
         </HStack>

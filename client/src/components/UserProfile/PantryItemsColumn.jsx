@@ -37,6 +37,7 @@ export default function PantryItemsColumn() {
       boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
       bg={useColorModeValue("white", "blackAlpha.900")}
       w="30vw"
+      overflow="auto"
       height="100%"
       rounded="lg"
       padding="2rem"

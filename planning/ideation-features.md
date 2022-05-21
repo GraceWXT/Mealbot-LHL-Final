@@ -29,44 +29,48 @@
 
 ## Project Features
 ### Core
-- User Profile
+- [x] User Profile
   - Username, First and last name, email, avatar
   - Preferences (display only): calorie per recipe (ex.800), MaxTime 30 min, household size 2, etc)
   - Default pantry items/ingredients we already have
 
-- Home Page
+- [x] Home Page
   - one button that generates a random meal plan
 
-- Meal plan
-  - 7 * 3 table Mon to Sun, no date
-  - delete meal button
+- [x] Meal plan
+  - 7 * 3 table Mon to Sun, with date
   - recipe preview: title, image, link to recipe page
+  - delete meal button
+  - randomize button to change recipe
   - save button
   - button to call shopping list
 
-- Recipe page
+- [x] Recipe page
   - static info
   - exit button
 
-- Shopping List
-  - checkboxes and strikethrough
-  - desktop-mode: different columns for different aisles?
-  - mobile-mode: one columns - vertical for all aisles
+- [x] Shopping List
+  - checkboxes ~~and strikethrough~~
+  - desktop-mode: nav link
 
 
 ### Stretch
-- User Profile
-  - be able to change the User Diet Profile
-  - meal prep history (new meal plan added after click save button on meal plan page)
+- [x] User Profile
+  - [x] be able to change the User Diet Profile (visually)
 - Home Page
+  - [ ] animation?
 - Meal plan
-  - randomize button to change recipe
-  - flip card to delete?
-  - confirm deleting or not
-  - drag and drop?
+  - ~~flip card to delete?~~
+  - [x] meal prep history
+  - [ ]drag and drop?
   - search bar for editing recipes (Autocomplete Ingredient Search)
-- Shopping List
-  - one button copy entire shopping list
-  - Twilio
-  - Converting units
-- Render a random food joke/trivia in the transition/loading mode
+  - confirm deleting or not
+- Recipe Page
+  - [ ] serving calculator
+- [x] Shopping List
+  - [x] one button copy entire shopping list
+  - [x] Twilio
+  - [ ] mobile-mode: expand and collapse aisles?
+  - ~~Converting units~~ (only metric)
+- ~~Render a random food joke/trivia in the transition/loading mode~~ (no loading mode)
+- Accessability
