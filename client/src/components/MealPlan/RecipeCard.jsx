@@ -19,7 +19,7 @@ import axios from "axios";
 
 export default function RecipeCard(props) {
   const { mealPlan, setMealPlan, mealPlanStatus } = useOutletContext();
-  const { meal } = props;
+  const { meal, setDraggingMeal } = props;
 
   const FutureSaved = "FutureSaved";
   const PastSaved = "PastSaved";
@@ -49,10 +49,13 @@ export default function RecipeCard(props) {
 
   const [{isDragging}, drag] = useDrag(() => ({
     type: ItemTypes.RECIPE,
+    canDrag: () => mealPlanStatus === "FutureNew",
     collect: monitor => ({
       isDragging: !!monitor.isDragging(),
     }),
-  }));
+  }), [mealPlanStatus]);
+
+  if (isDragging) setDraggingMeal(meal);
 
   const EnablePopover = (() => {
     if (mealPlanStatus === FutureSaved || mealPlanStatus === PastSaved) return false;
