@@ -146,14 +146,15 @@ export default function Recipe() {
 
   // get data to update state;
 
-  // const { id } = useParams();
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/api/recipes/${id}`
-  //   ).then((res) => {
-  //     // console.log("res", res.data);
-  //     setState(prev => ({ ...prev, ...res.data }));
-  //   });
-  // }, []);
+  const { id } = useParams();
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/recipes/${id}`
+    ).then((res) => {
+      // console.log("res", res.data);
+      setState(prev => ({ ...prev, ...res.data }));
+      setOriginalServings(recipeMock.servings);
+    });
+  }, []);
 
   // const { colorMode, toggleColorMode } = useColorMode();
   // const customTheme = extendTheme(
@@ -161,10 +162,10 @@ export default function Recipe() {
   //     colorScheme: 'turquoiseGreen.100' }))
 
 
-  useEffect(() => {
-    setState(prev => ({ ...prev, ...recipeMock }));
-    setOriginalServings(recipeMock.servings);
-  }, []);
+  // useEffect(() => {
+  //   setState(prev => ({ ...prev, ...recipeMock }));
+  //   setOriginalServings(recipeMock.servings);
+  // }, []);
 
 
   // console.log("state", state);
@@ -196,6 +197,9 @@ export default function Recipe() {
   const ingredientList = ingredientsArray.map((ingredient, index) => {
 
     let newServings = state.servings / originalServings;
+    console.log('newServings', newServings);
+    console.log('state.servings', state.servings);
+    console.log('originalServings', originalServings);
 
     return (
       <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
