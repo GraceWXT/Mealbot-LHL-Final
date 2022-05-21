@@ -31,15 +31,15 @@ export default function AisleNameLinks(props) {
   const { aisles } = props;
   aisles.map(aisleObj => {
     const linkText = aisleObj.aisle.replaceAll(" ", "-");
-    if (!filter.includes(aisleObj.aisle)) {
-      return (
-        <ListItem key={aisleObj.aisle} py={0.5} borderBottom='1px' borderColor='gray.200'>
-          <Link href={`#${linkText}`}>
-            {aisleObj.aisle}
-          </Link>
-        </ListItem>
-      );
-    }
+
+    return (
+      <ListItem key={aisleObj.aisle} py={0.5} borderBottom='1px' borderColor='gray.200'>
+        <Link href={`#${linkText}`}>
+          {aisleObj.aisle}
+        </Link>
+      </ListItem>
+    );
+
 
   });
 }

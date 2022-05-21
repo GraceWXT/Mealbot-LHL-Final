@@ -25,42 +25,26 @@ import {
 import { CopyIcon } from "@chakra-ui/icons";
 import { MdOutlineTextsms } from "react-icons/md";
 
+import AisleNameLinks from "./AisleNameLinks";
+import ListItems from "./ListItems";
+import filter from "./filter";
 
 export default function GroceryList() {
-  // get start date from react router
+  // get start date from url
   const { startDate } = useParams();
-  const [groceryList, setgroceryList] = useState({});
-  // get grocerylist data
+
+  // get grocerylist data and store in a state
+  const [ aisles, setAisles ] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:8080/api/grocerylist/${startDate}`)
       .then(res => {
-        setgroceryList(res.data);
+        const filteredAisles = res.data.aisles
+          .filter(aisle => !filter.includes(aisle["aisle"]));
+        setAisles(filteredAisles);
       }).catch(err => {
         console.log("Error: ", err.message);
       });
-  }, [startDate, setgroceryList]);
-
-  const { aisles } = groceryList;
-
-  //FILTER OUT
-  const filter = ["Oil, Vinegar, Salad Dressing", "Spices and Seasonings", "Condiments", "Pantry Items", "Sweet Snacks", "Dried Fruits", "Ethnic Foods", "Generic", "Savory Snacks", "Nut butters, Jams, and Honey", "Alcoholic Beverages"];
-
-
-  // AISLE NAMES
-  const aisleNameLinks = aisles ?
-    aisles.map(aisleObj => {
-      const linkText = aisleObj.aisle.replaceAll(" ", "-");
-      if (!filter.includes(aisleObj.aisle)) {
-        return (
-          <ListItem key={aisleObj.aisle} py={0.5} borderBottom='1px' borderColor='gray.200'>
-            <Link href={`#${linkText}`}>
-              {aisleObj.aisle}
-            </Link>
-          </ListItem>
-        );
-      }
-
-    }) : null;
+  }, [startDate, setAisles]);
 
   //TWILIO BUTTON
   const toast = useToast();
@@ -95,63 +79,18 @@ export default function GroceryList() {
     if (aisles)
     //aisleItem cannot be named aisle otherwise will conflict with database key name and won't work
       aisles.map((aisleItem) => {
-        if (!filter.includes(aisleItem.aisle)) {
-          const aisle = aisleItem.aisle.toUpperCase();
+        const aisle = aisleItem.aisle.toUpperCase();
 
-          textMessage += `\n${aisle}\n`;
+        textMessage += `\n${aisle}\n`;
 
-          aisleItem.items.map(item => {
-            const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
-            textMessage += ingredient;
-          });
-        }
-      });
-
-    setValue(textMessage);
-  }, [aisles, filter]);
-
-
-  // ITEMS QUANTITY
-
-  // GROCERY LIST
-  const listOfAisleItems = aisles ?
-    aisles.map((aisle) => {
-
-      if (!filter.includes(aisle.aisle)) {
-      // AISLE ITEMS
-        const aisleItems = aisle.items.map(item => {
-          const measurement = item.measures.metric;
-          const { amount, unit } = measurement;
-          const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
-          // console.log(quantity);
-          return (
-            <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
-              <Checkbox colorScheme="green" spacing="1rem" width="100%">
-                {quantity} {item.name}
-              </Checkbox>
-            </ListItem>
-          );
+        aisleItem.items.map(item => {
+          const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
+          textMessage += ingredient;
         });
+      });
+    setValue(textMessage);
+  }, [aisles]);
 
-        const linkText = aisle.aisle.replaceAll(" ", "-");
-
-        return (
-          <VStack
-            key={`${aisle.aisle} - ${aisleItems.length}`}
-            margin="1em"
-            alignItems="start" >
-            {/* AISLE LINKS TO NAV TO AISLE NAME*/}
-            <Heading fontSize="large" id={`${linkText}`}>
-              {aisle.aisle}
-            </Heading>
-            <List textAlign="start" >
-              {aisleItems}
-            </List>
-          </VStack>
-        );
-      }
-
-    }) : null;
 
   return (
     <Center width="100vw" position="absolute">
@@ -173,7 +112,7 @@ export default function GroceryList() {
             borderRadius="lg">
             <Heading fontSize="1.8rem" >Aisles</Heading>
             <List padding="1em">
-              {aisleNameLinks}
+              {aisles ? <AisleNameLinks aisles={aisles}/> : null}
             </List>
           </VStack>
 
@@ -206,7 +145,7 @@ export default function GroceryList() {
               </Tooltip>
             </HStack>
             <List height="85%" overflow="auto">
-              {listOfAisleItems}
+              {aisles ? <ListItems aisles={aisles} /> : null}
             </List>
           </Container>
         </HStack>
