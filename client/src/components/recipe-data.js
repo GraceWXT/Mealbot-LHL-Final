@@ -103,3 +103,5 @@ const recipeInfo = {
   "image": "https://spoonacular.com/recipeImages/715523-556x370.jpg",
   "servings": 4
 };
+
+module.exports = recipeInfo;

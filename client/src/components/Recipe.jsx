@@ -41,8 +41,7 @@ export default function Recipe() {
     servings: 0
   });
 
-  // get data to update state;
-
+  // UPDATE STATE WITH API DATA
   const { id } = useParams();
   useEffect(() => {
     axios.get(`http://localhost:8080/api/recipes/${id}`
@@ -56,14 +55,12 @@ export default function Recipe() {
   // useEffect(() => {
   //   setState(prev => ({ ...prev, ...recipeInfo }));
   //   setOriginalServings(recipeInfo.servings);
-  // });
+  // }, []);
 
 
-  //creates array of ingredients copied from state.ingredients
-  const ingredientsArray = [...state.ingredients];
 
-  //serving calculator
 
+  //SERVING CALCULATOR
   const addServing = () => {
     setState({
       ...state,
@@ -80,7 +77,8 @@ export default function Recipe() {
     }
   };
 
-
+  //ARRAY OF INGREDIENTS
+  const ingredientsArray = [...state.ingredients];
 
   //maps over ingredientsArray to return list of ingredients
   const ingredientList = ingredientsArray.map((ingredient, index) => {
@@ -90,7 +88,6 @@ export default function Recipe() {
     return (
       <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
         { Number.isInteger(ingredient.amount * newServings) ? (ingredient.amount * newServings) : (ingredient.amount * newServings).toFixed(1) } {ingredient.unit} {ingredient.name}
-        {/* <Divider /> */}
       </ListItem>
     );
   });
@@ -103,7 +100,6 @@ export default function Recipe() {
     return (
       <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
         {instruction.step}
-        {/* <Divider /> */}
       </ListItem>
     );
   });
@@ -115,7 +111,6 @@ export default function Recipe() {
   //maps over instructionsArray to return a list of instructions
   const nutritionList = nutritionArray.map((nutrient, index) => {
     return (
-      // <ListItem py={2}>
       <Box key={index} py={2} borderBottom='1px' borderColor='gray.200'>
         <Flex>
           <Text fontWeight='semibold'>
@@ -126,9 +121,7 @@ export default function Recipe() {
             {nutrient.amount} {nutrient.unit}
           </Text>
         </Flex>
-        {/* <Divider /> */}
       </Box>
-      // </ListItem>
     );
   });
 
@@ -154,7 +147,6 @@ export default function Recipe() {
           <Heading as='h2' size='lg'>{state.title}</Heading>
           <Divider />
           <Text py={2}>Cooking time: {state.readyInMinutes} minutes</Text>
-          {/* <Divider /> */}
           <HStack marginBottom={3}>
             <IconButton
               onClick={addServing}
