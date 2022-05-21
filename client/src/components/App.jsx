@@ -34,10 +34,6 @@ export default function App() {
   // Get pantryItems data and set to state
   const [pantryItems, setPantryItems] = useState([]);
 
-  // sent twilio or not
-  const [sent, setSent] = useState(false);
-
-
 
   const [mealPlan, setMealPlan] = useState([]);
   const [mealPlanStatus, setMealPlanStatus] = useState("");
@@ -66,14 +62,14 @@ export default function App() {
   return (
     <div className="App">
       <ChakraProvider theme={theme}>
-        <Navbar user={ user } setStartDate={ setStartDate } />
+        <Navbar user={user} setStartDate={setStartDate} />
         <Outlet context={{
           user,
           pantryItems, setPantryItems,
           mealPlan, setMealPlan,
           startDate, setStartDate,
           mealPlanStatus, setMealPlanStatus,
-          sent, setSent }} />
+        }} />
       </ChakraProvider>
     </div>
   );
