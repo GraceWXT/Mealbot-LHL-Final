@@ -48,6 +48,7 @@ export default function Preferences() {
     <Container
       boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
       bg={useColorModeValue("white", "blackAlpha.900")}
+      overflow="auto"
       w="30vw"
       height="100%"
       rounded="lg"
