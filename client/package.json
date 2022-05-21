@@ -38,6 +38,7 @@
     "eslint": "^8.15.0",
     "node-sass": "^7.0.1",
     "prop-types": "^15.8.1",
+    "react-responsive": "^9.0.0-beta.8",
     "react-test-renderer": "^17.0.2"
   },
   "eslintConfig": {

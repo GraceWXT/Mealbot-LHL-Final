@@ -182,7 +182,7 @@ export default function Recipe() {
   };
 
   const minusServing = () => {
-    if (state.servings > 0) {
+    if (state.servings > 1) {
       setState({
         ...state,
         servings: state.servings - 1
