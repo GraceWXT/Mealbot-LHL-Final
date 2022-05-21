@@ -254,7 +254,9 @@ export default function Recipe() {
           bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
           leftIcon={<ArrowBackIcon />}
           _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-          _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}>
+          _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+          aria-label='go back to meal plan'
+        >
           Back
         </Button>
       </Link>
@@ -270,14 +272,19 @@ export default function Recipe() {
               borderRadius="50%"
               size="xs"
               colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              icon={<FaPlus />} />
+              icon={<FaPlus />}
+              aria-label='add serving by one'
+            />
+
             <Text py={2}>{state.servings} servings</Text>
             <IconButton
               onClick={minusServing}
               borderRadius="50%"
               size="xs"
               colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              icon={<FaMinus />} />
+              icon={<FaMinus />}
+              aria-label='minus serving by one'
+            />
           </HStack>
           <Image src={state.image} rounded="md" />
         </Container>
@@ -294,6 +301,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+              aria-label='recipe ingredients tab'
             >Ingredients</Tab>
             <Tab
               border="1px"
@@ -302,6 +310,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+              aria-label='recipe instructions tab'
             >Instructions</Tab>
             <Tab
               border="1px"
@@ -310,6 +319,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+              aria-label='recipe nutrition tab'
             >Nutrition</Tab>
           </TabList>
           <TabPanels>
