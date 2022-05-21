@@ -81,6 +81,7 @@ export default function GroceryList() {
 
     toast({
       title: 'Grocery List Sent!',
+      description: 'You will receive the text shortly.',
       status: 'success',
       duration: 3000,
       isClosable: true,
