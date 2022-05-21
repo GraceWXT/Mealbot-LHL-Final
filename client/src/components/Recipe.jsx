@@ -15,7 +15,7 @@ import { Text } from "@chakra-ui/react";
 import { Flex, Spacer } from "@chakra-ui/react";
 import { Box } from "@chakra-ui/react";
 import { useColorModeValue } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { mode } from "@chakra-ui/theme-tools";
 import {
@@ -23,9 +23,11 @@ import {
   OrderedList,
   UnorderedList,
 } from "@chakra-ui/react";
+import { FaPlus, FaMinus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Recipe() {
+  const [originalServings, setOriginalServings] = useState(0);
   const [state, setState] = useState({
     ingredients: [],
     instructions: [],
@@ -33,7 +35,7 @@ export default function Recipe() {
     title: "",
     readyInMinutes: "",
     image: "",
-    servings: ""
+    servings: 0
   });
 
   const recipeMock = {
@@ -56,7 +58,7 @@ export default function Recipe() {
       {
         "name": "chorizo",
         "amount": 1,
-        "unit": "g"
+        "unit": "lb"
       },
       {
         "name": "cumin",
@@ -71,17 +73,17 @@ export default function Recipe() {
       {
         "name": "jack cheese",
         "amount": 0.25,
-        "unit": "ml"
+        "unit": "cups"
       },
       {
         "name": "lean ground beef",
         "amount": 1,
-        "unit": "g"
+        "unit": "lb"
       },
       {
         "name": "quinoa",
         "amount": 1,
-        "unit": "ml"
+        "unit": "cup"
       }
     ],
     "instructions": [
@@ -142,7 +144,6 @@ export default function Recipe() {
     "servings": 4
   };
 
-
   // get data to update state;
 
   // const { id } = useParams();
@@ -162,6 +163,7 @@ export default function Recipe() {
 
   useEffect(() => {
     setState(prev => ({ ...prev, ...recipeMock }));
+    setOriginalServings(recipeMock.servings);
   }, []);
 
 
@@ -170,11 +172,34 @@ export default function Recipe() {
   //creates array of ingredients copied from state.ingredients
   const ingredientsArray = [...state.ingredients];
 
+  //serving calculator
+
+  const addServing = () => {
+    setState({
+      ...state,
+      servings: state.servings + 1
+    });
+  };
+
+  const minusServing = () => {
+    if (state.servings > 0) {
+      setState({
+        ...state,
+        servings: state.servings - 1
+      });
+    }
+  };
+
+
+
   //maps over ingredientsArray to return list of ingredients
   const ingredientList = ingredientsArray.map((ingredient, index) => {
+
+    let newServings = state.servings / originalServings;
+
     return (
       <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
-        {ingredient.amount} {ingredient.unit} {ingredient.name}
+        {ingredient.amount * newServings} {ingredient.unit} {ingredient.name}
         {/* <Divider /> */}
       </ListItem>
     );
@@ -237,10 +262,24 @@ export default function Recipe() {
         <Container w="40%">
           <Heading as='h2' size='lg'>{state.title}</Heading>
           <Divider />
-          <Text py={2}>Cooking time: {state.readyInMinutes}min</Text>
+          <Text py={2}>Cooking time: {state.readyInMinutes} minutes</Text>
           {/* <Divider /> */}
-          <Text py={2}>Servings: {state.servings}</Text>
-          <Image src={state.image} py={5} />
+          <HStack marginBottom={3}>
+            <IconButton
+              onClick={addServing}
+              borderRadius="50%"
+              size="xs"
+              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+              icon={<FaPlus />} />
+            <Text py={2}>{state.servings} servings</Text>
+            <IconButton
+              onClick={minusServing}
+              borderRadius="50%"
+              size="xs"
+              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+              icon={<FaMinus />} />
+          </HStack>
+          <Image src={state.image} rounded="md" />
         </Container>
 
         <Divider orientation='vertical' />
