@@ -56,7 +56,9 @@ export default function MealPlanTable(props) {
   });
 
   return (
-    <Table width="88vw" bgcolor="white" borderRadius="lg">
+    <Table
+      boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
+      width="88vw" bgcolor="white" borderRadius="lg">
       <Thead>
         <Tr>
           <Th></Th>

@@ -51,20 +51,24 @@ export default function Meal(props) {
   };
 
   return (
-    <Td padding="8px 0px" verticalAlign="top" height="20vh">
+    <Td py="0.8%" verticalAlign="top" height="20vh">
       <Popover
         trigger="hover"
         gutter={3}
         isOpen={ EnablePopover }
       >
-        <PopoverTrigger>
-          <VStack>
+        <PopoverTrigger >
+          <VStack
+            boxShadow="rgba(0, 0, 0, 0.1) 0px 0px 10px 0px"
+            w="fit-content" h="100%"
+            borderRadius="lg"
+          >
             <Link to={`/recipes/${meal.value.id}`} >
               <Image
                 src={meal.value.image}
                 width="auto"
                 height="12vh"
-                borderRadius='lg'
+                borderTopRadius='lg'
               />
             </Link>
             <Text
