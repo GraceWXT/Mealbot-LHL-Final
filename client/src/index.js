@@ -7,7 +7,7 @@ import HomePage from "./components/HomePage";
 import Profile from "./components/UserProfile/Profile";
 import MealPlan from "./components/MealPlan/MealPlan";
 import Recipe from "./components/Recipe";
-import GroceryList from "./components/GroceryList";
+import GroceryList from "./components/GroceryList/GroceryList";
 
 import "./index.scss";
 
