@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Flex,
   Text,
@@ -29,7 +29,7 @@ import { MdOutlineTextsms } from "react-icons/md";
 export default function GroceryList() {
   // get start date from react router
   const { startDate } = useParams();
-  const { groceryList, setgroceryList } = useOutletContext();
+  const [groceryList, setgroceryList] = useState({});
   // get grocerylist data
   useEffect(() => {
     axios.get(`http://localhost:8080/api/grocerylist/${startDate}`)
@@ -47,20 +47,20 @@ export default function GroceryList() {
 
 
   // AISLE NAMES
-  const linkofAisleNames = aisles.map(aisle => {
+  const aisleNameLinks = aisles ?
+    aisles.map(aisleObj => {
+      const linkText = aisleObj.aisle.replaceAll(" ", "-");
+      if (!filter.includes(aisleObj.aisle)) {
+        return (
+          <ListItem key={aisleObj.aisle} py={0.5} borderBottom='1px' borderColor='gray.200'>
+            <Link href={`#${linkText}`}>
+              {aisleObj.aisle}
+            </Link>
+          </ListItem>
+        );
+      }
 
-    const linkText = aisle.aisle.replaceAll(" ", "-");
-    if (!filter.includes(aisle.aisle)) {
-      return (
-        <ListItem key={aisle.aisle} py={0.5} borderBottom='1px' borderColor='gray.200'>
-          <Link href={`#${linkText}`}>
-            {aisle.aisle}
-          </Link>
-        </ListItem>
-      );
-    }
-
-  });
+    }) : null;
 
   //TWILIO BUTTON
   const toast = useToast();
@@ -88,72 +88,70 @@ export default function GroceryList() {
   const [value, setValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(value);
 
-  const formatGroceryList = () => {
-    let textMessage = "";
-
-    //aisleItem cannot be named aisle otherwise will conflict with database key name and won't work
-    aisles.map((aisleItem) => {
-      if (!filter.includes(aisleItem.aisle)) {
-        const aisle = aisleItem.aisle.toUpperCase();
-
-        textMessage += `\n${aisle}\n`;
-
-        aisleItem.items.map(item => {
-          const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
-          textMessage += ingredient;
-        });
-      }
-    });
-
-    setValue(textMessage);
-  };
-
   //put aisles as dependency so if aisles data changes the formatGroceryList copy function also updates with new data
   useEffect(() => {
-    formatGroceryList();
-  }, [aisles]);
+    let textMessage = "";
+
+    if (aisles)
+    //aisleItem cannot be named aisle otherwise will conflict with database key name and won't work
+      aisles.map((aisleItem) => {
+        if (!filter.includes(aisleItem.aisle)) {
+          const aisle = aisleItem.aisle.toUpperCase();
+
+          textMessage += `\n${aisle}\n`;
+
+          aisleItem.items.map(item => {
+            const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
+            textMessage += ingredient;
+          });
+        }
+      });
+
+    setValue(textMessage);
+  }, [aisles, filter]);
 
 
   // ITEMS QUANTITY
 
   // GROCERY LIST
-  const listOfAisleItems = aisles.map((aisle) => {
+  const listOfAisleItems = aisles ?
+    aisles.map((aisle) => {
 
-    if (!filter.includes(aisle.aisle)) {
+      if (!filter.includes(aisle.aisle)) {
       // AISLE ITEMS
-      const aisleItems = aisle.items.map(item => {
-        const measurement = item.measures.metric;
-        const { amount, unit } = measurement;
-        const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
-        // console.log(quantity);
+        const aisleItems = aisle.items.map(item => {
+          const measurement = item.measures.metric;
+          const { amount, unit } = measurement;
+          const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
+          // console.log(quantity);
+          return (
+            <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
+              <Checkbox colorScheme="green" spacing="1rem" width="100%">
+                {quantity} {item.name}
+              </Checkbox>
+            </ListItem>
+          );
+        });
+
+        const linkText = aisle.aisle.replaceAll(" ", "-");
+
         return (
-          <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
-            <Checkbox colorScheme="green" spacing="1rem" width="100%">
-              {quantity} {item.name}
-            </Checkbox>
-          </ListItem>
+          <VStack
+            key={`${aisle.aisle} - ${aisleItems.length}`}
+            margin="1em"
+            alignItems="start" >
+            {/* AISLE LINKS TO NAV TO AISLE NAME*/}
+            <Heading fontSize="large" id={`${linkText}`}>
+              {aisle.aisle}
+            </Heading>
+            <List textAlign="start" >
+              {aisleItems}
+            </List>
+          </VStack>
         );
-      });
+      }
 
-      const linkText = aisle.aisle.replaceAll(" ", "-");
-
-      return (
-        <VStack
-          key={`${aisle.aisle} - ${aisleItems.length}`}
-          margin="1em"
-          alignItems="start" >
-          {/* AISLE LINKS TO NAV TO AISLE NAME*/}
-          <Heading fontSize="large" id={`${linkText}`}>
-            {aisle.aisle}
-          </Heading>
-          <List textAlign="start" >
-            {aisleItems}
-          </List>
-        </VStack>
-      );
-    }
-
-  });
+    }) : null;
 
   return (
     <Center width="100vw" position="absolute">
@@ -175,7 +173,7 @@ export default function GroceryList() {
             borderRadius="lg">
             <Heading fontSize="1.8rem" >Aisles</Heading>
             <List padding="1em">
-              {linkofAisleNames}
+              {aisleNameLinks}
             </List>
           </VStack>
 
