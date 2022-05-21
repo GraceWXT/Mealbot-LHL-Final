@@ -19,7 +19,8 @@ import {
   Button,
   Tooltip,
   Input,
-  useClipboard
+  useClipboard,
+  useToast
 } from "@chakra-ui/react";
 import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
 
@@ -32,7 +33,6 @@ export default function GroceryList() {
 
   // get start date from react router
   const { startDate } = useParams();
-  const { sent, setSent } = useOutletContext();
 
   // get grocerylist data
   // useEffect(() => {
@@ -68,22 +68,25 @@ export default function GroceryList() {
   });
 
   //TWILIO BUTTON
+  const toast = useToast();
 
   const sendTwilio = () => {
-
     axios.post('http://localhost:8080/api/twilio', aisles)
       .then(res => {
         console.log(res);
-        setSent(true);
-
-        // setTimeout(() => {
-        //   setSent(false);
-        // }, 3000);
       })
       .catch(function (error) {
         console.log(error);
       });
 
+    toast({
+      title: 'Grocery List Sent!',
+      description: 'You will receive the text shortly.',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+      position: 'bottom'
+    });
   };
 
   //COPY FEATURE
@@ -124,7 +127,7 @@ export default function GroceryList() {
     if (!filter.includes(aisle.aisle)) {
       // AISLE ITEMS
       const aisleItems = aisle.items.map(item => {
-        const measurement = item.measures.original;
+        const measurement = item.measures.metric;
         const { amount, unit } = measurement;
         const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
         // console.log(quantity);
@@ -200,7 +203,7 @@ export default function GroceryList() {
                 />
               </Tooltip>
               <Text></Text>
-              <Tooltip label={sent ? 'Sent!' : 'Text the grocery list to your saved phone number'} closeOnClick={false}>
+              <Tooltip label="Send as text message" closeOnClick={false}>
                 <IconButton
                   onClick={sendTwilio}
                   icon={<MdOutlineTextsms boxSize={20} />}

@@ -1,0 +1,9 @@
+@import "styles/variables.scss";
+
+#homepage-button {
+  font-family: $logo-font;
+  box-shadow: 2px 2px 5px rgb(40, 39, 39);
+  &:hover {
+    transform: scale(1.05) perspective(1px);
+  }
+}
