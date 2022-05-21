@@ -80,12 +80,11 @@ export default function GroceryList() {
       });
 
     toast({
-      title: 'Sent Grocery List!',
-      description: "We've texted the grocery list to your saved phone number.",
+      title: 'Grocery List Sent!',
       status: 'success',
-      duration: 5000,
+      duration: 3000,
       isClosable: true,
-      position: 'top'
+      position: 'bottom'
     });
   };
 
@@ -203,7 +202,7 @@ export default function GroceryList() {
                 />
               </Tooltip>
               <Text></Text>
-              <Tooltip label="Text the grocery list to your saved phone number" closeOnClick={false}>
+              <Tooltip label="Send as text message" closeOnClick={false}>
                 <IconButton
                   onClick={sendTwilio}
                   icon={<MdOutlineTextsms boxSize={20} />}
