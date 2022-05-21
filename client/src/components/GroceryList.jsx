@@ -127,7 +127,7 @@ export default function GroceryList() {
     if (!filter.includes(aisle.aisle)) {
       // AISLE ITEMS
       const aisleItems = aisle.items.map(item => {
-        const measurement = item.measures.original;
+        const measurement = item.measures.metric;
         const { amount, unit } = measurement;
         const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
         // console.log(quantity);

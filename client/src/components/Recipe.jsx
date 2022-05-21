@@ -246,12 +246,12 @@ export default function Recipe() {
         <Divider orientation='vertical' />
 
 
-        <Tabs isFitted variant='enclosed' w="60%" bg={useColorModeValue("white", "gray.700")}rounded="lg" boxShadow="lg">
+        <Tabs isFitted variant='enclosed' w="60%" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
           <TabList mb='1em' >
             <Tab
               border="1px"
               borderColor={useColorModeValue("gray.200", "gray.700")}
-              bg={ useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
+              bg={useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
@@ -259,7 +259,7 @@ export default function Recipe() {
             <Tab
               border="1px"
               borderColor={useColorModeValue("gray.200", "gray.700")}
-              bg={ useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
+              bg={useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
@@ -267,7 +267,7 @@ export default function Recipe() {
             <Tab
               border="1px"
               borderColor={useColorModeValue("gray.200", "gray.700")}
-              bg={ useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
+              bg={useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
