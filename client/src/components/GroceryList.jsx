@@ -22,28 +22,23 @@ import {
   useClipboard,
   useToast
 } from "@chakra-ui/react";
-import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
-
+import { CopyIcon } from "@chakra-ui/icons";
 import { MdOutlineTextsms } from "react-icons/md";
 
 
-import groceryList from "./grocery-list-data";
-
 export default function GroceryList() {
-
   // get start date from react router
   const { startDate } = useParams();
-
+  const { groceryList, setgroceryList } = useOutletContext();
   // get grocerylist data
-  // useEffect(() => {
-  //   axios.get(`http://localhost:8080/api/grocerylist/${startDate}`)
-  //     .then(res => {
-  //       const groceryList = res.data;
-  //       console.log(groceryList);
-  //     }).catch(err => {
-  //       console.log("Error: ", err.message);
-  //     });
-  // }, []);
+  useEffect(() => {
+    axios.get(`http://localhost:8080/api/grocerylist/${startDate}`)
+      .then(res => {
+        setgroceryList(res.data);
+      }).catch(err => {
+        console.log("Error: ", err.message);
+      });
+  }, [startDate, setgroceryList]);
 
   const { aisles } = groceryList;
 
@@ -71,21 +66,21 @@ export default function GroceryList() {
   const toast = useToast();
 
   const sendTwilio = () => {
-    axios.post('http://localhost:8080/api/twilio', aisles)
+    axios.post("http://localhost:8080/api/twilio", aisles)
       .then(res => {
         console.log(res);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(err => {
+        console.log("sendTwilio Error:", err.message);
       });
 
     toast({
-      title: 'Grocery List Sent!',
-      description: 'You will receive the text shortly.',
-      status: 'success',
+      title: "Grocery List Sent!",
+      description: "You will receive the text shortly.",
+      status: "success",
       duration: 3000,
       isClosable: true,
-      position: 'bottom'
+      position: "bottom"
     });
   };
 
@@ -94,7 +89,7 @@ export default function GroceryList() {
   const { hasCopied, onCopy } = useClipboard(value);
 
   const formatGroceryList = () => {
-    let textMessage = ``;
+    let textMessage = "";
 
     //aisleItem cannot be named aisle otherwise will conflict with database key name and won't work
     aisles.map((aisleItem) => {
@@ -192,7 +187,7 @@ export default function GroceryList() {
             borderRadius="lg">
             <HStack justifyContent="center" position="sticky" padding="20px" >
               <Heading fontSize="1.8rem" >Grocery List</Heading>
-              <Tooltip label={hasCopied ? 'Copied!' : 'Copy the grocery list'} closeOnClick={false}>
+              <Tooltip label={hasCopied ? "Copied!" : "Copy the grocery list"} closeOnClick={false}>
                 <IconButton
                   onClick={onCopy}
                   aria-label='copy grocery list'
