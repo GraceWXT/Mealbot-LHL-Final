@@ -33,6 +33,7 @@ export default function Meal(props) {
       py="0.8%"
       verticalAlign="top"
       height="22vh"
+      bg={ isOver ? "gray.100" : undefined}
     >
       {meal.value && <RecipeCard meal={meal} setDraggingMeal={setDraggingMeal}/>}
     </Td>
