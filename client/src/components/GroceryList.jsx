@@ -209,7 +209,7 @@ export default function GroceryList() {
                   size="sm" />
               </Tooltip>
             </HStack>
-            <List height="85%" overflow="scroll">
+            <List height="85%" overflow="auto">
               {listOfAisleItems}
             </List>
           </Container>
