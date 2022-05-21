@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 // Internal Components
 import Navbar from "./Navbar";
@@ -61,16 +63,18 @@ export default function App() {
 
   return (
     <div className="App">
-      <ChakraProvider theme={theme}>
-        <Navbar user={user} setStartDate={setStartDate} />
-        <Outlet context={{
-          user,
-          pantryItems, setPantryItems,
-          mealPlan, setMealPlan,
-          startDate, setStartDate,
-          mealPlanStatus, setMealPlanStatus,
-        }} />
-      </ChakraProvider>
+      <DndProvider backend={HTML5Backend}>
+        <ChakraProvider theme={theme}>
+          <Navbar user={user} setStartDate={setStartDate} />
+          <Outlet context={{
+            user,
+            pantryItems, setPantryItems,
+            mealPlan, setMealPlan,
+            startDate, setStartDate,
+            mealPlanStatus, setMealPlanStatus,
+            sent, setSent }} />
+        </ChakraProvider>
+      </DndProvider>
     </div>
   );
 }
