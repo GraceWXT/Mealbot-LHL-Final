@@ -19,9 +19,6 @@ export default function App() {
 
   const [startDate, setStartDate] = useState("");
 
-
-  // const [groceryList, setgroceryList] = useState({});
-
   // Get user data and set to state
   const [user, setUser] = useState({});
   useEffect(() => {
@@ -72,7 +69,7 @@ export default function App() {
             mealPlan, setMealPlan,
             startDate, setStartDate,
             mealPlanStatus, setMealPlanStatus,
-            sent, setSent }} />
+          }} />
         </ChakraProvider>
       </DndProvider>
     </div>
