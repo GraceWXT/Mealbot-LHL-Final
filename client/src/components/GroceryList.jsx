@@ -145,7 +145,7 @@ export default function GroceryList() {
     return isDesktop ? children : null;
   };
   const Tablet = ({ children }) => {
-    const isTablet = useMediaQuery({ minWidth: 768, maxWidth: 991 });
+    const isTablet = useMediaQuery({ maxWidth: 991 });
     return isTablet ? children : null;
   };
   const Mobile = ({ children }) => {
@@ -203,7 +203,7 @@ export default function GroceryList() {
       <VStack py={2}>
 
         {/* AISLES */}
-        <Mobile>
+        <Tablet>
           <VStack>
             <Button colorScheme='blue' onClick={onOpen}>
               Open
@@ -224,44 +224,44 @@ export default function GroceryList() {
                       {linkofAisleNames}
                     </List>
                   </VStack>
-                  <Container
-                    width="50%"
-                    height="100%"
-                    bg={useColorModeValue("white", "gray.700")}
-                    boxShadow="lg"
-                    borderRadius="lg">
-                    <HStack justifyContent="center" position="sticky" padding="20px" >
-                      <BsCart4 />
-                      <Heading fontSize="1.8rem" >Grocery List</Heading>
-                      <Tooltip label={hasCopied ? 'Copied!' : 'Copy the grocery list'} closeOnClick={false}>
-                        <IconButton
-                          onClick={onCopy}
-                          aria-label='copy grocery list'
-                          icon={<CopyIcon />}
-                          colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-                          borderRadius="50%"
-                          size="sm"
-                        />
-                      </Tooltip>
-                      <Text></Text>
-                      <Tooltip label="Send as text message" closeOnClick={false}>
-                        <IconButton
-                          onClick={sendTwilio}
-                          icon={<MdOutlineTextsms boxSize={5} />}
-                          colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-                          borderRadius="50%"
-                          size="sm" />
-                      </Tooltip>
-                    </HStack>
-                    <List height="85%" overflow="auto">
-                      {listOfAisleItems}
-                    </List>
-                  </Container>
                 </DrawerBody>
               </DrawerContent>
             </Drawer>
           </VStack>
-        </Mobile>
+          <Container
+            width="100%"
+            height="100%"
+            bg={useColorModeValue("white", "gray.700")}
+            boxShadow="lg"
+            borderRadius="lg">
+            <HStack justifyContent="center" position="sticky" padding="20px" >
+              <BsCart4 />
+              <Heading fontSize="1.8rem" >Grocery List</Heading>
+              <Tooltip label={hasCopied ? 'Copied!' : 'Copy the grocery list'} closeOnClick={false}>
+                <IconButton
+                  onClick={onCopy}
+                  aria-label='copy grocery list'
+                  icon={<CopyIcon />}
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  borderRadius="50%"
+                  size="sm"
+                />
+              </Tooltip>
+              <Text></Text>
+              <Tooltip label="Send as text message" closeOnClick={false}>
+                <IconButton
+                  onClick={sendTwilio}
+                  icon={<MdOutlineTextsms boxSize={5} />}
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  borderRadius="50%"
+                  size="sm" />
+              </Tooltip>
+            </HStack>
+            <List height="85%" overflow="auto">
+              {listOfAisleItems}
+            </List>
+          </Container>
+        </Tablet>
 
         <Desktop>
           <HStack
