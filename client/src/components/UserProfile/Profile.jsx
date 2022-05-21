@@ -20,8 +20,8 @@ export default function Profile() {
       <HStack
         spacing="2vw"
         justifyContent="center"
-        w="80%"
-        height="70vh"
+        w="90%"
+        height="75vh"
       >
         {/* User profile: avatar and info */}
         <VStack
