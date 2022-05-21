@@ -19,7 +19,8 @@ import {
   Button,
   Tooltip,
   Input,
-  useClipboard
+  useClipboard,
+  useToast
 } from "@chakra-ui/react";
 import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
 
@@ -32,7 +33,6 @@ export default function GroceryList() {
 
   // get start date from react router
   const { startDate } = useParams();
-  const { sent, setSent } = useOutletContext();
 
   // get grocerylist data
   // useEffect(() => {
@@ -68,22 +68,25 @@ export default function GroceryList() {
   });
 
   //TWILIO BUTTON
+  const toast = useToast();
 
   const sendTwilio = () => {
-
     axios.post('http://localhost:8080/api/twilio', aisles)
       .then(res => {
         console.log(res);
-        setSent(true);
-
-        // setTimeout(() => {
-        //   setSent(false);
-        // }, 3000);
       })
       .catch(function (error) {
         console.log(error);
       });
 
+    toast({
+      title: 'Sent Grocery List!',
+      description: "We've texted the grocery list to your saved phone number.",
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+      position: 'top'
+    });
   };
 
   //COPY FEATURE
@@ -200,7 +203,7 @@ export default function GroceryList() {
                 />
               </Tooltip>
               <Text></Text>
-              <Tooltip label={sent ? 'Sent!' : 'Text the grocery list to your saved phone number'} closeOnClick={false}>
+              <Tooltip label="Text the grocery list to your saved phone number" closeOnClick={false}>
                 <IconButton
                   onClick={sendTwilio}
                   icon={<MdOutlineTextsms boxSize={20} />}
