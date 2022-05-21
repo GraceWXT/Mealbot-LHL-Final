@@ -53,19 +53,19 @@ export default function GroceryList() {
     axios.post("http://localhost:8080/api/twilio", aisles)
       .then(res => {
         console.log(res);
+        toast({
+          title: "Grocery List Sent!",
+          description: "You will receive the text shortly.",
+          status: "success",
+          variant: "subtle",
+          duration: 5000,
+          isClosable: true,
+        });
       })
       .catch(err => {
         console.log("sendTwilio Error:", err.message);
       });
 
-    toast({
-      title: "Grocery List Sent!",
-      description: "You will receive the text shortly.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      position: "bottom"
-    });
   };
 
   //COPY FEATURE
