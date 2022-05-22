@@ -5,7 +5,7 @@ export default function AisleListItems(props) {
   const { aisle } = props;
 
   // Ingredient items in each aisle
-  const aisleItems = aisle.items.map(item => <AisleListItem item={item} />);
+  const aisleItems = aisle.items.map(item => <AisleListItem key={item.id}item={item} />);
 
   // id to match the nav link href
   const linkText = aisle.aisle.replaceAll(" ", "-");
@@ -14,7 +14,7 @@ export default function AisleListItems(props) {
     <VStack
       width="100%"
       alignItems="start" >
-      <Heading fontSize="large" fontWeight="semibold" id={`${linkText}`}>
+      <Heading marginY="0.3em" fontSize="large" fontWeight="semibold" id={`${linkText}`}>
         {aisle.aisle}
       </Heading>
       <List
