@@ -23,26 +23,26 @@ export default function HomePage() {
   const nextMondayDate = getNextMondayDate();
 
   return (
-    <Container>
-      <VStack mt="20px" height="80vh">
-        <Box m="30px" align="center">
-          <Image boxSize="100px" mb="10px" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
-          <Text fontSize="28px" fontWeight="600">
+    <Center h="92vh">
+      <VStack height="56vh" marginBottom="8vh" spacing="5vh">
+        <VStack>
+          <Image height="25vh" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
+          <Text fontSize="" fontWeight="600">
             MEALTIME IN NO TIME!
           </Text>
-        </Box>
-        <Box w="75%" mt={50} h="200px" textAlign="center">
+        </VStack>
+        <VStack  textAlign="center">
           <Text fontSize="20px" fontWeight="500" mb="10px">
             Say hello to Mealbot!
           </Text>
-          <Text noOfLines={2}>
+          <Text>
             Mealbot allows you to generate a random meal plan for the entire week!
           </Text>
-          <br />
+
           <Text>
             Click the button below to see what you get
           </Text>
-          <br />
+
           <Link to={`mealplan/${nextMondayDate}`}>
             <Button
               id="homepage-button"
@@ -57,9 +57,9 @@ export default function HomePage() {
               I'm feeling hungry!
             </Button>
           </Link>
-        </Box>
+        </VStack>
       </VStack>
-    </Container>
+    </Center>
 
   );
 }
