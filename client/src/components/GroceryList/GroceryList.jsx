@@ -95,38 +95,42 @@ export default function GroceryList() {
   const aisleNameListItems = aisles.map(aisle => <AisleNameListItem aisle={aisle} />);
 
   return (
-    <Center width="100vw" position="absolute">
-      <VStack py={2}>
-        <HStack
-          height="80vh"
-          width="80vw"
-          // bg={useColorModeValue("white", "gray.700")}
-          // boxShadow="lg"
-          // borderRadius="lg"
-          justifyContent="center"
-          marginTop="5vh" >
-          {/* AISLES */}
-          <VStack
-            height="100%"
-            padding="20px"
-            bg={useColorModeValue("white", "gray.700")}
-            boxShadow="lg"
-            borderRadius="lg">
-            <Heading fontSize="1.8rem" >Aisles</Heading>
-            <List padding="1em">
-              {aisles ? aisleNameListItems : null}
-            </List>
-          </VStack>
+    <Center width="100vw" h="92vh">
+      <HStack
+        height="80vh"
+        spacing="2vw"
+        width="fit-content"
+        justifyContent="center"
+      >
+        {/* Aisles Navigation*/}
+        <VStack
+          alignItems="flex-start"
+          height="100%"
+          padding="2em"
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
+          borderRadius="lg">
+          <Heading fontSize="1.8rem" >Aisles</Heading>
+          <List minWidth="18em">
+            {aisles ? aisleNameListItems : null}
+          </List>
+        </VStack>
 
-          <Container
-            width="50%"
-            height="100%"
-            bg={useColorModeValue("white", "gray.700")}
-            boxShadow="lg"
-            borderRadius="lg">
-            <HStack justifyContent="center" position="sticky" padding="20px" >
-              <Heading fontSize="1.8rem" >Grocery List</Heading>
-              <Tooltip label={hasCopied ? "Copied!" : "Copy the grocery list"} closeOnClick={false}>
+        {/* Grocery List Items*/}
+        <VStack
+          w="fit-content"
+          minWidth="35em"
+          height="100%"
+          padding="2em"
+          bg={useColorModeValue("white", "gray.700")}
+          boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
+          borderRadius="lg">
+
+          {/* Grocery List heading and buttons Div */}
+          <HStack width="100%" justifyContent="space-between" spacing={4} >
+            <Heading fontSize="1.8rem" >Grocery List</Heading>
+            <HStack >
+              <Tooltip label={hasCopied ? "Copied!" : "Copy to your clipboard"} closeOnClick={false}>
                 <IconButton
                   onClick={onCopy}
                   aria-label='copy grocery list'
@@ -136,7 +140,6 @@ export default function GroceryList() {
                   size="sm"
                 />
               </Tooltip>
-              <Text></Text>
               <Tooltip label="Send as text message" closeOnClick={false}>
                 <IconButton
                   onClick={sendTwilio}
@@ -146,12 +149,20 @@ export default function GroceryList() {
                   size="sm" />
               </Tooltip>
             </HStack>
-            <List height="88%" overflow="auto">
-              {aisles ? aislesWithListItems : null}
-            </List>
-          </Container>
-        </HStack>
-      </VStack >
+          </HStack>
+
+          {/* Aisle List items Div */}
+          <VStack
+            height="full"
+            scrollBehavior="smooth"
+            padding="1em"
+            width="100%"
+            alignItems="flex-start"
+            overflow="auto">
+            {aisles ? aislesWithListItems : null}
+          </VStack>
+        </VStack>
+      </HStack>
     </Center>
   );
 }
