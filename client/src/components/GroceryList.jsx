@@ -38,6 +38,7 @@ import { CopyIcon, ChatIcon } from "@chakra-ui/icons";
 //IMPORT REACT ICONS
 import { MdOutlineTextsms } from "react-icons/md";
 import { BsCart4 } from "react-icons/bs";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 //IMPORT REACT RESPONSIVE
 import { MediaQuery, useMediaQuery } from 'react-responsive';
@@ -67,6 +68,8 @@ export default function GroceryList() {
   //FILTER OUT
   const filter = ["Oil, Vinegar, Salad Dressing", "Spices and Seasonings", "Condiments", "Pantry Items", "Sweet Snacks", "Dried Fruits", "Ethnic Foods", "Generic", "Savory Snacks", "Nut butters, Jams, and Honey", "Alcoholic Beverages"];
 
+  //useDisclosure for SIDEBAR
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   // AISLE NAMES
   const linkofAisleNames = aisles.map(aisle => {
@@ -75,7 +78,7 @@ export default function GroceryList() {
     if (!filter.includes(aisle.aisle)) {
       return (
         <ListItem key={aisle.aisle} py={0.5} borderBottom='1px' borderColor='gray.200'>
-          <Link href={`#${linkText}`}>
+          <Link href={`#${linkText}`} onClick={onClose}>
             {aisle.aisle}
           </Link>
         </ListItem>
@@ -136,10 +139,8 @@ export default function GroceryList() {
   }, [aisles]);
 
 
-  //useDisclosure for SIDEBAR
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
-  //RESPONSIVE DESIGN
+  //RESPONSIVE DESIGNS CONSTANTS
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 992 });
     return isDesktop ? children : null;
@@ -148,14 +149,7 @@ export default function GroceryList() {
     const isTablet = useMediaQuery({ maxWidth: 991 });
     return isTablet ? children : null;
   };
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 767 });
-    return isMobile ? children : null;
-  };
-  const Default = ({ children }) => {
-    const isNotMobile = useMediaQuery({ minWidth: 768 });
-    return isNotMobile ? children : null;
-  };
+
 
   // ITEMS QUANTITY
 
@@ -204,37 +198,41 @@ export default function GroceryList() {
 
         {/* AISLES */}
         <Tablet>
-          <VStack>
-            <Button colorScheme='blue' onClick={onOpen}>
-              Open
-            </Button>
-            <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
-              <DrawerOverlay />
-              <DrawerContent>
-                {/* <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader> */}
-                <DrawerBody>
-                  <VStack
-                    height="100%"
-                    padding="20px"
-                    bg={useColorModeValue("white", "gray.700")}
-                    boxShadow="lg"
-                    borderRadius="lg">
-                    <Heading fontSize="1.8rem" >Aisles</Heading>
-                    <List padding="1em">
-                      {linkofAisleNames}
-                    </List>
-                  </VStack>
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
-          </VStack>
+          {/* <VStack> */}
+
+          <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay />
+            <DrawerContent>
+              {/* <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader> */}
+              <DrawerBody>
+                <VStack
+                  height="100%"
+                  padding="20px"
+                  bg={useColorModeValue("white", "gray.700")}
+                // boxShadow="lg"
+                // borderRadius="lg"
+                >
+                  <Heading fontSize="1.8rem" >Aisles</Heading>
+                  <DrawerCloseButton />
+                  <List padding="1em" width="100%">
+                    {linkofAisleNames}
+                  </List>
+                </VStack>
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+          {/* </VStack> */}
           <Container
-            width="100%"
-            height="100%"
+            marginTop="5vh"
+            width="75wh"
+            height="80vh"
             bg={useColorModeValue("white", "gray.700")}
             boxShadow="lg"
             borderRadius="lg">
             <HStack justifyContent="center" position="sticky" padding="20px" >
+              <Button leftIcon={<GiHamburgerMenu />} colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")} onClick={onOpen}>
+                Aisles
+              </Button>
               <BsCart4 />
               <Heading fontSize="1.8rem" >Grocery List</Heading>
               <Tooltip label={hasCopied ? 'Copied!' : 'Copy the grocery list'} closeOnClick={false}>
@@ -257,7 +255,7 @@ export default function GroceryList() {
                   size="sm" />
               </Tooltip>
             </HStack>
-            <List height="85%" overflow="auto">
+            <List height="75%" overflow="auto" >
               {listOfAisleItems}
             </List>
           </Container>
