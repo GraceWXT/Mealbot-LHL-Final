@@ -25,8 +25,8 @@ import {
 import { CopyIcon } from "@chakra-ui/icons";
 import { MdOutlineTextsms } from "react-icons/md";
 
-import AisleNameLinks from "./AisleNameLinks";
-import ListItems from "./ListItems";
+import AisleNameListItem from "./AisleNameListItem";
+import AisleListItems from "./AisleListItems";
 import filter from "./filter";
 
 export default function GroceryList() {
@@ -65,7 +65,6 @@ export default function GroceryList() {
       .catch(err => {
         console.log("sendTwilio Error:", err.message);
       });
-
   };
 
   //COPY FEATURE
@@ -91,6 +90,9 @@ export default function GroceryList() {
     setValue(textMessage);
   }, [aisles]);
 
+  const aislesWithListItems = aisles.map(aisle => <AisleListItems aisle={aisle} />);
+
+  const aisleNameListItems = aisles.map(aisle => <AisleNameListItem aisle={aisle} />);
 
   return (
     <Center width="100vw" position="absolute">
@@ -112,7 +114,7 @@ export default function GroceryList() {
             borderRadius="lg">
             <Heading fontSize="1.8rem" >Aisles</Heading>
             <List padding="1em">
-              {aisles ? <AisleNameLinks aisles={aisles}/> : null}
+              {aisles ? aisleNameListItems : null}
             </List>
           </VStack>
 
@@ -144,8 +146,8 @@ export default function GroceryList() {
                   size="sm" />
               </Tooltip>
             </HStack>
-            <List height="85%" overflow="auto">
-              {aisles ? <ListItems aisles={aisles} /> : null}
+            <List height="88%" overflow="auto">
+              {aisles ? aislesWithListItems : null}
             </List>
           </Container>
         </HStack>
