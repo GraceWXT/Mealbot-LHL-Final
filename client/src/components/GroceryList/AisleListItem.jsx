@@ -2,9 +2,8 @@ import { ListItem, Checkbox} from "@chakra-ui/react";
 
 export default function AisleListItem(props) {
   const { item } = props;
-  const measurement = item.measures.metric;
-  const { amount, unit } = measurement;
-  const quantity = (`${Number(amount.toFixed(2))} ${unit}`);
+  const { amount, unit } = item.measures.metric.measurement;
+  const quantity = `${Number(amount.toFixed(2))} ${unit}`;
 
   return (
     <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
