@@ -6,7 +6,7 @@ export default function AisleNameListItem(props) {
   const linkText = aisle.aisle.replaceAll(" ", "-");
 
   return (
-    <ListItem key={aisle.aisle} py={1} fontWeight="500" borderBottom='1px' borderColor='gray.200'>
+    <ListItem py={1} fontWeight="500" borderBottom='1px' borderColor='gray.200'>
       <Link href={`#${linkText}`}>
         {aisle.aisle}
       </Link>

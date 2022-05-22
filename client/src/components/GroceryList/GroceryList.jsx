@@ -90,9 +90,9 @@ export default function GroceryList() {
     setValue(textMessage);
   }, [aisles]);
 
-  const aislesWithListItems = aisles.map(aisle => <AisleListItems aisle={aisle} />);
+  const aislesWithListItems = aisles.map(aisle => <AisleListItems key={aisle.aisle} aisle={aisle} />);
 
-  const aisleNameListItems = aisles.map(aisle => <AisleNameListItem aisle={aisle} />);
+  const aisleNameListItems = aisles.map(aisle => <AisleNameListItem key={aisle.aisle} aisle={aisle} />);
 
   return (
     <Center width="100vw" h="92vh">

@@ -13,7 +13,6 @@ export default function AisleListItems(props) {
   return (
     <VStack
       width="100%"
-      key={`${aisle.aisle} - ${aisleItems.length}`}
       alignItems="start" >
       <Heading fontSize="large" fontWeight="semibold" id={`${linkText}`}>
         {aisle.aisle}
