@@ -12,13 +12,15 @@ export default function AisleListItems(props) {
 
   return (
     <VStack
+      width="100%"
       key={`${aisle.aisle} - ${aisleItems.length}`}
-      margin="1em"
       alignItems="start" >
-      <Heading fontSize="large" id={`${linkText}`}>
+      <Heading fontSize="large" fontWeight="semibold" id={`${linkText}`}>
         {aisle.aisle}
       </Heading>
-      <List textAlign="start" >
+      <List
+        width="100%"
+        textAlign="start" >
         {aisleItems}
       </List>
     </VStack>
