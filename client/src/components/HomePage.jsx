@@ -6,6 +6,7 @@ import {
   VStack,
   Button,
   Box,
+  Heading,
   Text,
   Image,
   useColorModeValue
@@ -25,34 +26,28 @@ export default function HomePage() {
   return (
     <Center h="92vh">
       <VStack height="56vh" marginBottom="8vh" spacing="5vh">
-        <VStack>
-          <Image height="25vh" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
-          <Text fontSize="" fontWeight="600">
-            MEALTIME IN NO TIME!
-          </Text>
+        <VStack spacing="5">
+          <Image alt="logo" height="20vh" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
+          <Heading fontSize="5xl" id="catch-phrase"fontWeight="600">
+            Mealtime In No Time!
+          </Heading>
         </VStack>
-        <VStack  textAlign="center">
-          <Text fontSize="20px" fontWeight="500" mb="10px">
+        <VStack spacing={5} textAlign="center">
+          <Heading fontSize="3xl" fontWeight="500">
             Say hello to Mealbot!
+          </Heading>
+          <Text fontSize="lg" maxWidth="28em">
+            Mealbot allows you to get the meal plan and grocery list for an entire week in a few clicks.
+            <br/> Click the button below to see what you get for next week!
           </Text>
-          <Text>
-            Mealbot allows you to generate a random meal plan for the entire week!
-          </Text>
-
-          <Text>
-            Click the button below to see what you get
-          </Text>
-
           <Link to={`mealplan/${nextMondayDate}`}>
             <Button
               id="homepage-button"
-              fontSize="22px"
-              fontWeight="600"
-              w="100%"
-              h="50px"
+              fontSize="3xl"
+              height="2em"
+              width="10em"
               bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
               onClick={() => setStartDate(nextMondayDate)}
-
             >
               I'm feeling hungry!
             </Button>
