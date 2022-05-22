@@ -21,8 +21,11 @@
     "classnames": "^2.3.1",
     "framer-motion": "^6.3.3",
     "react": "^17.0.2",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
+    "react-responsive": "^9.0.0-beta.8",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1"

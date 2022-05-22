@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 // Internal Components
 import Navbar from "./Navbar";
@@ -16,9 +18,6 @@ import "./App.scss";
 export default function App() {
 
   const [startDate, setStartDate] = useState("");
-
-
-  // const [groceryList, setgroceryList] = useState({});
 
   // Get user data and set to state
   const [user, setUser] = useState({});
@@ -61,16 +60,18 @@ export default function App() {
 
   return (
     <div className="App">
-      <ChakraProvider theme={theme}>
-        <Navbar user={user} setStartDate={setStartDate} />
-        <Outlet context={{
-          user,
-          pantryItems, setPantryItems,
-          mealPlan, setMealPlan,
-          startDate, setStartDate,
-          mealPlanStatus, setMealPlanStatus,
-        }} />
-      </ChakraProvider>
+      <DndProvider backend={HTML5Backend}>
+        <ChakraProvider theme={theme}>
+          <Navbar user={user} setStartDate={setStartDate} />
+          <Outlet context={{
+            user,
+            pantryItems, setPantryItems,
+            mealPlan, setMealPlan,
+            startDate, setStartDate,
+            mealPlanStatus, setMealPlanStatus,
+          }} />
+        </ChakraProvider>
+      </DndProvider>
     </div>
   );
 }

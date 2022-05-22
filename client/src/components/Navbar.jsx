@@ -1,21 +1,9 @@
 import {
-  Box,
-  Heading,
-  Image,
-  Avatar,
   HStack,
-  Button,
-  Icon,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useColorModeValue,
-  useColorMode,
-  FormControl,
-  FormLabel,
-  Switch
+  Heading, Image, Avatar, Button, Icon,
+  Menu, MenuButton, MenuList, MenuItem, MenuDivider,
+  FormControl, FormLabel, Switch,
+  useColorModeValue, useColorMode
 } from "@chakra-ui/react";
 import { BiUserCircle } from "react-icons/bi";
 import { BsCalendar3 } from "react-icons/bs";
@@ -33,23 +21,24 @@ export default function Navbar(props) {
 
   return (
     <>
-      <Box as="nav"
+      <HStack
+        as="nav"
         height="8vh"
         minH="50px"
         bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
         display="flex" justifyContent={"space-between"} alignItems={"center"}
-        padding="0 2vw"
+        px="3vw"
         boxShadow="rgba(0, 0, 0, 0.10) 0px 0px 12px 0px"
       >
         <Link to="/">
           <HStack>
-            <Image boxSize="6vh" minBlockSize="5vh" align={"center"} src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
+            <Image boxSize="6vh" minBlockSize="5vh" align="center" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
             <Heading fontSize="2rem" id="logo">Mealbot</Heading>
           </HStack>
         </Link>
-        <HStack>
-          <FormControl display='flex' alignItems='center'>
-            <FormLabel htmlFor='email-alerts' mb='0'>
+        <HStack spacing={5}>
+          <FormControl display="flex" alignItems="center">
+            <FormLabel htmlFor="color-mode" mb="0">
               {colorMode === "light" ? "☀️" : "🌒"}
             </FormLabel>
             <Switch
@@ -63,7 +52,7 @@ export default function Navbar(props) {
               rounded={"full"}
               variant={"link"}
               cursor={"pointer"}
-              minW={0}>
+              minW="fit-content">
               <Avatar
                 size={"md"}
                 src={user.img_url ? `${user.img_url}` : null}
@@ -91,7 +80,7 @@ export default function Navbar(props) {
             </MenuList>
           </Menu>
         </HStack>
-      </Box>
+      </HStack>
     </>
   );
 }
