@@ -30,10 +30,10 @@ import AisleListItems from "./AisleListItems";
 import groceryListProcessor from "helpers/grocerylist-helper";
 
 export default function GroceryList() {
-  // get start date from url
+  // Get start date from url
   const { startDate } = useParams();
 
-  // get grocerylist data and store in a state
+  // Get grocerylist data and store in a state
   const [ aisles, setAisles ] = useState([]);
   useEffect(() => {
     axios.get(`http://localhost:8080/api/grocerylist/${startDate}`)
@@ -45,7 +45,7 @@ export default function GroceryList() {
       });
   }, [startDate, setAisles]);
 
-  //TWILIO BUTTON
+  // TWILIO BUTTON
   const toast = useToast();
 
   const sendTwilio = () => {
@@ -66,24 +66,23 @@ export default function GroceryList() {
       });
   };
 
-  //COPY FEATURE
+  // COPY FEATURE
   const [value, setValue] = useState("");
   const { hasCopied, onCopy } = useClipboard(value);
 
-  //put aisles as dependency so if aisles data changes the formatGroceryList copy function also updates with new data
+  // Set aisles as dependency so if aisles data changes the text is also updated with new data
   useEffect(() => {
     let textMessage = "";
-
     if (aisles)
-    //aisleItem cannot be named aisle otherwise will conflict with database key name and won't work
-      aisles.map((aisleItem) => {
-        const aisle = aisleItem.aisle.toUpperCase();
-
-        textMessage += `\n${aisle}\n`;
-
-        aisleItem.items.map(item => {
-          const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
-          textMessage += ingredient;
+      aisles.forEach((aisle) => {
+        // Add upper case aisle name to the text message
+        const aisleName = aisle["aisle"].toUpperCase();
+        textMessage += `\n${aisleName}\n`;
+        // Add each item in teh aisle to the text message
+        aisle.items.forEach(item => {
+          textMessage += `
+          -${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n
+          `;
         });
       });
     setValue(textMessage);
