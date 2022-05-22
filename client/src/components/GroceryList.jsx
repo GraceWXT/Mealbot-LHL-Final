@@ -212,16 +212,7 @@ export default function GroceryList() {
                   size="sm" />
               </Tooltip>
             </HStack>
-            <List height="85%" overflow="auto" sx={{
-              '&::-webkit-scrollbar': {
-                width: '16px',
-                borderRadius: '8px',
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-              },
-              '&::-webkit-scrollbar-thumb': {
-                backgroundColor: `rgba(0, 0, 0, 0.05)`,
-              },
-            }}>
+            <List height="85%" overflow="auto">
               {listOfAisleItems}
             </List>
           </Container>
