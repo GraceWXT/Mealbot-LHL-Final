@@ -1,30 +1,16 @@
+// External components and hooks
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import {
-  Flex,
-  Text,
-  Spacer,
-  IconButton,
-  Heading,
-  Link,
-  Center,
-  HStack,
-  VStack,
-  Container,
-  List,
-  ListItem,
-  Checkbox,
-  useColorModeValue,
-  Button,
-  Tooltip,
-  Input,
-  useClipboard,
-  useToast
+  Center, HStack, VStack,
+  Heading, List, IconButton, Tooltip,
+  useColorModeValue, useClipboard, useToast
 } from "@chakra-ui/react";
 import { CopyIcon } from "@chakra-ui/icons";
 import { MdOutlineTextsms } from "react-icons/md";
 
+// Internal components and helpers
 import AisleNameListItem from "./AisleNameListItem";
 import AisleListItems from "./AisleListItems";
 import groceryListProcessor from "helpers/grocerylist-helper";
@@ -88,9 +74,10 @@ export default function GroceryList() {
     setValue(textMessage);
   }, [aisles]);
 
-  const aislesWithListItems = aisles.map(aisle => <AisleListItems key={aisle.aisle} aisle={aisle} />);
+  // Map over the datat to render aisle name links and items
+  const aislesWithListItems = aisles.length ? aisles.map(aisle => <AisleListItems key={aisle.aisle} aisle={aisle} />) : null;
 
-  const aisleNameListItems = aisles.map(aisle => <AisleNameListItem key={aisle.aisle} aisle={aisle} />);
+  const aisleNameListItems = aisles.length ? aisles.map(aisle => <AisleNameListItem key={aisle.aisle} aisle={aisle} />) : null;
 
   return (
     <Center width="100vw" h="92vh">
@@ -110,7 +97,7 @@ export default function GroceryList() {
           borderRadius="lg">
           <Heading fontSize="1.8rem" >Aisles</Heading>
           <List minWidth="18em">
-            {aisles ? aisleNameListItems : null}
+            {aisleNameListItems}
           </List>
         </VStack>
 
@@ -157,7 +144,7 @@ export default function GroceryList() {
             width="100%"
             alignItems="flex-start"
             overflow="auto">
-            {aisles ? aislesWithListItems : null}
+            {aislesWithListItems}
           </VStack>
         </VStack>
       </HStack>
