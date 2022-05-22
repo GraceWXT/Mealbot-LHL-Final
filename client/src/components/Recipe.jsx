@@ -173,7 +173,7 @@ export default function Recipe() {
         <Divider orientation='vertical' />
 
 
-        <Tabs isFitted variant='enclosed' w="60%" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
+        <Tabs isFitted variant='enclosed' w="60%" h="75vh" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
           <TabList mb='1em' >
             <Tab
               border="1px"
