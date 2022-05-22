@@ -1,4 +1,4 @@
-import { ListItem, Checkbox} from "@chakra-ui/react";
+import { ListItem, HStack, Checkbox, Text} from "@chakra-ui/react";
 
 export default function AisleListItem(props) {
   const { item } = props;
@@ -7,9 +7,19 @@ export default function AisleListItem(props) {
 
   return (
     <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
-      <Checkbox colorScheme="green" spacing="1rem" width="100%">
-        {quantity} {item.name}
-      </Checkbox>
+      <HStack justifyContent="space-between">
+        <Checkbox
+          colorScheme="green"
+          spacing="1rem"
+          fontWeight="500"
+          fontSize="md"
+        >
+          {item.name}
+        </Checkbox>
+        <Text minW="fit-content">
+          {quantity}
+        </Text>
+      </HStack>
     </ListItem>
   );
 }
