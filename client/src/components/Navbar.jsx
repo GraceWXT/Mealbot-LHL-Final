@@ -33,7 +33,7 @@ export default function Navbar(props) {
         <Link to="/">
           <HStack>
             <Image boxSize="6vh" minBlockSize="5vh" align="center" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
-            <Heading fontSize="2rem" id="logo">Mealbot</Heading>
+            <Heading fontSize="4xl" id="logo">Mealbot</Heading>
           </HStack>
         </Link>
         <HStack spacing={5}>
