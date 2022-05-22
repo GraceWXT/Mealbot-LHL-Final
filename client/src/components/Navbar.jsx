@@ -59,19 +59,19 @@ export default function Navbar(props) {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem>
-                <Icon boxSize="1.2em" marginRight="0.5em" as={BiUserCircle}></Icon>
-                <Link to={`/users/${user.id}`} >
+              <Link to={`/users/${user.id}`} >
+                <MenuItem>
+                  <Icon boxSize="1.2em" marginRight="0.5em" as={BiUserCircle}></Icon>
                   Profile
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
               <MenuDivider />
-              <MenuItem onClick={() => setStartDate(currentMonday) } >
-                <Icon boxSize="0.9em" marginRight="0.5em" as={BsCalendar3}></Icon>
-                <Link to={`mealplan/${currentMonday}`}>
+              <Link to={`mealplan/${currentMonday}`}>
+                <MenuItem onClick={() => setStartDate(currentMonday) } >
+                  <Icon boxSize="0.9em" marginRight="0.5em" as={BsCalendar3}></Icon>
                   Meal Planner
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
               <MenuDivider />
               <MenuItem>
                 <Icon boxSize="1em" marginRight="0.5em" as={MdOutlineLogout}></Icon>
