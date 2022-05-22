@@ -4,9 +4,10 @@ import AisleListItem from "./AisleListItem";
 export default function AisleListItems(props) {
   const { aisle } = props;
 
-  // AISLE ITEMS
+  // Ingredient items in each aisle
   const aisleItems = aisle.items.map(item => <AisleListItem item={item} />);
 
+  // id to match the nav link href
   const linkText = aisle.aisle.replaceAll(" ", "-");
 
   return (
@@ -14,7 +15,6 @@ export default function AisleListItems(props) {
       key={`${aisle.aisle} - ${aisleItems.length}`}
       margin="1em"
       alignItems="start" >
-      {/* AISLE LINKS TO NAV TO AISLE NAME*/}
       <Heading fontSize="large" id={`${linkText}`}>
         {aisle.aisle}
       </Heading>
