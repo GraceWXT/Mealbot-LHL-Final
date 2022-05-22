@@ -27,7 +27,7 @@ import { MdOutlineTextsms } from "react-icons/md";
 
 import AisleNameListItem from "./AisleNameListItem";
 import AisleListItems from "./AisleListItems";
-import filter from "./filter";
+import groceryListProcessor from "helpers/grocerylist-helper";
 
 export default function GroceryList() {
   // get start date from url
@@ -38,8 +38,7 @@ export default function GroceryList() {
   useEffect(() => {
     axios.get(`http://localhost:8080/api/grocerylist/${startDate}`)
       .then(res => {
-        const filteredAisles = res.data.aisles
-          .filter(aisle => !filter.includes(aisle["aisle"]));
+        const filteredAisles = groceryListProcessor(res.data.aisles);
         setAisles(filteredAisles);
       }).catch(err => {
         console.log("Error: ", err.message);
