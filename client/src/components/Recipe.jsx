@@ -148,16 +148,7 @@ export default function Recipe() {
           <Divider />
           <Text py={2}>Cooking time: {state.readyInMinutes} minutes</Text>
           <HStack marginBottom={3}>
-            <IconButton
-              onClick={addServing}
-              borderRadius="50%"
-              size="xs"
-              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              icon={<FaPlus />}
-              aria-label='add serving by one'
-            />
 
-            <Text py={2}>{state.servings} servings</Text>
             <IconButton
               onClick={minusServing}
               borderRadius="50%"
@@ -166,6 +157,15 @@ export default function Recipe() {
               icon={<FaMinus />}
               aria-label='minus serving by one'
             />
+            <Text py={2}>{state.servings} servings</Text>
+            <IconButton
+              onClick={addServing}
+              borderRadius="50%"
+              size="xs"
+              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+              icon={<FaPlus />}
+              aria-label='add serving by one'
+            />
           </HStack>
           <Image src={state.image} rounded="md" />
         </Container>
@@ -173,7 +173,7 @@ export default function Recipe() {
         <Divider orientation='vertical' />
 
 
-        <Tabs isFitted variant='enclosed' w="60%" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
+        <Tabs isFitted variant='enclosed' w="60%" h="75vh" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
           <TabList mb='1em' >
             <Tab
               border="1px"
