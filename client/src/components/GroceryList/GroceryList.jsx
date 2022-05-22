@@ -4,16 +4,21 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import {
   Center, HStack, VStack,
-  Heading, List, IconButton, Tooltip,
-  useColorModeValue, useClipboard, useToast
+  Heading, IconButton, Tooltip, Button,
+  Drawer, DrawerBody, DrawerOverlay, DrawerContent, useDisclosure, useColorModeValue, useClipboard, useToast
 } from "@chakra-ui/react";
 import { CopyIcon } from "@chakra-ui/icons";
 import { MdOutlineTextsms } from "react-icons/md";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+//IMPORT REACT RESPONSIVE
+import { useMediaQuery } from "react-responsive";
 
 // Internal components and helpers
 import AisleNameListItem from "./AisleNameListItem";
 import AisleListItems from "./AisleListItems";
 import groceryListProcessor from "helpers/grocerylist-helper";
+import AisleNameNav from "./AisleNameNav";
 
 export default function GroceryList() {
   // Get start date from url
@@ -74,64 +79,89 @@ export default function GroceryList() {
     setValue(textMessage);
   }, [aisles]);
 
+  //useDisclosure for SIDEBAR
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const isTablet = useMediaQuery({ maxWidth: 991 });
+
+  const tabletAislesButton = (
+    <Button
+      size="sm"
+      leftIcon={<GiHamburgerMenu />}
+      colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+      onClick={onOpen}>
+  Aisles
+    </Button>);
+
   // Map over the datat to render aisle name links and items
   const aislesWithListItems = aisles.length ? aisles.map(aisle => <AisleListItems key={aisle.aisle} aisle={aisle} />) : null;
 
-  const aisleNameListItems = aisles.length ? aisles.map(aisle => <AisleNameListItem key={aisle.aisle} aisle={aisle} />) : null;
+  const aisleNameListItems = aisles.length ?
+    aisles.map(aisle => <AisleNameListItem key={aisle.aisle} aisle={aisle} handleClick={onClose}/>)
+    : null;
 
   return (
-    <Center width="100vw" h="92vh">
+    <Center
+      width="100vw"
+      h="92vh"
+    >
       <HStack
-        height="80vh"
-        spacing="2vw"
-        width="fit-content"
+        height={isTablet ? "100%" : "80vh"}
+        spacing={isTablet ? undefined : "2vw"}
+        width={isTablet ? undefined : "fit-content"}
         justifyContent="center"
       >
         {/* Aisles Navigation*/}
-        <VStack
-          alignItems="flex-start"
-          height="100%"
-          padding="2em"
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
-          borderRadius="lg">
-          <Heading fontSize="1.8rem" >Aisles</Heading>
-          <List minWidth="18em">
-            {aisleNameListItems}
-          </List>
-        </VStack>
+        {isTablet ?
+          <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+            <DrawerOverlay />
+            <DrawerContent>
+              <DrawerBody>
+                <AisleNameNav isTablet={isTablet}>{aisleNameListItems}</AisleNameNav>
+              </DrawerBody>
+            </DrawerContent>
+          </Drawer>
+          :
+          <AisleNameNav isTablet={isTablet}>{aisleNameListItems}</AisleNameNav>}
 
-        {/* Grocery List Items*/}
+
+        {/* Grocery List Items Container*/}
         <VStack
-          w="fit-content"
-          minWidth="35em"
           height="100%"
-          padding="2em"
           bg={useColorModeValue("white", "gray.700")}
-          boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
-          borderRadius="lg">
+          padding={isTablet ? "0.8em" : "2em"}
+          maxW={isTablet ? "100vw" : undefined}
+          w={isTablet ? undefined : "fit-content"}
+          minWidth={isTablet ? undefined : "35em"}
+          boxShadow={isTablet ? undefined : "rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"}
+          borderRadius={isTablet ? undefined : "lg"}
+        >
 
           {/* Grocery List heading and buttons Div */}
           <HStack width="100%" justifyContent="space-between" spacing={4} >
-            <Heading fontSize="1.8rem" >Grocery List</Heading>
+            <HStack>
+              {isTablet ? tabletAislesButton : null}
+              <Heading fontSize={isTablet ? "1.5em" : "1.8em"} >Grocery List</Heading>
+            </HStack>
             <HStack >
               <Tooltip label={hasCopied ? "Copied!" : "Copy to your clipboard"} closeOnClick={false}>
                 <IconButton
                   onClick={onCopy}
-                  aria-label='copy grocery list'
+                  aria-label="copy grocery list"
                   icon={<CopyIcon />}
                   colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
                   borderRadius="50%"
-                  size="sm"
+                  size={isTablet ? "sm" : "md"}
                 />
               </Tooltip>
               <Tooltip label="Send as text message" closeOnClick={false}>
                 <IconButton
                   onClick={sendTwilio}
-                  icon={<MdOutlineTextsms boxSize={20} />}
+                  icon={<MdOutlineTextsms />}
                   colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
                   borderRadius="50%"
-                  size="sm" />
+                  size={isTablet ? "sm" : "md"}
+                />
               </Tooltip>
             </HStack>
           </HStack>
