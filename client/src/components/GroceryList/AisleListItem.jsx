@@ -9,7 +9,7 @@ export default function AisleListItem(props) {
     <ListItem key={item.id} py={2} borderBottom='1px' borderColor='gray.200'>
       <HStack justifyContent="space-between">
         <Checkbox
-          colorScheme="green"
+          colorScheme="turquoiseGreen"
           spacing="1rem"
           fontWeight="500"
           fontSize="md"
