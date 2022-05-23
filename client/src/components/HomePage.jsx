@@ -1,14 +1,6 @@
 import {
-  Flex,
-  Container,
-  Spacer,
-  Center,
-  VStack,
-  Button,
-  Box,
-  Heading,
-  Text,
-  Image,
+  Center, VStack,
+  Button, Heading, Text, Image,
   useColorModeValue
 } from "@chakra-ui/react";
 
