@@ -76,7 +76,7 @@ export default function Recipe() {
       : (ingredient.amount * newServings).toFixed(1);
 
     return (
-      <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
+      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
         {`${ingredientAmount} ${ingredient.unit} ${ingredient.name}`}
       </ListItem>
     );
@@ -88,7 +88,7 @@ export default function Recipe() {
   //maps over instructionsArray to return a list of instructions
   const instructionsList = instructionsArray.map((instruction, index) => {
     return (
-      <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
+      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
         <HStack spacing={5}>
           <Text fontWeight="500">{instruction.number}</Text>
           <Text>{instruction.step}</Text>
@@ -104,17 +104,16 @@ export default function Recipe() {
   //maps over instructionsArray to return a list of instructions
   const nutritionList = nutritionArray.map((nutrient, index) => {
     return (
-      <Box key={index} py={2} borderBottom='1px' borderColor='gray.200'>
-        <Flex>
-          <Text fontWeight='semibold'>
+      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
+        <HStack justifyContent="space-between">
+          <Text fontWeight="semibold">
             {nutrient.name}
           </Text>
-          <Spacer />
           <Text>
             {nutrient.amount} {nutrient.unit}
           </Text>
-        </Flex>
-      </Box>
+        </HStack>
+      </ListItem>
     );
   });
 
@@ -130,14 +129,14 @@ export default function Recipe() {
           leftIcon={<ArrowBackIcon />}
           _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
           _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-          aria-label='go back to meal plan'
+          aria-label="go back to meal plan"
         >
           Back
         </Button>
       </Link>
       <HStack alignItems="start" m={2}>
         <Container w="40%">
-          <Heading as='h2' size='lg'>{state.title}</Heading>
+          <Heading as="h2" size="lg">{state.title}</Heading>
           <Divider />
           <Text py={2}>Cooking time: {state.readyInMinutes} minutes</Text>
           <HStack marginBottom={3}>
@@ -148,7 +147,7 @@ export default function Recipe() {
               size="xs"
               colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
               icon={<FaMinus />}
-              aria-label='minus serving by one'
+              aria-label="minus serving by one"
             />
             <Text py={2}>{state.servings} servings</Text>
             <IconButton
@@ -157,17 +156,17 @@ export default function Recipe() {
               size="xs"
               colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
               icon={<FaPlus />}
-              aria-label='add serving by one'
+              aria-label="add serving by one"
             />
           </HStack>
           <Image src={state.image} rounded="md" />
         </Container>
 
-        <Divider orientation='vertical' />
+        <Divider orientation="vertical" />
 
 
-        <Tabs isFitted variant='enclosed' w="60%" h="75vh" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
-          <TabList mb='1em' >
+        <Tabs isFitted variant="enclosed" w="60%" h="75vh" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
+          <TabList mb="1em" >
             <Tab
               border="1px"
               borderColor={useColorModeValue("gray.200", "gray.700")}
@@ -175,7 +174,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label='recipe ingredients tab'
+              aria-label="recipe ingredients tab"
             >Ingredients</Tab>
             <Tab
               border="1px"
@@ -184,7 +183,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label='recipe instructions tab'
+              aria-label="recipe instructions tab"
             >Instructions</Tab>
             <Tab
               border="1px"
@@ -193,7 +192,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label='recipe nutrition tab'
+              aria-label="recipe nutrition tab"
             >Nutrition</Tab>
           </TabList>
           <TabPanels>
@@ -208,9 +207,9 @@ export default function Recipe() {
               </List>
             </TabPanel>
             <TabPanel>
-              <UnorderedList>
+              <List>
                 {nutritionList}
-              </UnorderedList>
+              </List>
             </TabPanel>
           </TabPanels>
         </Tabs>
