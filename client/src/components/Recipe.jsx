@@ -4,9 +4,9 @@ import axios from "axios";
 // External components and hooks
 import {
   Tabs, TabList, TabPanels, Tab, TabPanel,
-  HStack, Container, Center, Divider, VStack, Spacer,
+  HStack, Center, VStack,
   Image, Heading, Text, Button, IconButton,
-  ListItem, List, OrderedList, UnorderedList,
+  ListItem, List, UnorderedList,
   useColorModeValue
 } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
