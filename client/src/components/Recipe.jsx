@@ -26,8 +26,7 @@ import {
 import { FaPlus, FaMinus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-import recipeInfo from "./recipe-data.js";
-
+// import recipeInfo from "./recipe-data.js";
 
 export default function Recipe() {
   const [originalServings, setOriginalServings] = useState(0);
