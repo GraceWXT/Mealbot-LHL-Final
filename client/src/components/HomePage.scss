@@ -3,11 +3,17 @@
 #catch-phrase {
   font-family: $logo-font;
 }
-#homepage-button {
-  &:hover {
-    transform: scale(1.05) perspective(1px);
+#hungry-button {
+  box-shadow: -10px -10px 15px white,
+  10px 10px 15px rgba(0, 0, 0, 0.1);
+  transition: .13s ease-in-out;
+
+  #button-text {
+    font-family: $logo-font;
   }
-}
-#button-text {
-  font-family: $logo-font;
+
+  &:hover {
+    box-shadow: none;
+    transform:translate3d(0px, 4px, 0px);
+  }
 }
