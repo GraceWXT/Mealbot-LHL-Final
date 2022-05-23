@@ -1,5 +1,5 @@
 INSERT INTO pantry_items (user_id, name)
-VALUES (1, 'salt')
+VALUES (1, 'salt'),
 (1, 'oil'),
 (1, 'cider vinegar'),
 (1, 'black pepper'),
