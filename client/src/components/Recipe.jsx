@@ -4,7 +4,7 @@ import axios from "axios";
 // External components and hooks
 import {
   Tabs, TabList, TabPanels, Tab, TabPanel,
-  HStack, Container, Box, Divider, Flex, Spacer,
+  HStack, Container, Center, Divider, VStack, Spacer,
   Image, Heading, Text, Button, IconButton,
   ListItem, List, OrderedList, UnorderedList,
   useColorModeValue
@@ -121,49 +121,47 @@ export default function Recipe() {
 
 
   return (
-    <Box>
-      <Link to={"/mealplan/2022-05-23"} >
-        <Button
-          m={5}
-          bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
-          leftIcon={<ArrowBackIcon />}
-          _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-          _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-          aria-label="go back to meal plan"
-        >
-          Back
-        </Button>
-      </Link>
-      <HStack alignItems="start" m={2}>
-        <Container w="40%">
-          <Heading as="h2" size="lg">{state.title}</Heading>
-          <Divider />
-          <Text py={2}>Cooking time: {state.readyInMinutes} minutes</Text>
-          <HStack marginBottom={3}>
-
-            <IconButton
-              onClick={minusServing}
-              borderRadius="50%"
-              size="xs"
-              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              icon={<FaMinus />}
-              aria-label="minus serving by one"
-            />
-            <Text py={2}>{state.servings} servings</Text>
-            <IconButton
-              onClick={addServing}
-              borderRadius="50%"
-              size="xs"
-              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              icon={<FaPlus />}
-              aria-label="add serving by one"
-            />
-          </HStack>
-          <Image src={state.image} rounded="md" />
-        </Container>
-
-        <Divider orientation="vertical" />
-
+    <Center h="92vh">
+      <HStack alignItems="start">
+        <VStack>
+          <Link to={"/mealplan/2022-05-23"} >
+            <Button
+              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              leftIcon={<ArrowBackIcon />}
+              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+              aria-label="go back to meal plan"
+            >
+              Back
+            </Button>
+          </Link>
+          <Container w="40%">
+            <Heading as="h2" size="lg">{state.title}</Heading>
+            <HStack>
+              <Text py={2}>Cooking time: {state.readyInMinutes} minutes</Text>
+              <HStack>
+                <IconButton
+                  onClick={minusServing}
+                  borderRadius="50%"
+                  size="xs"
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  icon={<FaMinus />}
+                  aria-label="minus serving by one"
+                />
+                <Text py={2}>{state.servings} servings</Text>
+                <IconButton
+                  onClick={addServing}
+                  borderRadius="50%"
+                  size="xs"
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  icon={<FaPlus />}
+                  aria-label="add serving by one"
+                />
+              </HStack>
+            </HStack>
+            <Image src={state.image} rounded="md" />
+          </Container>
+        </VStack>
 
         <Tabs isFitted variant="enclosed" w="60%" h="75vh" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
           <TabList mb="1em" >
@@ -214,7 +212,7 @@ export default function Recipe() {
           </TabPanels>
         </Tabs>
       </HStack>
-    </Box>
+    </Center>
 
 
   );
