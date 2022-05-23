@@ -1,30 +1,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-//grab info from params
-import { useParams } from "react-router-dom";
-
-//chakra-ui components
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { HStack } from "@chakra-ui/react";
-import { Container } from "@chakra-ui/react";
-import { Divider } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
-import { Heading } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
-import { Flex, Spacer } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import { useColorModeValue } from "@chakra-ui/react";
-import { Button, IconButton } from "@chakra-ui/react";
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { mode } from "@chakra-ui/theme-tools";
+// External components and hooks
 import {
-  ListItem,
-  OrderedList,
-  UnorderedList,
+  Tabs, TabList, TabPanels, Tab, TabPanel,
+  HStack, Container, Box, Divider, Flex, Spacer,
+  Image, Heading, Text, Button, IconButton,
+  ListItem, OrderedList, UnorderedList,
+  useColorModeValue
 } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
+
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 // import recipeInfo from "./recipe-data.js";
 
@@ -51,13 +40,11 @@ export default function Recipe() {
     });
   }, [id]);
 
+  // When using testing data:
   // useEffect(() => {
   //   setState(prev => ({ ...prev, ...recipeInfo }));
   //   setOriginalServings(recipeInfo.servings);
   // }, []);
-
-
-
 
   //SERVING CALCULATOR
   const addServing = () => {
