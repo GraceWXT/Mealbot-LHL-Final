@@ -117,9 +117,6 @@ export default function Recipe() {
     );
   });
 
-
-
-
   return (
     <Center h="92vh" minH="45rem">
       <HStack alignItems="start" spacing={12}>
@@ -221,7 +218,5 @@ export default function Recipe() {
         </Tabs>
       </HStack>
     </Center>
-
-
   );
 }
