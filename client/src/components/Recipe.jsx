@@ -121,8 +121,8 @@ export default function Recipe() {
 
 
   return (
-    <Center h="92vh">
-      <HStack alignItems="start" spacing={12} height="min-content">
+    <Center h="92vh" minH="45rem">
+      <HStack alignItems="start" spacing={12}>
         <VStack alignItems="start" spacing={6} h="100%">
           <Link to={"/mealplan/2022-05-23"} >
             <Button
@@ -163,8 +163,8 @@ export default function Recipe() {
           </VStack>
         </VStack>
 
-        <Tabs isFitted variant="enclosed" width="45vw" h="100%" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
-          <TabList mb="1em" >
+        <Tabs isFitted variant="enclosed" width="45vw" h="42rem" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
+          <TabList>
             <Tab
               border="1px"
               borderColor={useColorModeValue("gray.200", "gray.700")}
@@ -193,19 +193,27 @@ export default function Recipe() {
               aria-label="recipe nutrition tab"
             >Nutrition</Tab>
           </TabList>
-          <TabPanels>
-            <TabPanel>
-              <UnorderedList>
+          <TabPanels
+            h="93%"
+            padding="1em"
+          >
+            <TabPanel h="100%" >
+              <UnorderedList
+                h="100%"
+                listStylePosition="inside"
+                marginInlineStart={0}
+                overflowY="auto"
+              >
                 {ingredientList}
               </UnorderedList>
             </TabPanel>
-            <TabPanel>
-              <List>
+            <TabPanel h="100%" >
+              <List h="100%" overflow="auto">
                 {instructionsList}
               </List>
             </TabPanel>
-            <TabPanel>
-              <List>
+            <TabPanel h="100%" >
+              <List h="100%" overflow="auto">
                 {nutritionList}
               </List>
             </TabPanel>
