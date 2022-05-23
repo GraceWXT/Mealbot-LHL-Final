@@ -34,7 +34,7 @@ export default function HomePage() {
           </Text>
           <Link to={`mealplan/${nextMondayDate}`}>
             <Button
-              id="hungry-button"
+              id={useColorModeValue("hungry-button", "dark-hungry-button")}
               fontSize="3xl"
               height="2em"
               width="10em"
