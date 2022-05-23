@@ -25,14 +25,14 @@ export default function HomePage() {
 
   return (
     <Center h="92vh">
-      <VStack height="56vh" marginBottom="8vh" spacing="5vh">
+      <VStack minH="56vh" maxH="85vh" marginBottom="8vh" spacing="5vh">
         <VStack spacing="5">
           <Image alt="logo" height="20vh" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
           <Heading fontSize="5xl" id="catch-phrase"fontWeight="600">
             Mealtime In No Time!
           </Heading>
         </VStack>
-        <VStack spacing={5} textAlign="center">
+        <VStack spacing={7} textAlign="center">
           <Heading fontSize="3xl" fontWeight="500">
             Say hello to Mealbot!
           </Heading>
@@ -42,14 +42,18 @@ export default function HomePage() {
           </Text>
           <Link to={`mealplan/${nextMondayDate}`}>
             <Button
-              id="homepage-button"
+              id="hungry-button"
               fontSize="3xl"
               height="2em"
               width="10em"
-              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              borderRadius="lg"
+              bg={useColorModeValue("turquoiseGreen.300", "majestyPurple.500")}
+              _hover={{bg: useColorModeValue("majestyPurple.100", "turquoiseGreen.500")}}
               onClick={() => setStartDate(nextMondayDate)}
             >
-              I'm feeling hungry!
+              <Text id="button-text">
+                I'm feeling hungry!
+              </Text>
             </Button>
           </Link>
         </VStack>
