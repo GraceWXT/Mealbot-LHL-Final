@@ -24,7 +24,7 @@ router.get("/:startDate", (req, res) => {
       // if there's no saved mealplan in the api database
       if (result.data.days.length === 0) {
         // For a future weeek, get random recipes from our pool and send back as meal plan json
-        if (Date.parse(startDate) > new Date()) {
+        if (Date.parse(startDate) > new Date().setHours(0, 0, 0, 0)) {
           getRandomRecipesForWeek()
             .then((recipes) => {
               const mealplan = mealplanMapper(recipes);
