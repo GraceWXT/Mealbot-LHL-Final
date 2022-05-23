@@ -71,9 +71,13 @@ export default function Recipe() {
 
     let newServings = state.servings / originalServings;
 
+    const ingredientAmount = Number.isInteger(ingredient.amount * newServings) ?
+      (ingredient.amount * newServings)
+      : (ingredient.amount * newServings).toFixed(1);
+
     return (
       <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
-        { Number.isInteger(ingredient.amount * newServings) ? (ingredient.amount * newServings) : (ingredient.amount * newServings).toFixed(1) } {ingredient.unit} {ingredient.name}
+        {`${ingredientAmount} ${ingredient.unit} ${ingredient.name}`}
       </ListItem>
     );
   });
