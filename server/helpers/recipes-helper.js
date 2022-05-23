@@ -11,20 +11,20 @@ const getRecipeInfo = (recipe) => {
         name: ingredient.name,
         amount: ingredient.measures.us.amount,
         unit: ingredient.measures.us.unitShort
-      })
-    })
+      });
+    });
     return ingredients;
   };
 
   //get instructions information
   const getInstructions = (recipe) => {
     let instructions = [];
-    recipe.analyzedInstructions[0].steps.map( instruction => {
+    recipe.analyzedInstructions[0].steps.map(instruction => {
       instructions.push({
         number: instruction.number,
         step: instruction.step
-      })
-    })
+      });
+    });
     return instructions;
   };
 
@@ -32,20 +32,20 @@ const getRecipeInfo = (recipe) => {
   //get nutrition information
   const getNutrition = (recipe) => {
     let nutritionalInfo = [];
-    const nutrition = recipe.nutrition.nutrients
+    const nutrition = recipe.nutrition.nutrients;
 
     nutrition.map(nutrient => {
-      if (nutrient.name === "Calories" || nutrient.name === "Fat" || nutrient.name === "Carbohydrates" || nutrient.name === "Protein"){
+      if (nutrient.name === "Calories" || nutrient.name === "Fat" || nutrient.name === "Carbohydrates" || nutrient.name === "Protein") {
         nutritionalInfo.push({
           name: nutrient.name,
           amount: nutrient.amount,
           unit: nutrient.unit
-        })
+        });
       }
-    })
+    });
 
-    return nutritionalInfo
-  }
+    return nutritionalInfo;
+  };
 
   cleanedRecipe["ingredients"] = getIngredients(recipe);
   cleanedRecipe["instructions"] = getInstructions(recipe);
