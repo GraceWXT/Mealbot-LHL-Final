@@ -22,7 +22,7 @@ export default function PantryItemsColumn() {
     }).catch(err => {
       console.log("Error: ", err.message);
     });
-  }, []);
+  }, [setPantryItems]);
 
   const getPantryItems = pantryItems.map((item, index) => {
     return (
