@@ -49,7 +49,7 @@ export default function Recipe() {
       setState(prev => ({ ...prev, ...res.data }));
       setOriginalServings(res.data.servings);
     });
-  }, []);
+  }, [id]);
 
   // useEffect(() => {
   //   setState(prev => ({ ...prev, ...recipeInfo }));
