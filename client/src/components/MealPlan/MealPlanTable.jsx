@@ -7,9 +7,11 @@ import {
   Tr,
   Th,
 } from "@chakra-ui/react";
+import { useOutletContext } from "react-router";
 
 // Internal components
 import Meal from "./Meal";
+import Loading from "./Loading";
 
 // Helper Functions
 import { mealPlanSorter, headerTextHelper } from "helpers/mealplan-helper";
@@ -18,6 +20,7 @@ import { mealPlanSorter, headerTextHelper } from "helpers/mealplan-helper";
 export default function MealPlanTable(props) {
   const { mealPlan } = props;
   const [draggingMeal, setDraggingMeal] = useState();
+  const { mealPlanStatus } = useOutletContext();
 
   // Restructure the mealPlan state into array of 3 arrays
   const breakfasts = mealPlanSorter(mealPlan, 1) || [];
@@ -69,7 +72,8 @@ export default function MealPlanTable(props) {
         </Tr>
       </Thead>
       <Tbody>
-        {rows}
+        {mealPlanStatus === "Loading" ?
+          <Loading /> : rows}
       </Tbody>
     </Table>
   );
