@@ -39,8 +39,8 @@ export default function HomePage() {
               height="2em"
               width="10em"
               borderRadius="lg"
-              bg={useColorModeValue("turquoiseGreen.300", "majestyPurple.500")}
-              _hover={{bg: useColorModeValue("majestyPurple.100", "turquoiseGreen.500")}}
+              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              _hover={{bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.500")}}
               onClick={() => setStartDate(nextMondayDate)}
             >
               <Text id="button-text">
