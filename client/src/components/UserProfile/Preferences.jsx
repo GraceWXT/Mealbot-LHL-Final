@@ -48,14 +48,13 @@ export default function Preferences() {
     <Container
       boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 12px 2px"
       bg={useColorModeValue("white", "blackAlpha.900")}
-      overflow="auto"
       w="30vw"
       height="100%"
       rounded="lg"
       padding="2rem"
     >
       <Heading as="h2" size="md">Preferences</Heading>
-      <List alignItems="flex-start" py={2}>
+      <List height="full" overflow="auto" alignItems="flex-start" py={2}>
         <ListItem py={2} borderBottom="1px" borderColor="gray.200">
           <ListIcon as={IoFastFoodOutline} />
             Max Calories (per meal):

@@ -1,13 +1,6 @@
 import {
-  Flex,
-  Container,
-  Spacer,
-  Center,
-  VStack,
-  Button,
-  Box,
-  Text,
-  Image,
+  Center, VStack,
+  Button, Heading, Text, Image,
   useColorModeValue
 } from "@chakra-ui/react";
 
@@ -23,43 +16,41 @@ export default function HomePage() {
   const nextMondayDate = getNextMondayDate();
 
   return (
-    <Container>
-      <VStack mt="20px" height="80vh">
-        <Box m="30px" align="center">
-          <Image boxSize="100px" mb="10px" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
-          <Text fontSize="28px" fontWeight="600">
-            MEALTIME IN NO TIME!
-          </Text>
-        </Box>
-        <Box w="75%" mt={50} h="200px" textAlign="center">
-          <Text fontSize="20px" fontWeight="500" mb="10px">
+    <Center h="92vh">
+      <VStack minH="56vh" maxH="85vh" marginBottom="8vh" spacing="5vh">
+        <VStack spacing="5">
+          <Image alt="logo" height="20vh" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
+          <Heading fontSize="5xl" id="catch-phrase"fontWeight="600">
+            Mealtime In No Time!
+          </Heading>
+        </VStack>
+        <VStack spacing={7} textAlign="center">
+          <Heading fontSize="3xl" fontWeight="500">
             Say hello to Mealbot!
+          </Heading>
+          <Text fontSize="lg" maxWidth="28em">
+            Mealbot allows you to get the meal plan and grocery list for an entire week in a few clicks.
+            <br/> Click the button below to see what you get for next week!
           </Text>
-          <Text noOfLines={2}>
-            Mealbot allows you to generate a random meal plan for the entire week!
-          </Text>
-          <br />
-          <Text>
-            Click the button below to see what you get
-          </Text>
-          <br />
           <Link to={`mealplan/${nextMondayDate}`}>
             <Button
-              id="homepage-button"
-              fontSize="22px"
-              fontWeight="600"
-              w="100%"
-              h="50px"
+              id="hungry-button"
+              fontSize="3xl"
+              height="2em"
+              width="10em"
+              borderRadius="lg"
               bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              _hover={{bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.500")}}
               onClick={() => setStartDate(nextMondayDate)}
-
             >
-              I'm feeling hungry!
+              <Text id="button-text">
+                I'm feeling hungry!
+              </Text>
             </Button>
           </Link>
-        </Box>
+        </VStack>
       </VStack>
-    </Container>
+    </Center>
 
   );
 }

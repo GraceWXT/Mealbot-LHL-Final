@@ -33,7 +33,7 @@ export default function App() {
   // Get pantryItems data and set to state
   const [pantryItems, setPantryItems] = useState([]);
 
-
+  // Meal Plan related status
   const [mealPlan, setMealPlan] = useState([]);
   const [mealPlanStatus, setMealPlanStatus] = useState("");
   console.log("mealPlanStatus:", mealPlanStatus);
@@ -43,13 +43,12 @@ export default function App() {
   // set meal plan data and status based on the response
   useEffect(() => {
     if (startDate) {
+      setMealPlanStatus("Loading");
       axios.get(`http://localhost:8080/api/mealplans/${startDate}`).then(res => {
         setMealPlan(res.data.mealplan);
-        if (Date.parse(startDate) > new Date()) {
-          // console.log(`Future${res.data.status}`);
+        if (Date.parse(startDate) > new Date().setHours(0, 0, 0, 0)) {
           setMealPlanStatus(`Future${res.data.status}`);
         } else {
-          // console.log(`Past${res.data.status}`);
           setMealPlanStatus(`Past${res.data.status}`);
         }
       }).catch(err => {

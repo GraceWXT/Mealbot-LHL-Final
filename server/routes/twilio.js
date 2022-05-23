@@ -4,44 +4,38 @@ const router = express.Router();
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 
-
-const client = require('twilio')(accountSid, authToken);
-
+const client = require("twilio")(accountSid, authToken);
 
 router.post("/", (req, res) => {
-  const groceryList = req.body;
+
+  // Construct the message from the req.body data
+  const aisles = req.body;
 
   let textMessage = "";
+  for (let i = 0; i < 4; i++) {
+    const aisleName = aisles[i]["aisle"].toUpperCase();
+    textMessage += `\n${aisleName}\n`;
 
-  //FILTER OUT
-  const filter = ["Oil, Vinegar, Salad Dressing", "Spices and Seasonings", "Condiments", "Pantry Items", "Sweet Snacks", "Dried Fruits", "Ethnic Foods", "Generic", "Savory Snacks", "Nut butters, Jams, and Honey", "Alcoholic Beverages"];
-
-  for (let i = 0; i < 3; i++) {
-    if (!filter.includes(groceryList[i].aisle)) {
-      const aisle = groceryList[i].aisle.toUpperCase();
-
-      textMessage += `\n${aisle}\n`;
-
-      groceryList[i].items.map(item => {
-        const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
-        textMessage += ingredient;
-      });
-    }
+    aisles[i].items.map(item => {
+      const ingredient = `-${item.measures.metric.amount} ${item.measures.metric.unit} ${item.name}\n`;
+      textMessage += ingredient;
+    });
   }
 
+  // Send the message request to Twilio
   client.messages.create({
     to: process.env.MY_PHONE_NUMBER,
     from: process.env.TWILIO_NUMBER,
     body: textMessage
   })
-    .then((message) => console.log(message.sid))
-    .catch((error) => console.log(error));
-
-
-  return res.status(200);
+    .then((message) =>{
+      console.log("message.sid: ", message.sid);
+      res.status(200).send(message.sid);
+    })
+    .catch((error) => {
+      console.log("Twilio client create message error: ", error.message);
+    });
 
 });
 
 module.exports = router;
-
-

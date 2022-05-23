@@ -26,7 +26,6 @@ VALUES (632928, 'Asparagus Eggs Benedict', 'https://spoonacular.com/recipeImages
 (643674, 'Fried Brown Rice', 'https://spoonacular.com/recipeImages/643674-312x231.jpg', 2),
 (982371, 'Instant Pot Quinoa Grain Bowl', 'https://spoonacular.com/recipeImages/982371-312x231.jpg', 1),
 (1098354, 'Rotisserie Chicken and Bean Tostadas', 'https://spoonacular.com/recipeImages/1098354-312x231.jpg', 2),
-(639722, 'Coconut and Whole Wheat Chicken Tenders', 'https://spoonacular.com/recipeImages/639722-312x231.jpg', 2),
 (1003670, 'Stuffed Chicken Breast', 'https://spoonacular.com/recipeImages/1003670-312x231.jpg', 2),
 (1697553, 'Pan-Seared Honey Glazed Salmon with Collard Greens', 'https://spoonacular.com/recipeImages/1697553-312x231.jpg', 2),
 (642585, 'Farfalle with fresh tomatoes, basil and mozzarella', 'https://spoonacular.com/recipeImages/642585-312x231.jpg', 3),

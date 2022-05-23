@@ -1,33 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-//grab info from params
-import { useParams } from "react-router-dom";
-
-//chakra-ui components
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { HStack } from "@chakra-ui/react";
-import { Container } from "@chakra-ui/react";
-import { Divider } from "@chakra-ui/react";
-import { Image } from "@chakra-ui/react";
-import { Heading } from "@chakra-ui/react";
-import { Text } from "@chakra-ui/react";
-import { Flex, Spacer } from "@chakra-ui/react";
-import { Box } from "@chakra-ui/react";
-import { useColorModeValue } from "@chakra-ui/react";
-import { Button, IconButton } from "@chakra-ui/react";
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { mode } from "@chakra-ui/theme-tools";
+// External components and hooks
 import {
-  ListItem,
-  OrderedList,
-  UnorderedList,
+  Tabs, TabList, TabPanels, Tab, TabPanel,
+  HStack, Container, Center, Divider, VStack, Spacer,
+  Image, Heading, Text, Button, IconButton,
+  ListItem, List, OrderedList, UnorderedList,
+  useColorModeValue
 } from "@chakra-ui/react";
+import { mode } from "@chakra-ui/theme-tools";
+
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
-import recipeInfo from "./recipe-data.js";
-
+// import recipeInfo from "./recipe-data.js";
 
 export default function Recipe() {
   const [originalServings, setOriginalServings] = useState(0);
@@ -50,15 +38,13 @@ export default function Recipe() {
       setState(prev => ({ ...prev, ...res.data }));
       setOriginalServings(res.data.servings);
     });
-  }, []);
+  }, [id]);
 
+  // When using testing data:
   // useEffect(() => {
   //   setState(prev => ({ ...prev, ...recipeInfo }));
   //   setOriginalServings(recipeInfo.servings);
   // }, []);
-
-
-
 
   //SERVING CALCULATOR
   const addServing = () => {
@@ -85,9 +71,13 @@ export default function Recipe() {
 
     let newServings = state.servings / originalServings;
 
+    const ingredientAmount = Number.isInteger(ingredient.amount * newServings) ?
+      (ingredient.amount * newServings)
+      : (ingredient.amount * newServings).toFixed(1);
+
     return (
-      <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
-        { Number.isInteger(ingredient.amount * newServings) ? (ingredient.amount * newServings) : (ingredient.amount * newServings).toFixed(1) } {ingredient.unit} {ingredient.name}
+      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
+        {`${ingredientAmount} ${ingredient.unit} ${ingredient.name}`}
       </ListItem>
     );
   });
@@ -98,8 +88,11 @@ export default function Recipe() {
   //maps over instructionsArray to return a list of instructions
   const instructionsList = instructionsArray.map((instruction, index) => {
     return (
-      <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
-        {instruction.step}
+      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
+        <HStack spacing={5}>
+          <Text fontWeight="500">{instruction.number}</Text>
+          <Text>{instruction.step}</Text>
+        </HStack>
       </ListItem>
     );
   });
@@ -111,17 +104,16 @@ export default function Recipe() {
   //maps over instructionsArray to return a list of instructions
   const nutritionList = nutritionArray.map((nutrient, index) => {
     return (
-      <Box key={index} py={2} borderBottom='1px' borderColor='gray.200'>
-        <Flex>
-          <Text fontWeight='semibold'>
+      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
+        <HStack justifyContent="space-between">
+          <Text fontWeight="semibold">
             {nutrient.name}
           </Text>
-          <Spacer />
           <Text>
             {nutrient.amount} {nutrient.unit}
           </Text>
-        </Flex>
-      </Box>
+        </HStack>
+      </ListItem>
     );
   });
 
@@ -129,52 +121,50 @@ export default function Recipe() {
 
 
   return (
-    <Box>
-      <Link to={"/mealplan/2022-05-23"} >
-        <Button
-          m={5}
-          bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
-          leftIcon={<ArrowBackIcon />}
-          _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-          _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-          aria-label='go back to meal plan'
-        >
-          Back
-        </Button>
-      </Link>
-      <HStack alignItems="start" m={2}>
-        <Container w="40%">
-          <Heading as='h2' size='lg'>{state.title}</Heading>
-          <Divider />
-          <Text py={2}>Cooking time: {state.readyInMinutes} minutes</Text>
-          <HStack marginBottom={3}>
+    <Center h="92vh">
+      <HStack alignItems="start" spacing={12} height="min-content">
+        <VStack alignItems="start" spacing={6} h="100%">
+          <Link to={"/mealplan/2022-05-23"} >
+            <Button
+              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
+              leftIcon={<ArrowBackIcon />}
+              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
+              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
+              aria-label="go back to meal plan"
+            >
+              Back
+            </Button>
+          </Link>
+          <VStack alignItems="start" spacing={5}>
+            <Heading width="32rem" as="h2">{state.title}</Heading>
+            <HStack width="32rem" spacing={10}>
+              <Text>Cooking time: {state.readyInMinutes} minutes</Text>
+              <HStack>
+                <IconButton
+                  onClick={minusServing}
+                  borderRadius="50%"
+                  size="xs"
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  icon={<FaMinus />}
+                  aria-label="minus serving by one"
+                />
+                <Text>{state.servings} servings</Text>
+                <IconButton
+                  onClick={addServing}
+                  borderRadius="50%"
+                  size="xs"
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                  icon={<FaPlus />}
+                  aria-label="add serving by one"
+                />
+              </HStack>
+            </HStack>
+            <Image src={state.image} rounded="md" />
+          </VStack>
+        </VStack>
 
-            <IconButton
-              onClick={minusServing}
-              borderRadius="50%"
-              size="xs"
-              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              icon={<FaMinus />}
-              aria-label='minus serving by one'
-            />
-            <Text py={2}>{state.servings} servings</Text>
-            <IconButton
-              onClick={addServing}
-              borderRadius="50%"
-              size="xs"
-              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              icon={<FaPlus />}
-              aria-label='add serving by one'
-            />
-          </HStack>
-          <Image src={state.image} rounded="md" />
-        </Container>
-
-        <Divider orientation='vertical' />
-
-
-        <Tabs isFitted variant='enclosed' w="60%" h="75vh" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
-          <TabList mb='1em' >
+        <Tabs isFitted variant="enclosed" width="45vw" h="100%" overflow="auto" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
+          <TabList mb="1em" >
             <Tab
               border="1px"
               borderColor={useColorModeValue("gray.200", "gray.700")}
@@ -182,7 +172,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label='recipe ingredients tab'
+              aria-label="recipe ingredients tab"
             >Ingredients</Tab>
             <Tab
               border="1px"
@@ -191,7 +181,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label='recipe instructions tab'
+              aria-label="recipe instructions tab"
             >Instructions</Tab>
             <Tab
               border="1px"
@@ -200,7 +190,7 @@ export default function Recipe() {
               _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
               _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
               _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label='recipe nutrition tab'
+              aria-label="recipe nutrition tab"
             >Nutrition</Tab>
           </TabList>
           <TabPanels>
@@ -210,19 +200,19 @@ export default function Recipe() {
               </UnorderedList>
             </TabPanel>
             <TabPanel>
-              <OrderedList>
+              <List>
                 {instructionsList}
-              </OrderedList>
+              </List>
             </TabPanel>
             <TabPanel>
-              <UnorderedList>
+              <List>
                 {nutritionList}
-              </UnorderedList>
+              </List>
             </TabPanel>
           </TabPanels>
         </Tabs>
       </HStack>
-    </Box>
+    </Center>
 
 
   );

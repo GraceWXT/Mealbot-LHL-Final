@@ -24,7 +24,7 @@ router.get("/:startDate", (req, res) => {
       // if there's no saved mealplan in the api database
       if (result.data.days.length === 0) {
         // For a future weeek, get random recipes from our pool and send back as meal plan json
-        if (Date.parse(startDate) > new Date()) {
+        if (Date.parse(startDate) > new Date().setHours(0, 0, 0, 0)) {
           getRandomRecipesForWeek()
             .then((recipes) => {
               const mealplan = mealplanMapper(recipes);
@@ -59,9 +59,9 @@ router.get("/:startDate", (req, res) => {
 // GET mealplans/shuffle/:slot - shuffle
 router.post("/shuffle/:id", (req, res) => {
   const oldMealPlan = req.body;
-  const recipeToReplace = oldMealPlan.find(meal => meal.value.id === Number.parseInt(req.params.id));
+  const recipeToReplace = oldMealPlan.find(meal => meal.value && meal.value.id === Number.parseInt(req.params.id));
   const slot = recipeToReplace.slot;
-  const arrayOfExistingRecipeIds = getRecipeIds(oldMealPlan, slot);
+  const arrayOfExistingRecipeIds = getRecipeIds(oldMealPlan);
   getRandomRecipeForSlot(slot, arrayOfExistingRecipeIds)
     .then(recipe => {
       const mealplan = oldMealPlan.map(meal => {

@@ -1,9 +1,19 @@
 @import "styles/variables.scss";
 
-#homepage-button {
+#catch-phrase {
   font-family: $logo-font;
-  box-shadow: 2px 2px 5px rgb(40, 39, 39);
+}
+#hungry-button {
+  box-shadow: -10px -10px 15px white,
+  10px 10px 15px rgba(0, 0, 0, 0.1);
+  transition: .13s ease-in-out;
+
+  #button-text {
+    font-family: $logo-font;
+  }
+
   &:hover {
-    transform: scale(1.05) perspective(1px);
+    box-shadow: none;
+    transform:translate3d(0px, 4px, 0px);
   }
 }

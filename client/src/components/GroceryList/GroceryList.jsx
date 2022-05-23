@@ -169,7 +169,7 @@ export default function GroceryList() {
           {/* Aisle List items Div */}
           <VStack
             height="full"
-            scrollBehavior="smooth"
+            scrollBehavior={isTablet ? undefined : "smooth"}
             padding="1em"
             width="100%"
             alignItems="flex-start"

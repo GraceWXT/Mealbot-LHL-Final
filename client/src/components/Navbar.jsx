@@ -28,12 +28,12 @@ export default function Navbar(props) {
         bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
         display="flex" justifyContent={"space-between"} alignItems={"center"}
         px="3vw"
-        boxShadow="rgba(0, 0, 0, 0.10) 0px 0px 12px 0px"
+        boxShadow="rgba(0, 0, 0, 0.08) 0px 0px 12px 0px"
       >
         <Link to="/">
           <HStack>
             <Image boxSize="6vh" minBlockSize="5vh" align="center" src="https://cdn-icons-png.flaticon.com/512/1129/1129149.png" />
-            <Heading fontSize="2rem" id="logo">Mealbot</Heading>
+            <Heading fontSize="4xl" id="logo">Mealbot</Heading>
           </HStack>
         </Link>
         <HStack spacing={5}>
@@ -59,19 +59,19 @@ export default function Navbar(props) {
               />
             </MenuButton>
             <MenuList>
-              <MenuItem>
-                <Icon boxSize="1.2em" marginRight="0.5em" as={BiUserCircle}></Icon>
-                <Link to={`/users/${user.id}`} >
+              <Link to={`/users/${user.id}`} >
+                <MenuItem>
+                  <Icon boxSize="1.2em" marginRight="0.5em" as={BiUserCircle}></Icon>
                   Profile
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
               <MenuDivider />
-              <MenuItem onClick={() => setStartDate(currentMonday) } >
-                <Icon boxSize="0.9em" marginRight="0.5em" as={BsCalendar3}></Icon>
-                <Link to={`mealplan/${currentMonday}`}>
+              <Link to={`mealplan/${currentMonday}`}>
+                <MenuItem onClick={() => setStartDate(currentMonday) } >
+                  <Icon boxSize="0.9em" marginRight="0.5em" as={BsCalendar3}></Icon>
                   Meal Planner
-                </Link>
-              </MenuItem>
+                </MenuItem>
+              </Link>
               <MenuDivider />
               <MenuItem>
                 <Icon boxSize="1em" marginRight="0.5em" as={MdOutlineLogout}></Icon>
