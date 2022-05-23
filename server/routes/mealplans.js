@@ -59,9 +59,9 @@ router.get("/:startDate", (req, res) => {
 // GET mealplans/shuffle/:slot - shuffle
 router.post("/shuffle/:id", (req, res) => {
   const oldMealPlan = req.body;
-  const recipeToReplace = oldMealPlan.find(meal => meal.value.id === Number.parseInt(req.params.id));
+  const recipeToReplace = oldMealPlan.find(meal => meal.value && meal.value.id === Number.parseInt(req.params.id));
   const slot = recipeToReplace.slot;
-  const arrayOfExistingRecipeIds = getRecipeIds(oldMealPlan, slot);
+  const arrayOfExistingRecipeIds = getRecipeIds(oldMealPlan);
   getRandomRecipeForSlot(slot, arrayOfExistingRecipeIds)
     .then(recipe => {
       const mealplan = oldMealPlan.map(meal => {
