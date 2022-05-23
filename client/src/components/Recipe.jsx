@@ -6,7 +6,7 @@ import {
   Tabs, TabList, TabPanels, Tab, TabPanel,
   HStack, Container, Box, Divider, Flex, Spacer,
   Image, Heading, Text, Button, IconButton,
-  ListItem, OrderedList, UnorderedList,
+  ListItem, List, OrderedList, UnorderedList,
   useColorModeValue
 } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
@@ -89,7 +89,10 @@ export default function Recipe() {
   const instructionsList = instructionsArray.map((instruction, index) => {
     return (
       <ListItem key={index} py={2} borderBottom='1px' borderColor='gray.200'>
-        {instruction.step}
+        <HStack spacing={5}>
+          <Text fontWeight="500">{instruction.number}</Text>
+          <Text>{instruction.step}</Text>
+        </HStack>
       </ListItem>
     );
   });
@@ -200,9 +203,9 @@ export default function Recipe() {
               </UnorderedList>
             </TabPanel>
             <TabPanel>
-              <OrderedList>
+              <List>
                 {instructionsList}
-              </OrderedList>
+              </List>
             </TabPanel>
             <TabPanel>
               <UnorderedList>
