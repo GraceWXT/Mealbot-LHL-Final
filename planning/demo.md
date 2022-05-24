@@ -63,3 +63,92 @@
     - Search bar
     - Connect to local grocery store (online order, compare costs)
     - Coupons for ingredients in our grocery list
+
+## Script
+
+- Teammate Introduction & background
+  - Lucas
+  > Hi everyone,
+  > My name's Lucas, and I come from a background in food inspection
+  - Grace
+  > Hi I'm Grace and I have a background in tourism and flooring wholesale industry.
+  - Warren
+  >
+
+- App Intro (Warren)
+  > We're team MealBot and we've created an app for efficient meal planning. For tech stack, we used React, Express, PostgreSQL, and Node.
+  > Has anyone ever struggled to choose what to eat or cook at home? I'm sure you all have and so the creation of Mealbot was born. Mealbot is an app that allows you to generate a weekly meal plan, consisting of 3 meals per day by default. This is based off your inputted preferences and dietary restrictions.
+  > It saves the time for you to search for recipes and decide the menu for a whole week without repeating.
+  > It also reduces chance of wasting food or grocery shopping during weekday.
+
+
+- Homepage (Warren)
+  - switch to dark mode
+
+
+- User Profile (Warren)
+  > So lets begin with the user profiles, where you are able to filter your results and add items you already have at home. You can also add your number which we will talk about later.
+
+- Homepage (Warren)
+  > Next, the homepage which only consists of a button and our logo/slogan. Users only have one option here, which is to generate the meal plan. After clicking this button, the user is taken to the meal plan page which my group member Grace will talk about.
+
+- Meal plan (Grace)
+  > Thank you!
+  > The home page button takes you to the meal planner of next week.
+  - Point to date header
+  > You can navigate to previous weeks to see your meal plan history from here.
+  - click previous week button and back to next
+
+  > There is also a save button, and a get grocery list button which is disabled until the meal plan is saved.
+  - Point to buttons
+  > The meal plan itself is presented as a table with the recipe card for each meal.
+  > You can click the recipe card which takes you to the recipe detail page.
+  - Click one recipe
+  > It provides the ingredient, instructions and nutrition info for each recipe.
+  - Click through the Tabs
+  > The ingredient quantity shown is for the default serving size of this recipe, but you can change the serving size as needed.
+  - Click plus minus button, click back to meal plan
+  > Now back to the meal plan table. We've designed a few ways for you to adjust the meal plan.
+  > If you don't like a particular recipe, hover over it and you'll see the button for shuffling recipes.
+  - hover recipe and click shuffle a few times
+  > If you have a plan to dine out for certain meal, you can delete it.
+  - delete Sunday night
+  > But if you really like the recipe for your dine out meal, you can also delete another recipe that you don't like, and switch the position by drag and drop
+  - Delete Wed Lunch and switch with Saturday Dinner
+  > The drag and drop also works if you simply want to switch the order of recipes.
+  - DnD again
+  > Once you're satisfied with the plan, you can save it.
+  - Click save
+  > Now the delete, shuffle and drag and drop are all disabled once saved.
+  - and show delete, shuffle and DnD disabled
+  > With the grocey list becomes available. And I'll hand it off to Lucas to talk about it.
+  - Click the grocery list button
+
+- Grocery List (Lucas)
+  > Thanks Grace!
+  > The grocery list is generated based on the household size in your user profile preferences
+  - Start scrolling down the grocery list
+  > As we scroll down the grocery list you can see it's organized by aisles alphabetically, and under each aisle are a list of ingredients
+  > But this is a long list and it's inconvenient to scroll up and down constantly, so we have designed a navigation side bar with links to jump to each aisle
+  - Click "Meat", Click the last aisle
+  > We've made the grocery list mobile responsive so you can take it on the go, and check the boxes as you grab the things in the store
+  - change app size to mobile
+  - check box
+  > You can then open the aisle sidebar by clicking a button instead
+  - open sidebar, click on an aisle
+  > There are also features for you to easily share the grocery list with someone else.
+  > You can send a text message to the phone number you saved on your profile page.
+  - click the twilio button
+  - show text message on my phone
+  > Or copy the grocery list and send it on some other messaging app.
+  - click copy button and paste it into a note
+  > These are all the main features of our app.
+
+- Closing
+  > Before we started coding we put together a very detailed plan for making sure everyone is on the same page.
+  > We also learned some new tools like Chakra-UI, React Router, React Drag and Drop, Twilio and React Responsive
+  > If we had more time to work on it,
+    > we'd like to add a recipe rating feature so that the higher rated recipes can be repeated more frequently.
+    > also add a search bar so the user can search for specific recipes.
+    > And even connect with local stores for online ordering, cost comparison, and coupons
+  > That's our app and we hope you enjoyed it
