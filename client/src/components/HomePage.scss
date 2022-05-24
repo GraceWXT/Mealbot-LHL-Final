@@ -5,7 +5,8 @@
 }
 #hungry-button {
   box-shadow: -10px -10px 15px white,
-  10px 10px 15px rgba(0, 0, 0, 0.1);
+  0px 0px 2px 0px white,
+  10px 10px 15px rgba(0, 0, 0, 0.08);
   transition: .13s ease-in-out;
 
   #button-text {
@@ -14,6 +15,18 @@
 
   &:hover {
     box-shadow: none;
+    transform:translate3d(0px, 4px, 0px);
+  }
+}
+
+#dark-hungry-button {
+  transition: .13s ease-in-out;
+
+  #button-text {
+    font-family: $logo-font;
+  }
+
+  &:hover {
     transform:translate3d(0px, 4px, 0px);
   }
 }
