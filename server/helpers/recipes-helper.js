@@ -9,8 +9,8 @@ const getRecipeInfo = (recipe) => {
     recipe.extendedIngredients.map(ingredient =>  {
       ingredients.push({
         name: ingredient.name,
-        amount: ingredient.measures.us.amount,
-        unit: ingredient.measures.us.unitShort
+        amount: ingredient.amount,
+        unit: ingredient.unit
       });
     });
     return ingredients;
