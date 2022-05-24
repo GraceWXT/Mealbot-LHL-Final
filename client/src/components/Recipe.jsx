@@ -13,11 +13,13 @@ import { mode } from "@chakra-ui/theme-tools";
 
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { useParams, Link } from "react-router-dom";
+import { useOutletContext, useParams, Link } from "react-router-dom";
 
 // import recipeInfo from "./recipe-data.js";
 
 export default function Recipe() {
+  const { startDate } = useOutletContext();
+
   const [originalServings, setOriginalServings] = useState(0);
   const [state, setState] = useState({
     ingredients: [],
@@ -121,7 +123,7 @@ export default function Recipe() {
     <Center h="92vh" minH="45rem">
       <HStack alignItems="start" spacing={12}>
         <VStack alignItems="start" spacing={6} h="100%">
-          <Link to={"/mealplan/2022-05-23"} >
+          <Link to={`/mealplan/${startDate}`} >
             <Button
               bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
               leftIcon={<ArrowBackIcon />}
