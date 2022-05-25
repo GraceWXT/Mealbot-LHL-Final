@@ -128,7 +128,7 @@ export default function Preferences() {
           <ListIcon as={IoHeartDislikeOutline}  />
           Avoid:
           <Editable
-            defaultValue={"Olives, Bittermelon"}
+            defaultValue={"Olives, Bitter Melon"}
             isPreviewFocusable={true}
             selectAllOnFocus={false}
           >
