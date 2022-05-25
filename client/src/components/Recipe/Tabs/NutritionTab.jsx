@@ -17,6 +17,7 @@ export default function NutritionTab(props) {
       </ListItem>
     );
   });
+
   return (
     <TabPanel h="100%" >
       <List h="100%" overflow="auto">

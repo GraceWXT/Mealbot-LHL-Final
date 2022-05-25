@@ -35,60 +35,6 @@ export default function Recipe() {
     });
   }, [id]);
 
-  //ARRAY OF INGREDIENTS
-  const ingredientsArray = [...recipe.ingredients];
-
-  //maps over ingredientsArray to return list of ingredients
-  const ingredientList = ingredientsArray.map((ingredient, index) => {
-
-    let newServings = servings / recipe.defaultServing;
-
-    const ingredientAmount = Number.isInteger(ingredient.amount * newServings) ?
-      (ingredient.amount * newServings)
-      : (ingredient.amount * newServings).toFixed(1);
-
-    return (
-      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
-        {`${ingredientAmount} ${ingredient.unit} ${ingredient.name}`}
-      </ListItem>
-    );
-  });
-
-  //creates an array of instructions
-  const instructionsArray = [...recipe.instructions];
-
-  //maps over instructionsArray to return a list of instructions
-  const instructionsList = instructionsArray.map((instruction, index) => {
-    return (
-      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
-        <HStack spacing={5}>
-          <Text fontWeight="500">{instruction.number}</Text>
-          <Text>{instruction.step}</Text>
-        </HStack>
-      </ListItem>
-    );
-  });
-
-  //creates an array of nutrition
-  const nutritionArray = [...recipe.nutrition];
-  // console.log("nutritionArray", nutritionArray);
-
-  //maps over instructionsArray to return a list of instructions
-  const nutritionList = nutritionArray.map((nutrient, index) => {
-    return (
-      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
-        <HStack justifyContent="space-between">
-          <Text fontWeight="semibold">
-            {nutrient.name}
-          </Text>
-          <Text>
-            {nutrient.amount} {nutrient.unit}
-          </Text>
-        </HStack>
-      </ListItem>
-    );
-  });
-
   return (
     <Center h="92vh" minH="45rem">
       <HStack alignItems="start" spacing={12}>
@@ -96,7 +42,6 @@ export default function Recipe() {
           <BackButton />
           <RecipeBasicInfo recipe={recipe} setServings={setServings} />
         </VStack>
-
         <RecipeDetailTabs servings={servings} recipe={recipe} />
       </HStack>
     </Center>
