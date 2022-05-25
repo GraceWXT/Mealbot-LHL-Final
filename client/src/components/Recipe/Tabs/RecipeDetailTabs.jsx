@@ -7,26 +7,14 @@ import {
 import { mode } from "@chakra-ui/theme-tools";
 
 import IngredientsTab from "./IngredientsTab";
+import InstructionsTab from "./InstructionsTab";
 
 export default function RecipeDetailTabs(props) {
   const { servings, recipe } = props;
 
   const servingsMultiplier = servings / recipe.defaultServing;
 
-  //creates an array of instructions
-  const instructionsArray = [...recipe.instructions];
 
-  //maps over instructionsArray to return a list of instructions
-  const instructionsList = instructionsArray.map((instruction, index) => {
-    return (
-      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
-        <HStack spacing={5}>
-          <Text fontWeight="500">{instruction.number}</Text>
-          <Text>{instruction.step}</Text>
-        </HStack>
-      </ListItem>
-    );
-  });
 
   //creates an array of nutrition
   const nutritionArray = [...recipe.nutrition];
@@ -87,11 +75,9 @@ export default function RecipeDetailTabs(props) {
           servingsMultiplier={servingsMultiplier}
           ingredients={recipe.ingredients}
         />
-        <TabPanel h="100%" >
-          <List h="100%" overflow="auto">
-            {instructionsList}
-          </List>
-        </TabPanel>
+        <InstructionsTab
+          instructions={recipe.instructions}
+        />
         <TabPanel h="100%" >
           <List h="100%" overflow="auto">
             {nutritionList}
