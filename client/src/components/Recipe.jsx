@@ -20,25 +20,15 @@ import { useOutletContext, useParams, Link } from "react-router-dom";
 export default function Recipe() {
   const { startDate } = useOutletContext();
 
-  const [originalServings, setOriginalServings] = useState(0);
-  const [state, setState] = useState({
-    ingredients: [],
-    instructions: [],
-    nutrition: [],
-    title: "",
-    readyInMinutes: "",
-    image: "",
-    servings: 0
-  });
+  const [recipe, setRecipe] = useState({});
+  const [servings, setServings] = useState(recipe.defaultServing);
 
   // UPDATE STATE WITH API DATA
   const { id } = useParams();
   useEffect(() => {
     axios.get(`http://localhost:8080/api/recipes/${id}`
     ).then((res) => {
-      // console.log("res", res.data);
-      setState(prev => ({ ...prev, ...res.data }));
-      setOriginalServings(res.data.servings);
+      setRecipe({...res.data});
     });
   }, [id]);
 
@@ -50,28 +40,22 @@ export default function Recipe() {
 
   //SERVING CALCULATOR
   const addServing = () => {
-    setState({
-      ...state,
-      servings: state.servings + 1
-    });
+    setServings(prev => prev + 1);
   };
 
   const minusServing = () => {
-    if (state.servings > 1) {
-      setState({
-        ...state,
-        servings: state.servings - 1
-      });
+    if (recipe.defaultServing > 1) {
+      setServings(prev => prev - 1);
     }
   };
 
   //ARRAY OF INGREDIENTS
-  const ingredientsArray = [...state.ingredients];
+  const ingredientsArray = [...recipe.ingredients];
 
   //maps over ingredientsArray to return list of ingredients
   const ingredientList = ingredientsArray.map((ingredient, index) => {
 
-    let newServings = state.servings / originalServings;
+    let newServings = servings / recipe.defaultServing;
 
     const ingredientAmount = Number.isInteger(ingredient.amount * newServings) ?
       (ingredient.amount * newServings)
@@ -85,7 +69,7 @@ export default function Recipe() {
   });
 
   //creates an array of instructions
-  const instructionsArray = [...state.instructions];
+  const instructionsArray = [...recipe.instructions];
 
   //maps over instructionsArray to return a list of instructions
   const instructionsList = instructionsArray.map((instruction, index) => {
@@ -100,7 +84,7 @@ export default function Recipe() {
   });
 
   //creates an array of nutrition
-  const nutritionArray = [...state.nutrition];
+  const nutritionArray = [...recipe.nutrition];
   // console.log("nutritionArray", nutritionArray);
 
   //maps over instructionsArray to return a list of instructions
@@ -135,9 +119,9 @@ export default function Recipe() {
             </Button>
           </Link>
           <VStack alignItems="start" spacing={5}>
-            <Heading width="32rem" as="h2">{state.title}</Heading>
+            <Heading width="32rem" as="h2">{recipe.title}</Heading>
             <HStack width="32rem" spacing={10}>
-              <Text>Cooking time: {state.readyInMinutes} minutes</Text>
+              <Text>Cooking time: {recipe.readyInMinutes} minutes</Text>
               <HStack>
                 <IconButton
                   onClick={minusServing}
@@ -147,7 +131,7 @@ export default function Recipe() {
                   icon={<FaMinus />}
                   aria-label="minus serving by one"
                 />
-                <Text>{state.servings} servings</Text>
+                <Text>{recipe.defaultServing} servings</Text>
                 <IconButton
                   onClick={addServing}
                   borderRadius="50%"
@@ -158,7 +142,7 @@ export default function Recipe() {
                 />
               </HStack>
             </HStack>
-            <Image src={state.image} rounded="md" />
+            <Image src={recipe.image} rounded="md" />
           </VStack>
         </VStack>
 
