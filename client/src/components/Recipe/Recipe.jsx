@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 // External components and hooks
-import { HStack, Center, VStack, Spinner} from "@chakra-ui/react";
+import { HStack, Center, VStack, Spinner, Container} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 // Internal Components
@@ -31,26 +31,19 @@ export default function Recipe() {
         <VStack alignItems="start" spacing={6} h="100%">
           <BackButton />
           { recipe.loading ?
-            <Spinner
-              label="loading"
-              thickness="4px"
-              speed="1s"
-              emptyColor="gray.200"
-              color="turquoiseGreen.500"
-              size="xl"
-            /> :
+            <Center w="32rem" h="38rem">
+              <Spinner
+                label="loading"
+                thickness="4px"
+                speed="1s"
+                emptyColor="gray.200"
+                color="turquoiseGreen.500"
+                size="xl"
+              />
+            </Center> :
             <RecipeBasicInfo recipe={recipe} setServings={setServings} />}
         </VStack>
-        { recipe.loading ?
-          <Spinner
-            label="loading"
-            thickness="4px"
-            speed="1s"
-            emptyColor="gray.200"
-            color="turquoiseGreen.500"
-            size="xl"
-          /> :
-          <RecipeDetailTabs servings={servings} recipe={recipe} />}
+        <RecipeDetailTabs servings={servings} recipe={recipe} />
       </HStack>
     </Center>
   );
