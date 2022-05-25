@@ -12,8 +12,9 @@ import {
 import { mode } from "@chakra-ui/theme-tools";
 
 import { ArrowBackIcon } from "@chakra-ui/icons";
-import { FaPlus, FaMinus } from "react-icons/fa";
+
 import { useOutletContext, useParams, Link } from "react-router-dom";
+import RecipeBasicInfo from "./RecipeBasicInfo";
 
 // import recipeInfo from "./recipe-data.js";
 
@@ -21,7 +22,7 @@ export default function Recipe() {
   const { startDate } = useOutletContext();
 
   const [recipe, setRecipe] = useState({});
-  const [servings, setServings] = useState(recipe.defaultServing);
+  const [servings, setServings] = useState(0);
 
   // UPDATE STATE WITH API DATA
   const { id } = useParams();
@@ -29,25 +30,9 @@ export default function Recipe() {
     axios.get(`http://localhost:8080/api/recipes/${id}`
     ).then((res) => {
       setRecipe({...res.data});
+      setServings(res.data.defaultServing);
     });
   }, [id]);
-
-  // When using testing data:
-  // useEffect(() => {
-  //   setState(prev => ({ ...prev, ...recipeInfo }));
-  //   setOriginalServings(recipeInfo.servings);
-  // }, []);
-
-  //SERVING CALCULATOR
-  const addServing = () => {
-    setServings(prev => prev + 1);
-  };
-
-  const minusServing = () => {
-    if (recipe.defaultServing > 1) {
-      setServings(prev => prev - 1);
-    }
-  };
 
   //ARRAY OF INGREDIENTS
   const ingredientsArray = [...recipe.ingredients];
@@ -118,32 +103,7 @@ export default function Recipe() {
               Back
             </Button>
           </Link>
-          <VStack alignItems="start" spacing={5}>
-            <Heading width="32rem" as="h2">{recipe.title}</Heading>
-            <HStack width="32rem" spacing={10}>
-              <Text>Cooking time: {recipe.readyInMinutes} minutes</Text>
-              <HStack>
-                <IconButton
-                  onClick={minusServing}
-                  borderRadius="50%"
-                  size="xs"
-                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-                  icon={<FaMinus />}
-                  aria-label="minus serving by one"
-                />
-                <Text>{recipe.defaultServing} servings</Text>
-                <IconButton
-                  onClick={addServing}
-                  borderRadius="50%"
-                  size="xs"
-                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-                  icon={<FaPlus />}
-                  aria-label="add serving by one"
-                />
-              </HStack>
-            </HStack>
-            <Image src={recipe.image} rounded="md" />
-          </VStack>
+          <RecipeBasicInfo recipe={recipe} setServings={setServings} />
         </VStack>
 
         <Tabs isFitted variant="enclosed" width="45vw" h="42rem" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
