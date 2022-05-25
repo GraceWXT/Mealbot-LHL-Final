@@ -76,18 +76,21 @@
   > And I'm Warren with a background in health care.
 
 - App Intro (Warren)
-We're team MealBot and we've created an app for efficient meal planning. Has anyone else ever struggled to choose what to eat or cook at home? I'm sure you all have and so the idea of Mealbot was born. The inspiration behind this idea was mainly due to covid and how staying home & deciding what to eat each day was a time consuming task. It saves time searching for recipes, creates a menu that doesn't repeat, and also cuts down on grocery waste.  For the tech stack, we used React, Express, PostgreSQL, and Node.
+> We're team MealBot and we've created an app for efficient meal planning. Has anyone else ever struggled to decide what to eat or cook at home? I'm sure you all have and so the idea of Mealbot was born. The inspiration behind this idea was mainly due to covid and how staying at home deciding what to eat each day was a time consuming task. Using this app saves time searching for recipes, creates a menu that doesn't repeat, and also cuts down on grocery waste. For the tech stack, we used React, Express, PostgreSQL, and Node.
 
 - Navbar (Warren)
-Starting with the navbar, we gave users the ability to use dark mode and also the option to access their user profile in the drop down menu.
+> Starting with the navbar, we gave users the ability to use dark mode and also the option to access their user profile in the drop down menu.
+  - Switch color mode
+  - Click menu button
+  - Click the profile link
 
 - User Profile (Warren)
-In the user profiles, your meal plan will be customized based on the preferences you enter. In addition, you can add items you already have at home to exclude them from the grocery list.
+> In the user profiles, your meal plan will be customized based on the preferences you enter. In addition, you can add items you already have at home to exclude them from the grocery list.
   - Point to Preference
 
 - Homepage (Warren)
-Next, the homepage which only consists of a button. Users only have one option here, which is to generate the meal plan. After clicking this button, the user is taken to the meal plan page which my group member Grace will talk about.
-
+> Next, the homepage which only consists of a button. Users only have one option here, which is to generate the meal plan. After clicking this button, the user is taken to the meal plan page which my group member Grace will talk about.
+  - Click hungry button
 
 - Meal plan (Grace)
   > Thank you!
