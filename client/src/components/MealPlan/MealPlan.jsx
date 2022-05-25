@@ -2,6 +2,7 @@
 import {
   IconButton,
   Heading,
+  Text,
   HStack,
   VStack,
   Button,
@@ -25,6 +26,7 @@ export default function MealPlan() {
   const FutureNew = "FutureNew";
   const FutureSaved = "FutureSaved";
   const PastSaved = "PastSaved";
+  const Loading = "Loading";
 
   let disableGroceryButton = true;
   let disableActionButton = true;
@@ -71,6 +73,7 @@ export default function MealPlan() {
       const result = res.data;
       console.log("save result", result);
       if (result.status === "success") {
+        setMealPlanStatus("FutureSaved");
         toast({
           title: "Meal Plan Saved!",
           description: "The grocery list is now available.",
@@ -82,7 +85,6 @@ export default function MealPlan() {
           duration: 5000,
           isClosable: true,
         });
-        setMealPlanStatus("FutureSaved");
       } else {
         toast({
           title: "Sorry, an error occured.",
@@ -98,6 +100,16 @@ export default function MealPlan() {
     });
   };
 
+  const tipText = (() => {
+    switch (mealPlanStatus) {
+    case FutureNew:
+      return "Edit and drag and drop is enabled.";
+    case Loading:
+      return "Loading...";
+    default:
+      return "Edit and drag and drop has been disabled.";
+    }
+  })();
 
   return (
     <VStack height="92vh">
@@ -123,24 +135,29 @@ export default function MealPlan() {
           />
         </HStack>
         <MealPlanTable mealPlan={mealPlan}/>
-        <HStack alignSelf="flex-end">
-          <Tooltip isDisabled={disableGroceryTooltip} label="Please save your meal plan first">
-            <Link to={`/grocerylist/${startDate}`}>
-              <Button
-                disabled={ disableGroceryButton }
-                colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-              >
-                Get the grocery list
-              </Button>
-            </Link>
-          </Tooltip>
-          <Button
-            colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
-            onClick={() => actionButtonText === "Save" ? saveMealPlan() : null}
-            disabled={ disableActionButton }
-          >
-            { actionButtonText }
-          </Button>
+        <HStack w="100%" justifyContent="space-between">
+          <Text width="30em" colorScheme="gray">
+            {tipText}
+          </Text>
+          <HStack>
+            <Tooltip isDisabled={disableGroceryTooltip} label="Please save your meal plan first">
+              <Link to={`/grocerylist/${startDate}`}>
+                <Button
+                  disabled={ disableGroceryButton }
+                  colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+                >
+                  Get the grocery list
+                </Button>
+              </Link>
+            </Tooltip>
+            <Button
+              colorScheme={useColorModeValue("turquoiseGreen", "majestyPurple")}
+              onClick={() => actionButtonText === "Save" ? saveMealPlan() : setMealPlanStatus(FutureNew)}
+              disabled={ disableActionButton }
+            >
+              { actionButtonText }
+            </Button>
+          </HStack>
         </HStack>
       </VStack>
     </VStack>
