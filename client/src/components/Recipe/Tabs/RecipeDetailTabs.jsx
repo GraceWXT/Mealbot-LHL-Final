@@ -6,27 +6,12 @@ import {
 } from "@chakra-ui/react";
 import { mode } from "@chakra-ui/theme-tools";
 
+import IngredientsTab from "./IngredientsTab";
+
 export default function RecipeDetailTabs(props) {
   const { servings, recipe } = props;
 
-  //ARRAY OF INGREDIENTS
-  const ingredientsArray = [...recipe.ingredients];
-
-  //maps over ingredientsArray to return list of ingredients
-  const ingredientList = ingredientsArray.map((ingredient, index) => {
-
-    let newServings = servings / recipe.defaultServing;
-
-    const ingredientAmount = Number.isInteger(ingredient.amount * newServings) ?
-      (ingredient.amount * newServings)
-      : (ingredient.amount * newServings).toFixed(1);
-
-    return (
-      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
-        {`${ingredientAmount} ${ingredient.unit} ${ingredient.name}`}
-      </ListItem>
-    );
-  });
+  const servingsMultiplier = servings / recipe.defaultServing;
 
   //creates an array of instructions
   const instructionsArray = [...recipe.instructions];
@@ -98,16 +83,10 @@ export default function RecipeDetailTabs(props) {
         h="93%"
         padding="1em"
       >
-        <TabPanel h="100%" >
-          <UnorderedList
-            h="100%"
-            listStylePosition="inside"
-            marginInlineStart={0}
-            overflowY="auto"
-          >
-            {ingredientList}
-          </UnorderedList>
-        </TabPanel>
+        <IngredientsTab
+          servingsMultiplier={servingsMultiplier}
+          ingredients={recipe.ingredients}
+        />
         <TabPanel h="100%" >
           <List h="100%" overflow="auto">
             {instructionsList}
