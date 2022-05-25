@@ -2,27 +2,17 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 // External components and hooks
-import {
-  Tabs, TabList, TabPanels, Tab, TabPanel,
-  HStack, Center, VStack,
-  Image, Heading, Text, Button, IconButton,
-  ListItem, List, UnorderedList,
-  useColorModeValue
-} from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
+import { HStack, Center, VStack, Spinner} from "@chakra-ui/react";
+import { useParams } from "react-router-dom";
 
-import { ArrowBackIcon } from "@chakra-ui/icons";
-
-import { useOutletContext, useParams, Link } from "react-router-dom";
+// Internal Components
 import RecipeBasicInfo from "./RecipeBasicInfo";
 import RecipeDetailTabs from "./Tabs/RecipeDetailTabs";
 import BackButton from "./BackButton";
 
-// import recipeInfo from "./recipe-data.js";
-
 export default function Recipe() {
 
-  const [recipe, setRecipe] = useState({});
+  const [recipe, setRecipe] = useState({loading: true});
   const [servings, setServings] = useState(0);
 
   // UPDATE STATE WITH API DATA
@@ -30,7 +20,7 @@ export default function Recipe() {
   useEffect(() => {
     axios.get(`http://localhost:8080/api/recipes/${id}`
     ).then((res) => {
-      setRecipe({...res.data});
+      setRecipe({...res.data, loading: false});
       setServings(res.data.defaultServing);
     });
   }, [id]);
@@ -40,9 +30,27 @@ export default function Recipe() {
       <HStack alignItems="start" spacing={12}>
         <VStack alignItems="start" spacing={6} h="100%">
           <BackButton />
-          <RecipeBasicInfo recipe={recipe} setServings={setServings} />
+          { recipe.loading ?
+            <Spinner
+              label="loading"
+              thickness="4px"
+              speed="1s"
+              emptyColor="gray.200"
+              color="turquoiseGreen.500"
+              size="xl"
+            /> :
+            <RecipeBasicInfo recipe={recipe} setServings={setServings} />}
         </VStack>
-        <RecipeDetailTabs servings={servings} recipe={recipe} />
+        { recipe.loading ?
+          <Spinner
+            label="loading"
+            thickness="4px"
+            speed="1s"
+            emptyColor="gray.200"
+            color="turquoiseGreen.500"
+            size="xl"
+          /> :
+          <RecipeDetailTabs servings={servings} recipe={recipe} />}
       </HStack>
     </Center>
   );
