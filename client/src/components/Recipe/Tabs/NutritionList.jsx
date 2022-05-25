@@ -1,6 +1,6 @@
-import { TabPanel, HStack, Text, ListItem, List} from "@chakra-ui/react";
+import { HStack, Text, ListItem, List} from "@chakra-ui/react";
 
-export default function NutritionTab(props) {
+export default function NutritionList(props) {
   const { nutrition } = props;
 
   const nutritionList = nutrition.map((nutrient, index) => {
@@ -19,10 +19,8 @@ export default function NutritionTab(props) {
   });
 
   return (
-    <TabPanel h="100%" >
-      <List h="100%" overflow="auto">
-        {nutritionList}
-      </List>
-    </TabPanel>
+    <List h="100%" overflow="auto">
+      {nutritionList}
+    </List>
   );
 }

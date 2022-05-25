@@ -1,9 +1,9 @@
 // External components and hooks
-import { Tabs, TabList, TabPanels, useColorModeValue } from "@chakra-ui/react";
+import { TabPanel, Tabs, TabList, TabPanels, useColorModeValue } from "@chakra-ui/react";
 
-import IngredientsTab from "./IngredientsTab";
-import InstructionsTab from "./InstructionsTab";
-import NutritionTab from "./NutritionTab";
+import IngredientsList from "./IngredientsList";
+import InstructionsList from "./InstructionsList";
+import NutritionList from "./NutritionList";
 import TabButton from "./TabButton";
 
 export default function RecipeDetailTabs(props) {
@@ -12,7 +12,7 @@ export default function RecipeDetailTabs(props) {
   const servingsMultiplier = servings / recipe.defaultServing;
 
   const tabButtons = ["Ingredients", "Instructions", "Nutrition"]
-    .map(tabName => <TabButton>{tabName}</TabButton>);
+    .map(tabName => <TabButton key={tabName}>{tabName}</TabButton>);
 
   return (
     <Tabs isFitted variant="enclosed" width="45vw" h="42rem" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
@@ -23,16 +23,22 @@ export default function RecipeDetailTabs(props) {
         h="93%"
         padding="1em"
       >
-        <IngredientsTab
-          servingsMultiplier={servingsMultiplier}
-          ingredients={recipe.ingredients}
-        />
-        <InstructionsTab
-          instructions={recipe.instructions}
-        />
-        <NutritionTab
-          nutrition= {recipe.nutrition}
-        />
+        <TabPanel h="100%" >
+          <IngredientsList
+            servingsMultiplier={servingsMultiplier}
+            ingredients={recipe.ingredients}
+          />
+        </TabPanel>
+        <TabPanel h="100%" >
+          <InstructionsList
+            instructions={recipe.instructions}
+          />
+        </TabPanel>
+        <TabPanel h="100%" >
+          <NutritionList
+            nutrition= {recipe.nutrition}
+          />
+        </TabPanel>
       </TabPanels>
     </Tabs>
 

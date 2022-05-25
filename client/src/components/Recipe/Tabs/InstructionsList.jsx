@@ -1,7 +1,7 @@
 // External components and hooks
-import { TabPanel, HStack, Text, ListItem, List} from "@chakra-ui/react";
+import { HStack, Text, ListItem, List} from "@chakra-ui/react";
 
-export default function InstructionsTab(props) {
+export default function InstructionsList(props) {
   const { instructions } = props;
   //maps over instructionsArray to return a list of instructions
   const instructionsList = instructions.map((instruction, index) => {
@@ -16,10 +16,9 @@ export default function InstructionsTab(props) {
   });
 
   return (
-    <TabPanel h="100%" >
-      <List h="100%" overflow="auto">
-        {instructionsList}
-      </List>
-    </TabPanel>
+    <List h="100%" overflow="auto">
+      {instructionsList}
+    </List>
+
   );
 }

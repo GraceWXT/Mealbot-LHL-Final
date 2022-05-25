@@ -1,6 +1,6 @@
-import { TabPanel, ListItem, UnorderedList} from "@chakra-ui/react";
+import { ListItem, UnorderedList} from "@chakra-ui/react";
 
-export default function IngredientsTab(props) {
+export default function IngredientsList(props) {
   const { servingsMultiplier, ingredients } = props;
   const ingredientList = ingredients.map((ingredient, index) => {
 
@@ -16,15 +16,13 @@ export default function IngredientsTab(props) {
   });
 
   return (
-    <TabPanel h="100%" >
-      <UnorderedList
-        h="100%"
-        listStylePosition="inside"
-        marginInlineStart={0}
-        overflowY="auto"
-      >
-        {ingredientList}
-      </UnorderedList>
-    </TabPanel>
+    <UnorderedList
+      h="100%"
+      listStylePosition="inside"
+      marginInlineStart={0}
+      overflowY="auto"
+    >
+      {ingredientList}
+    </UnorderedList>
   );
 }
