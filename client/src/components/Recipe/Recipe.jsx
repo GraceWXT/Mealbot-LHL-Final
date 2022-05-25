@@ -15,6 +15,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 
 import { useOutletContext, useParams, Link } from "react-router-dom";
 import RecipeBasicInfo from "./RecipeBasicInfo";
+import RecipeDetailTabs from "./Tabs/RecipeDetailTabs";
 import BackButton from "./BackButton";
 
 // import recipeInfo from "./recipe-data.js";
@@ -96,62 +97,7 @@ export default function Recipe() {
           <RecipeBasicInfo recipe={recipe} setServings={setServings} />
         </VStack>
 
-        <Tabs isFitted variant="enclosed" width="45vw" h="42rem" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
-          <TabList>
-            <Tab
-              border="1px"
-              borderColor={useColorModeValue("gray.200", "gray.700")}
-              bg={useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
-              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
-              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label="recipe ingredients tab"
-            >Ingredients</Tab>
-            <Tab
-              border="1px"
-              borderColor={useColorModeValue("gray.200", "gray.700")}
-              bg={useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
-              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
-              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label="recipe instructions tab"
-            >Instructions</Tab>
-            <Tab
-              border="1px"
-              borderColor={useColorModeValue("gray.200", "gray.700")}
-              bg={useColorModeValue(mode("hsl(0 0% 93%)", "gray.800"), "gray.900")}
-              _selected={{ bg: useColorModeValue("turquoiseGreen.100", "majestyPurple.500") }}
-              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label="recipe nutrition tab"
-            >Nutrition</Tab>
-          </TabList>
-          <TabPanels
-            h="93%"
-            padding="1em"
-          >
-            <TabPanel h="100%" >
-              <UnorderedList
-                h="100%"
-                listStylePosition="inside"
-                marginInlineStart={0}
-                overflowY="auto"
-              >
-                {ingredientList}
-              </UnorderedList>
-            </TabPanel>
-            <TabPanel h="100%" >
-              <List h="100%" overflow="auto">
-                {instructionsList}
-              </List>
-            </TabPanel>
-            <TabPanel h="100%" >
-              <List h="100%" overflow="auto">
-                {nutritionList}
-              </List>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <RecipeDetailTabs servings={servings} recipe={recipe} />
       </HStack>
     </Center>
   );
