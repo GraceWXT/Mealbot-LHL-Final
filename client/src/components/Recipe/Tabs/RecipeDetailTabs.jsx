@@ -1,10 +1,5 @@
 // External components and hooks
-import {
-  Tabs, TabList, TabPanels, Tab, TabPanel,
-  HStack, Text, ListItem, List, UnorderedList,
-  useColorModeValue
-} from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
+import { Tabs, TabList, TabPanels, useColorModeValue } from "@chakra-ui/react";
 
 import IngredientsTab from "./IngredientsTab";
 import InstructionsTab from "./InstructionsTab";
