@@ -41,7 +41,7 @@ export default function Recipe() {
                 size="xl"
               />
             </Center> :
-            <RecipeBasicInfo recipe={recipe} setServings={setServings} />}
+            <RecipeBasicInfo recipe={recipe} servings={servings} setServings={setServings} />}
         </VStack>
         <RecipeDetailTabs servings={servings} recipe={recipe} />
       </HStack>

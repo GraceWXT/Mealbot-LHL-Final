@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react";
 import { FaPlus, FaMinus } from "react-icons/fa";
 export default function RecipeBasicInfo(props) {
-  const { recipe, setServings } = props;
+  const { recipe, servings, setServings } = props;
 
   //SERVING CALCULATOR
   const addServing = () => {
@@ -32,7 +32,7 @@ export default function RecipeBasicInfo(props) {
             icon={<FaMinus />}
             aria-label="minus serving by one"
           />
-          <Text>{recipe.defaultServing} servings</Text>
+          <Text>{servings} servings</Text>
           <IconButton
             onClick={addServing}
             borderRadius="50%"
