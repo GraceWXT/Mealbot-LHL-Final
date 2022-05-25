@@ -25,7 +25,7 @@
   - Hungry Button
   - hand off to Grace
 
-- Meal plan (Grace) [ ] __decide recipe to show/shuffle/delete__
+- Meal plan (Grace) [x] __decide recipe to show/shuffle/delete__
   - date header (meal plan history)
   - table (grocery button not available yet)
     - Recipe (serving calculator, ingredients, instructions, nutrition)
@@ -102,7 +102,7 @@ Next, the homepage which only consists of a button. Users only have one option h
   - Click one recipe
   > you'll see the ingredients, instructions and nutrition info for each recipe.
   - Click through the Tabs
-  > The plus and minus button allows you change the serving size.
+  > The ingredient quantity displayed is for the default serving size, but you can change it by clicking the plus and minus button.
   - Click plus minus button, click back to meal plan
   > Now back to the meal plan table. We've designed a few ways for you to adjust the meal plan.
   > If you don't like a particular recipe, hover over it and you'll see the button for shuffling recipes.
