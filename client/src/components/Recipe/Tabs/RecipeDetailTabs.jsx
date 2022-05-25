@@ -1,5 +1,5 @@
 // External components and hooks
-import { TabPanel, Tabs, TabList, TabPanels, useColorModeValue } from "@chakra-ui/react";
+import { Center, Spinner, TabPanel, Tabs, TabList, TabPanels, useColorModeValue } from "@chakra-ui/react";
 
 import IngredientsList from "./IngredientsList";
 import InstructionsList from "./InstructionsList";
@@ -19,27 +19,41 @@ export default function RecipeDetailTabs(props) {
       <TabList>
         {tabButtons}
       </TabList>
-      <TabPanels
-        h="93%"
-        padding="1em"
-      >
-        <TabPanel h="100%" >
-          <IngredientsList
-            servingsMultiplier={servingsMultiplier}
-            ingredients={recipe.ingredients}
-          />
-        </TabPanel>
-        <TabPanel h="100%" >
-          <InstructionsList
-            instructions={recipe.instructions}
-          />
-        </TabPanel>
-        <TabPanel h="100%" >
-          <NutritionList
-            nutrition= {recipe.nutrition}
-          />
-        </TabPanel>
-      </TabPanels>
+      {recipe.loading ?
+        <TabPanels
+          h="93%"
+          padding="1em"
+        >
+          <TabPanel h="100%" >
+            <Center w="100%" h="100%">
+              <Spinner
+                label="loading"
+                thickness="4px"
+                speed="1s"
+                emptyColor="gray.200"
+                color="turquoiseGreen.500"
+                size="xl"
+              />
+            </Center>
+          </TabPanel>
+        </TabPanels>
+        :
+        <TabPanels
+          h="93%"
+          padding="1em"
+        >
+          <TabPanel h="100%">
+            <IngredientsList
+              servingsMultiplier={servingsMultiplier}
+              ingredients={recipe.ingredients} />
+          </TabPanel><TabPanel h="100%">
+            <InstructionsList
+              instructions={recipe.instructions} />
+          </TabPanel><TabPanel h="100%">
+            <NutritionList
+              nutrition={recipe.nutrition} />
+          </TabPanel>
+        </TabPanels> }
     </Tabs>
 
   );
