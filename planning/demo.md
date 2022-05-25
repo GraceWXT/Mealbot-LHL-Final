@@ -147,7 +147,7 @@
   > These are all the main features of our app.
 
 - Closing (Lucas)
-  > Before we started coding we made a very clear plan with all the features, functionality, data flow, and wireframes for our app - and I think that helped us clear direction while building it
+  > Before we started coding we made a very detailed plan with all the features, functionality, data flow, and wireframes for our app - and I think that helped us have a clear direction while building it
   > We also learned some new tools like Chakra-UI, React Router, React Drag and Drop, Twilio and React Responsive
   > If we had more time to work on it,
     > we'd like to add recipe rating, search bar, and even connect with local stores for online ordering, cost comparison, and coupons.
