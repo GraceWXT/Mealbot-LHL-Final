@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 // External components and hooks
-import { HStack, Center, VStack, Spinner, Container} from "@chakra-ui/react";
+import { HStack, Center, VStack, Spinner} from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 // Internal Components
