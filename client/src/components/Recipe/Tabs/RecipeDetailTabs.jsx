@@ -8,33 +8,13 @@ import { mode } from "@chakra-ui/theme-tools";
 
 import IngredientsTab from "./IngredientsTab";
 import InstructionsTab from "./InstructionsTab";
+import NutritionTab from "./NutritionTab";
 
 export default function RecipeDetailTabs(props) {
   const { servings, recipe } = props;
 
   const servingsMultiplier = servings / recipe.defaultServing;
 
-
-
-  //creates an array of nutrition
-  const nutritionArray = [...recipe.nutrition];
-  // console.log("nutritionArray", nutritionArray);
-
-  //maps over instructionsArray to return a list of instructions
-  const nutritionList = nutritionArray.map((nutrient, index) => {
-    return (
-      <ListItem key={index} py={2} borderBottom="1px" borderColor="gray.200">
-        <HStack justifyContent="space-between">
-          <Text fontWeight="semibold">
-            {nutrient.name}
-          </Text>
-          <Text>
-            {nutrient.amount} {nutrient.unit}
-          </Text>
-        </HStack>
-      </ListItem>
-    );
-  });
 
   return (
     <Tabs isFitted variant="enclosed" width="45vw" h="42rem" bg={useColorModeValue("white", "gray.700")} rounded="lg" boxShadow="lg">
@@ -78,11 +58,9 @@ export default function RecipeDetailTabs(props) {
         <InstructionsTab
           instructions={recipe.instructions}
         />
-        <TabPanel h="100%" >
-          <List h="100%" overflow="auto">
-            {nutritionList}
-          </List>
-        </TabPanel>
+        <NutritionTab
+          nutrition= {recipe.nutrition}
+        />
       </TabPanels>
     </Tabs>
 
