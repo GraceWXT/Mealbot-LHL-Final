@@ -15,11 +15,11 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 
 import { useOutletContext, useParams, Link } from "react-router-dom";
 import RecipeBasicInfo from "./RecipeBasicInfo";
+import BackButton from "./BackButton";
 
 // import recipeInfo from "./recipe-data.js";
 
 export default function Recipe() {
-  const { startDate } = useOutletContext();
 
   const [recipe, setRecipe] = useState({});
   const [servings, setServings] = useState(0);
@@ -92,17 +92,7 @@ export default function Recipe() {
     <Center h="92vh" minH="45rem">
       <HStack alignItems="start" spacing={12}>
         <VStack alignItems="start" spacing={6} h="100%">
-          <Link to={`/mealplan/${startDate}`} >
-            <Button
-              bg={useColorModeValue("turquoiseGreen.100", "majestyPurple.500")}
-              leftIcon={<ArrowBackIcon />}
-              _hover={{ bg: useColorModeValue("turquoiseGreen.300", "majestyPurple.600") }}
-              _active={{ bg: useColorModeValue("turquoiseGreen.500", "majestyPurple.700") }}
-              aria-label="go back to meal plan"
-            >
-              Back
-            </Button>
-          </Link>
+          <BackButton />
           <RecipeBasicInfo recipe={recipe} setServings={setServings} />
         </VStack>
 
