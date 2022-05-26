@@ -22,20 +22,38 @@ This project was created in a week and a half by [Grace Wang](https://github.com
 ### Homepage & User Profile
 Users can switch to light/dark mode and access their profile settings from the drop down menu on nav bar.
 
+https://user-images.githubusercontent.com/98781479/170399722-6908fd7d-5a67-4ff2-b2b0-2eef1eef0738.mov
+
+
 ### Meal Plan
 Meal plans are generated based on user preferences, but users can also edit the meal plan using drag and drop, shuffle, and delete buttons.
 
+https://user-images.githubusercontent.com/98781479/170399764-1df1fef5-6ab9-4cf5-a129-2cbfb263556f.mov
+
+
 Users can also access their meal plan history
+
+https://user-images.githubusercontent.com/98781479/170399834-8fe9570d-8e8f-41c6-82d6-541a37b16799.mov
+
 
 ### Recipe Detail
 Ingredients, instructions and nutrition info are provided on the recipe detail page. Users can change the serving size to get updated ingredient quantity.
+
+https://user-images.githubusercontent.com/98781479/170399889-2c53ed4e-dfbb-44f1-ab43-d6100625951d.mov
+
 
 ### Grocery List (Desktop)
 Users can get a grocery list of their weekly meal plan. The quantity is based on their household size preference setting, and the ingredients are sorted by aisles.
 Users can also share the grocery list by sending text message or copy on one click.
 
+https://user-images.githubusercontent.com/98781479/170399927-fb46dcde-5bfd-43f1-9070-911535c5024d.mov
+
+
 ### Grocery List (Mobile)
 Users can take the grocery list on the go.
+
+https://user-images.githubusercontent.com/98781479/170399960-64aab1ff-9ca6-40c9-9faf-4c2ea6e4feb1.mov
+
 
 
 ## Getting Started
