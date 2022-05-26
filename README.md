@@ -19,35 +19,37 @@ This project was created in a week and a half by [Grace Wang](https://github.com
 - NodeJS
 
 ## Features
-- Dark mode
-- Generate randomized meal plan based on preferences
-- Meal plan history
-- Edit meal plan - drag and drop, shuffle, and delete recipes
-- Ingredient calculator based on serving size
-- Generate shopping list based on household size (sorted by aisles)
-- Mobile responsive grocery list
-- Text shopping list (Twilio)
-- Copy shopping list
-
-## Preview
-
-### User Profile
+### Homepage & User Profile
+Users can switch to light/dark mode and access their profile settings from the drop down menu on nav bar.
 
 ### Meal Plan
+Meal plans are generated based on user preferences, but users can also edit the meal plan using drag and drop, shuffle, and delete buttons.
+
+Users can also access their meal plan history
 
 ### Recipe Detail
+Ingredients, instructions and nutrition info are provided on the recipe detail page. Users can change the serving size to get updated ingredient quantity.
 
 ### Grocery List (Desktop)
+Users can get a grocery list of their weekly meal plan. The quantity is based on their household size preference setting, and the ingredients are sorted by aisles.
+Users can also share the grocery list by sending text message or copy on one click.
 
 ### Grocery List (Mobile)
+Users can take the grocery list on the go.
+
 
 ## Getting Started
 Fork this project and clone it using the command line: `git clone [SSH link here]`
 
 ### Server Side
-1. Please follow the [README](/server/README.md) in server folder to set up database and dependencies.
-2. To use the text message function, register a trial account with [Twilio](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account) and read up to and including "Get your first Twilio phone number".
-3. To use the recipe API, register an account with [Spoonacular](https://spoonacular.com/food-api/console#Dashboard) and [connect a user](https://spoonacular.com/food-api/docs#Connect-User).
+1. Please follow the [README](/server/README.md) in server folder to set up the database and install the dependencies.
+2. For the text message function, register a trial account with [Twilio](https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account) and read up to and including "Get your first Twilio phone number".
+3. For the recipe database, register an account with [Spoonacular](https://spoonacular.com/food-api/console#Dashboard) and [connect a user](https://spoonacular.com/food-api/docs#Connect-User).
 
 ### Client Side
-Run `npm i` to install dependencies
+1. Run `npm i` to install the dependencies.
+
+2. Before starting the client side server, first go to `node_modules/react-dnd/dist/core/DndProvider.js`.
+
+3. On line 28, where it says `import { jsx as _jsx } from "react/jsx-runtime";`, add an ".js" extention to the file path: `import { jsx as _jsx } from "react/jsx-runtime.js";`.
+4. Run `npm start` to start the client side server.
