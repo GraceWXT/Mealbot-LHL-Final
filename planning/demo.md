@@ -101,14 +101,16 @@
 
   > There is also a save button, and a get grocery list button which is disabled until the meal plan is saved.
   - Point to buttons
-  > By clicking the recipe card,
+  > When you click a recipe card,
   - Click one recipe
-  > you'll see the ingredients, instructions and nutrition info for each recipe.
+  > you'll be able to checkout the recipe detail with ingredients, instructions and nutrition info.
   - Click through the Tabs
   > The ingredient quantity displayed is for the default serving size, but you can change it by clicking the plus and minus button.
   - Click plus minus button, click back to meal plan
-  > Now back to the meal plan table. We've designed a few ways for you to adjust the meal plan.
-  > If you don't like a particular recipe, hover over it and you'll see the button for shuffling recipes.
+  > Now back to the meal plan table. We've designed a few ways for you to customzie the meal plan.
+  > when you mouse over a recipe card you'll see the editing panel popping up.
+  - hover over Thu lunch
+  > If you don't like a particular recipe, you can shuffle it
   - hover recipe and click shuffle a few times
   > If you have a plan to dine out for a certain meal, you can delete it.
   - delete Sunday night
@@ -116,11 +118,11 @@
   - Delete Wed Lunch and switch with Saturday Dinner
   > The drag and drop also works if you simply want to switch the order of recipes.
   - DnD again
-  > Once you're satisfied with the plan, you can save it.
+  > Once you're satisfied with the plan, make sure to save it.
   - Click save
-  > And you won't be able to edit it anymore
+  > And the editing panel and drag and drop has been disabled unless you click edit again.
   - Show delete, shuffle and DnD disabled
-  > Now you can get the grocery list. And I'll hand it off to Lucas to talk about it.
+  > Now let's get the grocery list. And I'll pass it over to Lucas.
   - Click the grocery list button
 
 - Grocery List (Lucas)

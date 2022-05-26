@@ -151,7 +151,7 @@ export default function Preferences() {
           <ListIcon as={IoEarthSharp}  />
           Favourite Cuisines:
           <CheckboxGroup
-            colorScheme="turquoiseGreen"
+            colorScheme={useColorModeValue("turquoiseGreen","majestyPurple")}
             defaultValue={[
               "African", "American", "Asian", "British",
               "Canadian", "European", "French", "Indian","Italian", "Japanese", "Korean",

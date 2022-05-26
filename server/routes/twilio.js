@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
 
   // Send the message request to Twilio
   client.messages.create({
-    to: process.env.MY_PHONE_NUMBER,
+    to: process.env.USER_PHONE_NUMBER,
     from: process.env.TWILIO_NUMBER,
     body: textMessage
   })
