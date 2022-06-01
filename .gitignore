@@ -22,6 +22,8 @@
 */.env.production.local
 *.drawio.bkp
 
+/raw-data
+
 .vscode/
 
 npm-debug.log*
