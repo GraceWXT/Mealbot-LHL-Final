@@ -1,7 +1,7 @@
 //get ingredients information
 const getIngredients = (recipe) => {
   let ingredients = [];
-  recipe.extendedIngredients.map(ingredient =>  {
+  recipe.extendedIngredients.forEach(ingredient =>  {
     ingredients.push({
       name: ingredient.name,
       amount: ingredient.amount,
@@ -14,7 +14,7 @@ const getIngredients = (recipe) => {
 //get instructions information
 const getInstructions = (recipe) => {
   let instructions = [];
-  recipe.analyzedInstructions[0].steps.map(instruction => {
+  recipe.analyzedInstructions[0].steps.forEach(instruction => {
     instructions.push({
       number: instruction.number,
       step: instruction.step
@@ -29,7 +29,7 @@ const getNutrition = (recipe) => {
   let nutritionalInfo = [];
   const nutrition = recipe.nutrition.nutrients;
 
-  nutrition.map(nutrient => {
+  nutrition.forEach(nutrient => {
     if (nutrient.name === "Calories" || nutrient.name === "Fat" || nutrient.name === "Carbohydrates" || nutrient.name === "Protein") {
       nutritionalInfo.push({
         name: nutrient.name,
