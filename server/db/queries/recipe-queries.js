@@ -5,18 +5,21 @@ const getRandomRecipesForWeek = () => {
   SELECT *
   FROM recipes
   WHERE slot = 1
+  ORDER BY RANDOM ()
   LIMIT 7;
   `);
   const lunchPromise = db.query(`
   SELECT *
   FROM recipes
   WHERE slot = 2
+  ORDER BY RANDOM ()
   LIMIT 7;
   `);
   const dinnerPromise = db.query(`
   SELECT *
   FROM recipes
   WHERE slot = 3
+  ORDER BY RANDOM ()
   LIMIT 7;
   `);
   return Promise.all([breakfastPromise, lunchPromise, dinnerPromise])
